@@ -21,7 +21,7 @@ after install the source code open Terminal to use these command line:
 - sudo chmod -R 777 settings.json
 - sudo chmod -R 777 storage/app/public/images/
 
-## My site
+## Contact me
 <a href='https://alijumaan.com' target="_blank">https://alijumaan.com</a>
 
 * enjoy...
