@@ -15,11 +15,15 @@ after install the source code open Terminal to use these command line:
 - npm run dev or watch
 - php artisan serve
 - mkdir storage/app/public/assets/avatars
+- sudo cp public/img/users/avatar.png storage/app/public/assets/avatars/  
 - add your default image (should be the name is 'avatar.png' or custom the default name from ProductMedia migration table)
 
 ## Permission folder ( Linux | Mac)
 - sudo chmod -R 777 settings.json
 - sudo chmod -R 777 storage/app/public/images/
+
+## Try
+<a href='http://vue-spa.cartwhite.tk' target="_blank">http://vue-spa.cartwhite.tk</a>
 
 ## Contact me
 <a href='https://alijumaan.com' target="_blank">https://alijumaan.com</a>
