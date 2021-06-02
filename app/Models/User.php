@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Passport\HasApiTokens;
 use Nicolaslopezj\Searchable\SearchableTrait;
 
@@ -100,6 +101,11 @@ class User extends Authenticatable implements MustVerifyEmail
         $role = $this->role()->first();
 
         return $role->permissions()->whereName($permission)->first() ? true : false;
+    }
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
     }
 
 }

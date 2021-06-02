@@ -41,6 +41,11 @@ class UserController extends ApiController
 
         $user = User::create($request->validated());
 
+        $user->profile()->create([
+            'user_id' => $user->id,
+            'bio' => NULL
+        ]);
+
         $url = URL::signedRoute('invitation', $user);
 
         $user->notify(new UserInviteNotification($url));
