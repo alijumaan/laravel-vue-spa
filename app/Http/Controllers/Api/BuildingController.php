@@ -8,43 +8,55 @@ use App\Http\Requests\UpdateBuildingRequest;
 use App\Http\Resources\BuildingResource;
 use App\Models\Building;
 use Carbon\Carbon;
-use Symfony\Component\HttpFoundation\Response;
 
 class BuildingController extends ApiController
 {
     public function index()
     {
-        $pagination = 10;
-        $buildings = Building::with('user')
-            ->when(request('search', '') != '', function ($query) {
-                $query->where(function ($q) {
-                    $q->where('name', 'LIKE', '%' . request('search') . '%')
-                        ->orWhere('number', 'LIKE', '%' . request('search') . '%');
-                });
-            })
-            ->orderBy('checked_at')
-            ->latest()
-            ->paginate($pagination);
+        $paginate = 15;
+
+        if (auth()->user()->isAdmin()) {
+            $buildings = Building::with('user')
+                ->when(request('search', '') != '', function ($query) {
+                    $query->where(function ($q) {
+                        $q->where('name', 'LIKE', '%' . request('search') . '%')
+                            ->orWhere('number', 'LIKE', '%' . request('search') . '%');
+                    });
+                })
+                ->orderBy('checked_at')
+                ->latest()
+                ->paginate($paginate);
+
+            $buildings_count = Building::count();
+        } else {
+            $buildings = Building::with('user')
+                ->where('user_id', auth()->id())
+                ->when(request('search', '') != '', function ($query) {
+                    $query->where(function ($q) {
+                        $q->where('name', 'LIKE', '%' . request('search') . '%')
+                            ->orWhere('number', 'LIKE', '%' . request('search') . '%');
+                    });
+                })
+                ->orderBy('checked_at')
+                ->latest()
+                ->paginate($paginate);
+
+            $buildings_count = count(Building::where('user_id', auth()->id())->get());
+        }
 
         if (!$buildings) {
             return $this->respondNotFound('المبنى غير موجود');
         }
 
-        $buildings_count = Building::count();
-
         return $this->respond([
             'data' => BuildingResource::collection($buildings),
             'count' => $buildings_count,
-            'pagination' => $pagination
+            'paginate' => $paginate
         ]);
     }
 
     public function show(Building $building)
     {
-        if (!$building) {
-            return $this->respondNotFound('المبنى غير موجود');
-        }
-
         return $this->respond([
             'data' => new BuildingResource($building)
         ]);
@@ -52,7 +64,7 @@ class BuildingController extends ApiController
 
     public function store(StoreBuildingRequest $request)
     {
-        abort_if(!auth()->user()->can('add-building'), 403, 'ليس لديك الصلاحيات على انشاءالمبنى!');
+        $this->authorize('add-building');
 
         Building::create($request->validated());
 
@@ -61,74 +73,74 @@ class BuildingController extends ApiController
 
     public function update(UpdateBuildingRequest $request, Building $building)
     {
-        abort_if(!auth()->user()->can('edit-building'), 403, 'ليس لديك الصلاحيات على التعديل!');
+        $this->authorize('edit-building');
 
-        $building->name = $request->name;
-        $building->number = $request->number;
-        $building->user_id = $request->user_id;
-        $building->status = $request->status;
-        $building->notes = $request->notes;
-        $building->period_id = $request->period_id;
-        $building->checked_at = null;
+        $checked_at = $building->checked_at;
 
         if ($request->status == 1) {
             if ($request->period_id == 1) {
-                $building['checked_at'] = Carbon::now()->addMonth();
+                $checked_at = Carbon::now()->addMonth();
             } elseif ($request->period_id == 2) {
-                $building['checked_at'] = Carbon::now()->addDays('90');
+                $checked_at = Carbon::now()->addDays('90');
             } elseif ($request->period_id == 3) {
-                $building['checked_at'] = Carbon::now()->addDays('180');
+                $checked_at = Carbon::now()->addDays('180');
             } elseif ($request->period_id == 4) {
-                $building['checked_at'] = Carbon::now()->addYear();
-            } else {
-                $building['checked_at'] = null;
+                $checked_at = Carbon::now()->addYear();
             }
         }
 
-        $building->update();
+        $building->update($request->validated() + [
+                'checked_at' => $checked_at
+            ]);
+
+        return $this->respondUpdated();
+
     }
 
     public function destroy(Building $building)
     {
-        abort_if(!auth()->user()->can('delete-building'), 403, 'ليس لديك الصلاحيات على حذف المبنى!');
+        $this->authorize('delete-building');
 
         $building->delete();
 
-        return response(null, Response::HTTP_NO_CONTENT);
+        return $this->respondNoContent();
     }
 
     public function quickUpdate(QuickUpdateBuildingRequest $request, Building $building)
     {
         $this->authorize('update', $building);
 
-        $building->status = $request->status;
-        $building->notes = $request->notes;
-        $building->period_id = $request->period_id;
-//        $building->checked_at = null;
+        $checked_at = $building->checked_at;
 
         if ($request->status == 1) {
             if ($request->period_id == Building::ONE_MONTH) {
-                $building['checked_at'] = Carbon::now()->addMonth();
+                $checked_at = Carbon::now()->addMonth();
             } elseif ($request->period_id == Building::THREE_MONTHS) {
-                $building['checked_at'] = Carbon::now()->addDays('90');
+                $checked_at = Carbon::now()->addDays('90');
             } elseif ($request->period_id == Building::SIX_MONTHS) {
-                $building['checked_at'] = Carbon::now()->addDays('180');
+                $checked_at = Carbon::now()->addDays('180');
             } elseif ($request->period_id == Building::YEAR) {
-                $building['checked_at'] = Carbon::now()->addYear();
-            } else {
-                $building['checked_at'] = null;
+                $checked_at = Carbon::now()->addYear();
             }
         }
 
-        $building->update();
+        $building->update($request->validated() + [
+                'checked_at' => $checked_at
+            ]);
+
+        return $this->respondUpdated();
     }
 
-    public function buildingList()
+    public function list()
     {
-        $buildings = Building::select(['id', 'name', 'notes'])->get();
+        if (auth()->user()->isAdmin()) {
+            $buildings = Building::select(['id', 'name', 'notes'])->get();
+        } else {
+            $buildings = Building::select(['id', 'name', 'notes'])->where('user_id', auth()->id())->get();
+        }
 
         return $this->respond([
-            'buildings' => $buildings
+            'data' => $buildings
         ]);
     }
 }

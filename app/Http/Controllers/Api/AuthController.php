@@ -20,7 +20,7 @@ class AuthController extends ApiController
 
         $token =  $this->getRefreshedToken($user->email, $request->password);
 
-        return response()->json([
+        return $this->respond([
             "user" => $user,
             'token' => $token
         ]);
@@ -57,5 +57,10 @@ class AuthController extends ApiController
         } catch (\Exception $exception) {
             return response()->json(['Unauthorized'], 200);
         }
+    }
+
+    public function logout(Request $request)
+    {
+        $request->user()->token()->revoke();
     }
 }

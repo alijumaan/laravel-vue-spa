@@ -7,58 +7,60 @@
                         <input type="text" class="form-control w-50" v-model="search"
                                placeholder="بحث">
 
-                        <router-link v-if="isSupervisor" :to="{ name: 'buildingsCreate'}"
+                        <router-link v-if="isSupervisor" :to="{ name: 'buildings.create'}"
                                      class="ml-auto btn btn-primary btn-sm">
                             <i class="fa fa-plus fa-fw"></i>
                             انشاء مبنى
                         </router-link>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped table-sm">
-                            <thead class="">
-                            <tr>
-                                <th colspan="1">
-                                    <div class="input-group">
+                    <div :class="{'loading': loading}">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-sm">
+                                <thead class="">
+                                <tr>
+                                    <th colspan="1">
+                                        <div class="input-group">
 
-                                    </div>
-                                </th>
-                            </tr>
-                            <tr class="bg-dark text-white">
-                                <th>المبنى</th>
-                                <th>الانتهاء</th>
-                                <th>الحالة</th>
-                            </tr>
-                            </thead>
-                            <tbody v-if="buildings.length > 0">
-                            <tr v-for="(building, index) in buildings" :key="index">
-                                <td>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr class="bg-dark text-white">
+                                    <th>المبنى</th>
+                                    <th>الانتهاء</th>
+                                    <th>الحالة</th>
+                                </tr>
+                                </thead>
+                                <tbody v-if="buildings.length > 0">
+                                <tr v-for="(building, index) in buildings" :key="index">
+                                    <td>
                                     <span class="text-dark">
-                                        <router-link :to="{ name: 'buildingShow', params: { id: building.slug } }">
+                                        <router-link :to="{ name: 'buildings.show', params: { id: building.slug } }">
                                             <span class="text-dark">{{ building.number }} /</span>
                                             {{ building.name }}
                                         </router-link>
                                     </span>
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
                                     <span :class="building.checked_at > now ? 'text-success' : 'text-danger'">
                                         {{ building.checked_at }}
                                     </span>
-                                    <br>
-                                    <span class="text-info">
+                                        <br>
+                                        <span class="text-info">
                                         {{ building.checked_at_string }}
                                     </span>
-                                </td>
-                                <td>
+                                    </td>
+                                    <td>
                                     <span
                                         :class="building.status === 'مشيك' ? 'badge badge-success' : 'badge badge-danger'">
                                         {{ building.status }}
                                     </span>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
 
-                            </tbody>
-                        </table>
-                        <p class="text-center" v-show="!buildings.length > 0">لاتوجد نتائج.</p>
+                                </tbody>
+                            </table>
+                            <p class="text-center" v-show="!buildings.length > 0">لاتوجد نتائج.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -80,13 +82,6 @@ export default {
         }
         next();
     },
-    watch: {
-        search(val, old) {
-            if (val.length >= 2 || old.length >= 2) {
-                this.loadBuildings();
-            }
-        }
-    },
     data() {
         return {
             buildings: {},
@@ -94,13 +89,21 @@ export default {
             search: "",
             page: 1,
             records: 0,
-            per_page: 0
+            per_page: 0,
+            loading: true,
+        }
+    },
+    watch: {
+        search(val, old) {
+            if (val.length >= 2 || old.length >= 2) {
+                this.loadBuildings();
+            }
         }
     },
     computed: {
-      isSupervisor() {
-          return this.$store.state.currentUser.isSupervisor;
-      }
+        isSupervisor() {
+            return this.$store.state.currentUser.isSupervisor;
+        }
     },
     created() {
         this.loadBuildings()
@@ -114,7 +117,7 @@ export default {
                 }
             }).then(response => {
                 this.records = response.data.count
-                this.per_page = response.data.pagination
+                this.per_page = response.data.paginate
                 this.buildings = response.data.data.map(data => ({
                     slug: data.slug,
                     name: data.name,
@@ -123,6 +126,7 @@ export default {
                     checked_at_string: data.checked_at_string,
                     status: data.statusText
                 }))
+                this.loading = false;
             })
         },
     }

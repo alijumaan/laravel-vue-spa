@@ -26,9 +26,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        // $schedule->command('check:extinguishers')->everyMinute();
         // $schedule->command('check:extinguishers')->monthlyOn(1, '08:00');
-        $schedule->command('check:extinguishers')->dailyAt('08:00');
+        $schedule->command('php artisan check:extinguishers')->dailyAt('09:00');
         $schedule->command('php artisan passport:purge')->hourly();
 
     }
@@ -47,6 +46,6 @@ class Kernel extends ConsoleKernel
 
     protected function scheduleTimezone()
     {
-        return 'Asia/Riyadh';
+        return config('app.timezone');
     }
 }

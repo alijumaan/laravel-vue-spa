@@ -2,83 +2,90 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\UpdateAvatarRequest;
-use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
-use App\Http\Resources\UserProfileResource;
+use App\Http\Resources\UsersResource;
 use App\Models\User;
-use App\Traits\ImageUploadTrait;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
+use App\Notifications\UserInviteNotification;
+use Illuminate\Support\Facades\URL;
 
 class UserController extends ApiController
 {
-    use ImageUploadTrait;
-
-    public function details()
+    public function index(User $user)
     {
-        $user = User::with(['profile', 'buildings'])->find(auth()->id());
-
-        return ["user" => new UserProfileResource($user)];
-    }
-
-    public function updatePassword(UpdatePasswordRequest $request)
-    {
-        $user = auth()->user();
-
-        if (!Hash::check($request->current_password, $user->password)) {
-            throw ValidationException::withMessages([
-                'current_password' => 'كلمة المرور الحالية غير صحيحة'
-            ]);
-        }
-
-        $user->password = bcrypt($request->new_password);
-
-        if ($user->save()) {
-            return [
-                'message' => 'Password updated successfully'
-            ];
+        if (auth()->user()->isAdmin()) {
+            $users = $user->where('id', '<>', 1)->get();
         } else {
-            return response()->json([
-                'message' => 'Something was wrong please try again later'
-            ], 500);
+            $users = $user
+                ->where('id', auth()->id())
+                ->get();
         }
+
+        $usersCount = $user->where('id', '<>', 1)->get()->count();
+
+        $unActiveUsers = $user->onlyTrashed()->get();
+
+        $unActiveUserCount = $user->onlyTrashed()->get()->count();
+
+        return $this->respond([
+            'users' => UsersResource::collection($users),
+            'unActiveUsers' => $unActiveUsers,
+            'usersCount' => $usersCount,
+            'unActiveUsersCount' => $unActiveUserCount
+        ]);
     }
 
-    public function updateProfile(UpdateUserRequest $request)
+    public function store(StoreUserRequest $request)
     {
-        auth()->user()->update($request->only(['name', 'email']));
+        $this->authorize('add-user');
 
-        auth()->user()->profile()->updateOrcreate([
-            'user_id' => auth()->id()
-        ], $request->only([
-            'bio',
-        ]));
+        $user = User::create($request->validated());
 
-        return ['message' => 'Updated your profile successfully'];
+        $url = URL::signedRoute('invitation', $user);
 
+        $user->notify(new UserInviteNotification($url));
     }
 
-    public function updateAvatar(UpdateAvatarRequest $request)
+    public function show(User $user)
     {
-        if ($request->hasFile('avatar')) {
-
-            if (File::exists('storage/assets/avatars/' . auth()->user()->profile->avatar)) {
-                unlink('storage/assets/avatars/' . auth()->user()->profile->avatar);
-            }
-
-            $avatar = $this->uploadAvatar($request->avatar);
-
-            auth()->user()->profile()->update(['avatar' => $avatar]);
-
-            return ['message' => 'Updated your avatar successfully'];
-        }
+        return $this->respond([
+            "user" => $user
+        ]);
     }
 
-    public function logout(Request $request)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        $request->user()->token()->revoke();
+        $this->authorize('edit-user');
+
+        $user->update($request->validated() + ['role_id' => $request->role_id]);
+    }
+
+    public function destroy(User $user)
+    {
+        $this->authorize('delete-user');
+
+        $user->delete();
+
+        return $this->respond([
+            'message' => 'تم الحذف وبامكانك استرجاعه أيضاً'
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $this->authorize('restore-user');
+
+        User::withTrashed()->find($id)->restore();
+    }
+
+    public function forceDelete($id)
+    {
+        $this->authorize('force-delete-user');
+
+        $user = User::withTrashed()->findOrFail($id);
+
+        $user->forceDelete();
+
+        return $this->respondNoContent();
     }
 }

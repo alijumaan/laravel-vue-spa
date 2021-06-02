@@ -7,17 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Contact extends Model
 {
+    use HasFactory;
+
     protected $fillable = ['name', 'email', 'title', 'body', 'user_id', 'is_read'];
 
-    public function scopeIsRead()
+    public function getIsReadAttribute()
     {
-        return $this->is_read == 0 ? 'جديد' : 'مقروء';
-    }
+        return $this->attributes['is_read'] == 0 ? 'جديد' : 'مقروء';
 
-    public function scopeCreatedAt()
-    {
-        return $this->created_at->format('Y-m-d');
     }
-
-    use HasFactory;
 }

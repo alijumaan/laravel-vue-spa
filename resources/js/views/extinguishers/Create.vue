@@ -15,7 +15,7 @@
                                 <label for="type">نوع الطفاية</label>
                                 <select  v-model="extinguisher_id" id="type" class="form-control">
                                     <option value=""> --- </option>
-                                    <option v-for="extinguisher in extinguishersType" :value="extinguisher.id">
+                                    <option v-for="(extinguisher, index) in extinguishersType" :value="extinguisher.id">
                                         {{ extinguisher.type }}
                                     </option>
 
@@ -46,14 +46,18 @@ export default {
     data() {
         return {
             extinguishersType: [],
-            buildings: [],
             extinguisher_id: '',
             building_id: '',
         }
     },
-    mounted() {
+    computed: {
+        buildings() {
+            return this.$store.state.building.buildings;
+        }
+    },
+    created() {
         this.extinguisherType();
-        this.buildingName();
+        this.$store.dispatch('building/getBuilding');
     },
     methods: {
         extinguisherType() {
@@ -61,16 +65,11 @@ export default {
                 this.extinguishersType = response.data.extinguishersType
             })
         },
-        buildingName() {
-            axios.get('/api/v1/buildings/list').then(response => {
-                this.buildings = response.data.buildings
-            })
-        },
         submit_form() {
             axios.post('/api/v1/extinguishers', {
                 building_id: this.building_id,
                 extinguisher_id: this.extinguisher_id
-            }).then(response => {
+            }).then( () => {
                 toast.fire({
                     icon: 'success',
                     title: 'تم السحب بنجاح'

@@ -10,7 +10,7 @@
                         <option v-for="role in roles" :value="role.id">{{ role.role }}</option>
                     </select>
 
-                    <router-link v-if="isAdmin" :to="{ name: 'permissionsCreate'}"
+                    <router-link v-if="isAdmin" :to="{ name: 'permissions.create'}"
                                  class="ml-auto btn btn-primary btn-sm">
                         <i class="fa fa-plus fa-fw"></i>
                         انشاء صلاحية

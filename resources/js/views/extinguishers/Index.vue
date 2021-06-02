@@ -1,9 +1,8 @@
 <template>
-
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div v-if="isAdmin" class="d-flex mb-3">
-                <router-link v-if="isAdmin" :to="{ name: 'extinguisherCreate'}"
+            <div v-if="isSupervisor" class="d-flex mb-3">
+                <router-link :to="{ name: 'extinguishers.create'}"
                              class="ml-auto btn btn-primary btn-sm">
                     <i class="fa fa-plus fa-fw"></i>
                     سحب طفاية من مبنى
@@ -23,16 +22,16 @@
                         </tr>
                         </thead>
                         <tbody v-if="extinguishers.length > 0">
-                            <tr v-for="extinguisher in extinguishers">
-                                <td>{{ extinguisher.extinguisherType }}</td>
-                                <td>{{ extinguisher.extinguisherCount }}</td>
-                                <td>
-                                    <router-link
-                                        :to="{ name: 'extinguisherShow', params: { id: extinguisher.id } }">
-                                        التفاصيل
-                                    </router-link>
-                                </td>
-                            </tr>
+                        <tr v-for="extinguisher in extinguishers">
+                            <td>{{ extinguisher.extinguisherType }}</td>
+                            <td>{{ extinguisher.extinguisherCount }}</td>
+                            <td>
+                                <router-link
+                                    :to="{ name: 'extinguishers.show', params: { id: extinguisher.id } }">
+                                    التفاصيل
+                                </router-link>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
                     <p v-show="!extinguishers.length > 0"
@@ -58,20 +57,20 @@ export default {
         next();
     },
     computed: {
-        isAdmin() {
-            return this.$store.state.currentUser.isAdmin;
+        isSupervisor() {
+            return this.$store.state.currentUser.isSupervisor;
         }
     },
     created() {
-        this.$store.dispatch('currentUser/isAdmin');
+        this.$store.dispatch('currentUser/isSupervisor');
         this.loadExtinguishers()
     },
     methods: {
         loadExtinguishers() {
             axios.get('/api/v1/extinguishers').then(response => {
                 this.extinguishers = response.data.data
-            }).catch(err => {
-                console.log(err.message)
+            }).catch(error => {
+                console.log(error.message)
             })
         },
     }

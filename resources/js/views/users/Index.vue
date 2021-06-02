@@ -2,7 +2,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12 mb-3">
             <div class="d-flex mb-3">
-                <router-link class="ml-auto btn btn-primary btn-sm" :to="{name: 'usersCreate'}">
+                <router-link class="ml-auto btn btn-primary btn-sm" :to="{name: 'users.create'}">
                     إضافة مستخدم جديد
                 </router-link>
             </div>
@@ -31,7 +31,7 @@
                             <td>{{ user.role_id }}</td>
                             <td>{{ user.created_at }}</td>
                             <td class="d-flex">
-                                <router-link class="mr-auto" :to="{ name: 'usersEdit', params: { id: user.id } }">
+                                <router-link class="mr-auto" :to="{ name: 'users.edit', params: { id: user.id } }">
                                     <i class="fa fa-edit"></i>
                                 </router-link>
                                 <a @click="delete_user(user.id)" class="mr-auto trash" href="javascript:void(0);">

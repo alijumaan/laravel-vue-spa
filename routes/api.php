@@ -11,8 +11,8 @@ use App\Http\Controllers\Api\PermissionController;
 use App\Http\Controllers\Api\PermissionRoleController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\PageController;
+use App\Http\Controllers\Api\ProfileController;
 use App\Http\Controllers\Api\UserController;
-use App\Http\Controllers\Api\UsersController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => '/v1'], function() {
@@ -21,29 +21,29 @@ Route::group(['prefix' => '/v1'], function() {
         Route::get('links/get-url', [LinkController::class, 'getUrl']);
         Route::apiResource('links', LinkController::class);
 
-        Route::get('buildings/list', [BuildingController::class, 'buildingList']);
+        Route::get('buildings_list', [BuildingController::class, 'list']);
         Route::put('buildings/{building}/quickUpdate', [BuildingController::class, 'quickUpdate']);
         Route::apiResource('buildings', BuildingController::class );
 
-        Route::delete('extinguishers/{extinguisherId}/{buildingId}', [ExtinguisherController::class, 'restore']);
+        Route::delete('extinguishers/{extinguisherId}/{buildingId}', [ExtinguisherController::class, 'delete']);
         Route::get('extinguishers/type', [ExtinguisherController::class, 'getExtinguishersType']);
         Route::apiResource('extinguishers', ExtinguisherController::class );
 
         Route::apiResource('pages', PageController::class );
 
-        Route::post('logout', [\App\Http\Controllers\Api\UserController::class, 'logout']);
+        Route::post('logout', [AuthController::class, 'logout']);
 
         /* Current User */
-        Route::get('user/details', [UserController::class, 'details']);
-        Route::get('user/setting', [UserController::class, 'details']);
-        Route::post('user/update/avatar', [UserController::class, 'updateAvatar']);
-        Route::post('user/update/profile', [UserController::class, 'updateProfile']);
-        Route::post('user/update/password', [UserController::class, 'updatePassword']);
+        Route::get('user/details', [ProfileController::class, 'details']);
+        Route::get('user/setting', [ProfileController::class, 'details']);
+        Route::post('user/update/avatar', [ProfileController::class, 'updateAvatar']);
+        Route::post('user/update/profile', [ProfileController::class, 'updateProfile']);
+        Route::post('user/update/password', [ProfileController::class, 'updatePassword']);
 
         /* Other Users */
-        Route::post('users/{id}/restore',         [UsersController::class, 'restore']);
-        Route::delete("users/{id}/forceDelete",   [UsersController::class, 'forceDelete']);
-        Route::apiResource('users', UsersController::class);
+        Route::post('users/{id}/restore',         [UserController::class, 'restore']);
+        Route::delete("users/{id}/forceDelete",   [UserController::class, 'forceDelete']);
+        Route::apiResource('users', UserController::class);
 
         Route::get('roles', [RoleController::class, 'getRoles']);
 
@@ -55,14 +55,13 @@ Route::group(['prefix' => '/v1'], function() {
 
         Route::get('periods', [PeriodController::class, 'getPeriods']);
 
-        /* Check if user is admin and logged in*/
         Route::get('/admin', function () {
             if (!auth()->user()->isAdmin()) {
                 return false;
             }
             return true;
         });
-        /* Check if user is supervisor or admin and logged in*/
+
         Route::get('/supervisor', function () {
             if (!auth()->user()->isSupervisor()) {
                 return false;

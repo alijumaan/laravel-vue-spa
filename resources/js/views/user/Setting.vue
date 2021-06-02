@@ -78,9 +78,9 @@ export default {
         }
     },
     computed: {
-      user() {
-          return this.$store.state.currentUser.user;
-      }
+        user() {
+            return this.$store.state.currentUser.user;
+        }
     },
     created() {
         this.$store.dispatch('currentUser/user');

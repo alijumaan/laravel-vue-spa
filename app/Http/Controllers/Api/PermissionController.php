@@ -22,10 +22,10 @@ class PermissionController extends ApiController
         $permissions = Permission::all();
         $roles = Role::all();
 
-        return [
+        return $this->respond([
             'permissions' => PermissionResource::collection($permissions),
             'roles' => RoleResource::collection($roles)
-        ];
+        ]);
     }
 
     public function store(StorePermissionRequest $request)

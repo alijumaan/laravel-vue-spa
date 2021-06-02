@@ -4,7 +4,7 @@
             <div v-show="isAdmin" class="card shadow-sm mb-4">
                 <div class="card-header d-flex py-3">
                     <h4 class="m-0">روابط الموقع</h4>
-                    <router-link :to="{ name: 'linksCreate'}"
+                    <router-link :to="{ name: 'links.create'}"
                                  class="ml-auto btn btn-primary btn-sm">
                         <i class="fa fa-plus fa-fw"></i>
                         انشاء رابط
@@ -30,7 +30,7 @@
                             <td>{{ link.access }}</td>
                             <td>
                                 <div class="btn-group btn-group-toggle">
-                                    <router-link :to="{ name: 'linksEdit', params: { id: link.id } }" title="تعديل"
+                                    <router-link :to="{ name: 'links.edit', params: { id: link.id } }" title="تعديل"
                                                  class="btn-primary btn btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </router-link>

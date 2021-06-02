@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\StoreLinkRequest;
 use App\Http\Resources\LinkResource;
 use App\Models\Link;
-use Symfony\Component\HttpFoundation\Response;
 
 
 class LinkController extends ApiController
@@ -15,21 +14,19 @@ class LinkController extends ApiController
     {
         $links = Link::latest()->get();
 
-        return ['links' => $links];
+        return $this->respond(['links' => $links]);
     }
 
     public function show(Link $link)
     {
-        abort_if(!auth()->user()->can('show-link'),403, 'ليس لديك الصلاحيات على انشاءالرابط');
+        $this->authorize('show-link');
 
-        return $this->respond([
-            'link' => $link
-        ]);
+        return $this->respond(['link' => $link]);
     }
 
     public function store(StoreLinkRequest $request)
     {
-        abort_if(!auth()->user()->can('add-link'),403, 'ليس لديك الصلاحيات على انشاءالرابط');
+        $this->authorize('add-link');
 
         Link::create($request->validated());
 
@@ -38,18 +35,20 @@ class LinkController extends ApiController
 
     public function update(StoreLinkRequest $request, Link $link)
     {
-        abort_if(!auth()->user()->can('edit-link'),403, 'ليس لديك الصلاحيات على التعديل!');
+        $this->authorize('edit-link');
 
         $link->update($request->validated());
+
+        return $this->respondUpdated();
     }
 
     public function destroy(Link $link)
     {
-        abort_if(!auth()->user()->can('delete-link'),403, 'ليس لديك الصلاحيات لحذف الرابط');
+        $this->authorize('delete-link');
 
         $link->delete();
 
-        return response(null, Response::HTTP_NO_CONTENT);
+        return $this->respondNoContent();
     }
 
     public function getUrl()
@@ -60,6 +59,8 @@ class LinkController extends ApiController
             $links = Link::oldest()->whereAccess(TRUE)->get();
         }
 
-        return LinkResource::collection($links);
+        return $this->respond([
+            'data' => LinkResource::collection($links)
+        ]);
     }
 }

@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\StorePageRequest;
 use App\Models\Page;
-use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class PageController extends ApiController
 {
@@ -12,9 +11,9 @@ class PageController extends ApiController
     {
         $pages = Page::all();
 
-        return [
+        return $this->respond([
             'pages' => $pages
-        ];
+        ]);
     }
 
     public function show(Page $page)
@@ -24,33 +23,30 @@ class PageController extends ApiController
         ]);
     }
 
-    public function update(Request $request, Page $page)
+    public function store(StorePageRequest $request)
     {
-        abort_if(!auth()->user()
-            ->can('edit-page'),
-            403,
-            'ليس لديك الصلاحيات على التعديل!');
+        $this->authorize('add-page');
 
-        $page->title = $request->title;
-        $page->content = $request['content'];
+        Page::create($request->validated());
 
-        if ($page->update()) {
-            return $this->respondUpdated();
-        } else {
-            $this->respondInternalError();
-        }
+        return $this->respondCreated();
+    }
 
+    public function update(StorePageRequest $request, Page $page)
+    {
+        $this->authorize('edit-page');
+
+        $page->update($request->validated());
+
+        return $this->respondUpdated();
     }
 
     public function destroy(Page $page)
     {
-        abort_if(!auth()->user()
-            ->can('delete-page'),
-            403,
-            'ليس لديك الصلاحيات لحذف الصفحة!');
+        $this->authorize('delete-page');
 
         $page->delete();
 
-        return response(null, Response::HTTP_NO_CONTENT);
+        return $this->respondNoContent();
     }
 }

@@ -8,10 +8,10 @@ class RoleController extends ApiController
 {
     public function getRoles()
     {
-        $roles = Role::all();
+        $roles = Role::select('id', 'role')->get();
 
-        return [
+        return $this->respond([
             'roles' => $roles
-        ];
+        ]);
     }
 }

@@ -9,15 +9,16 @@ import ExtinguisherCreate from "../views/extinguishers/Create.vue";
 import ExtinguisherEdit from "../views/extinguishers/Edit.vue";
 import Pages from "../views/Pages/Index.vue";
 import PageShow from "../views/Pages/Show.vue";
+import PageCreate from "../views/Pages/Create.vue";
 import PageEdit from "../views/Pages/Edit.vue";
 import Profile from "../views/user/Profile.vue";
 import Login from "../views/auth/Login.vue";
 import Setting from "../views/user/Setting.vue";
 import UpdatePassword from "../views/user/UpdatePassword.vue";
 import BuildingCreate from "../views/buildings/Create.vue"
-import UsersIndex from "../views/users/Index.vue";
-import UsersEdit from "../views/users/Edit.vue";
-import UsersCreate from "../views/users/Create.vue"
+import User from "../views/users/Index.vue";
+import UserEdit from "../views/users/Edit.vue";
+import UserCreate from "../views/users/Create.vue"
 import SetPassword from "../views/auth/SetPassword.vue";
 import Note from "../views/notes/Notes.vue";
 import Contact from "../views/contacts/Index.vue"
@@ -48,17 +49,17 @@ export const router = createRouter({
         },
         {
             path: "/buildings/create",
-            name: "buildingsCreate",
+            name: "buildings.create",
             component: BuildingCreate
         },
         {
             path: "/buildings/:id",
-            name: "buildingShow",
+            name: "buildings.show",
             component: BuildingShow
         },
         {
             path: "/buildings/edit/:id",
-            name: "buildingEdit",
+            name: "buildings.edit",
             component: BuildingEdit
         },
         {
@@ -68,17 +69,17 @@ export const router = createRouter({
         },
         {
             path: "/extinguishers/:id",
-            name: "extinguisherShow",
+            name: "extinguishers.show",
             component: ExtinguisherShow
         },
         {
             path: "/extinguishers/create",
-            name: "extinguisherCreate",
+            name: "extinguishers.create",
             component: ExtinguisherCreate
         },
         {
             path: "/extinguishers/edit/:id",
-            name: "extinguisherEdit",
+            name: "extinguishers.edit",
             component: ExtinguisherEdit
         },
         {
@@ -93,28 +94,33 @@ export const router = createRouter({
         },
         {
             path: "/pages/:id",
-            name: "pageShow",
+            name: "pages.show",
             component: PageShow
         },
         {
+            path: "/pages/create",
+            name: "pages.create",
+            component: PageCreate
+        },
+        {
             path: "/pages/edit/:id",
-            name: "pageEdit",
+            name: "pages.edit",
             component: PageEdit
         },
         {
             path: "/users",
             name: "users",
-            component: UsersIndex
+            component: User
         },
         {
             path: "/users/:id",
-            name: "usersEdit",
-            component: UsersEdit
+            name: "users.edit",
+            component: UserEdit
         },
         {
             path: "/users/create",
-            name: "usersCreate",
-            component: UsersCreate
+            name: "users.create",
+            component: UserCreate
         },
         {
             path: "/login",
@@ -133,12 +139,12 @@ export const router = createRouter({
         },
         {
             path: "/user/password",
-            name: "updatePassword",
+            name: "update_password",
             component: UpdatePassword
         },
         {
             path: "/set-password",
-            name: "setPassword",
+            name: "set_password",
             component: SetPassword
         },
         {
@@ -153,12 +159,12 @@ export const router = createRouter({
         },
         {
             path: "/contacts/create",
-            name: "contactsCreate",
+            name: "contacts.create",
             component: ContactCreate
         },
         {
             path: "/contacts/:id",
-            name: "contactShow",
+            name: "contacts.show",
             component: ContactShow
         },
         {
@@ -168,12 +174,12 @@ export const router = createRouter({
         },
         {
             path: "/links/create",
-            name: "linksCreate",
+            name: "links.create",
             component: LinkCreate
         },
         {
             path: "/links/edit/:id",
-            name: "linksEdit",
+            name: "links.edit",
             component: LinkEdit
         },
         {
@@ -183,12 +189,12 @@ export const router = createRouter({
         },
         {
             path: "/permissions/create",
-            name: "permissionsCreate",
+            name: "permissions.create",
             component: PermissionCreate
         },
         {
             path: "/permissions/edit/:id",
-            name: "permissionsEdit",
+            name: "permissions.edit",
             component: PermissionEdit
         },
     ]

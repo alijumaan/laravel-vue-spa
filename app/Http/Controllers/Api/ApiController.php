@@ -53,7 +53,7 @@ class ApiController extends Controller
 
     public function respondNoContent()
     {
-        return $this->setStatusCode(204);
+        return response()->noContent();
     }
 
     public function respond($data, $headers = [])

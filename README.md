@@ -9,8 +9,8 @@ after install the source code open Terminal to use these command line:
 - php artisan storage:link
 - php artisan migrate --seed
 - php artisan passport:install
-- copy the of Client ID value and past it here Ex. 2
-- copy the of Client secret value and past it here Ex. CLFlyd84jgusluIbFDwWQ4XLMiuMr4NCh6kE2XSd 
+- copy the of Client ID value and paste it in .evn Ex. 2
+- copy the of Client secret value and paste it in .evn Ex. CLFlyd84jgusluIbFDwWQ4XLMiuMr4NCh6kE2XSd 
 - npm install
 - npm run dev or watch
 - php artisan serve

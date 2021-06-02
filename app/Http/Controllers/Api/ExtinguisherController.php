@@ -4,20 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\StoreExtinguisherRequest;
 use App\Http\Resources\ExtinguisherResource;
-use App\Models\Building;
 use App\Models\BuildingExtinguisher;
 use App\Models\Extinguisher;
-use Illuminate\Database\Eloquent\Model;
 
 class ExtinguisherController extends ApiController
 {
-//    public function index()
-//    {
-//        $extinguishers = Extinguisher::with('extinguisherBuildings')->get();
-//
-//        return ExtinguisherResource::collection($extinguishers);
-//    }
-
     public function index()
     {
         $extinguishers = Extinguisher::with('extinguisherBuildings')->get();
@@ -39,7 +30,7 @@ class ExtinguisherController extends ApiController
 
     public function getExtinguishersType()
     {
-        $extinguishersType = Extinguisher::all()->unique('type')->values()->all();
+        $extinguishersType = Extinguisher::select('id', 'type')->distinct()->get();
 
         return $this->respond([
             'extinguishersType' => $extinguishersType
@@ -48,23 +39,17 @@ class ExtinguisherController extends ApiController
 
     public function store(StoreExtinguisherRequest $request)
     {
-        $buildingExtinguisher = new BuildingExtinguisher();
+        BuildingExtinguisher::create($request->validated());
 
-        if ($buildingExtinguisher) {
-            $buildingExtinguisher['building_id'] = $request->building_id;
-            $buildingExtinguisher['extinguisher_id'] = $request->extinguisher_id;
-            $buildingExtinguisher->save();
-
-            return $this->respondCreated();
-        }
-
-        return $this->respondInternalError();
+        return $this->respondCreated();
     }
 
-    public function restore($extinguisherId, $buildingId)
+    public function delete($extinguisherId, $buildingId)
     {
         BuildingExtinguisher::where('extinguisher_id', $extinguisherId)
             ->where('building_id', $buildingId)
             ->delete();
+
+        return $this->respondNoContent();
     }
 }

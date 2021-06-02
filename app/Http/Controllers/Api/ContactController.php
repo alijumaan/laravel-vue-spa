@@ -5,13 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Requests\StoreContactRequest;
 use App\Http\Resources\ContactResource;
 use App\Models\Contact;
-use Symfony\Component\HttpFoundation\Response;
 
 class ContactController extends ApiController
 {
     public function index()
     {
-        abort_if(!auth()->user()->can('show-message'), 403, 'ليس لديك صلاحية الوصول الى الرسالة!');
+        $this->authorize('view-contacts');
 
         $contacts = Contact::latest()->get();
 
@@ -22,10 +21,8 @@ class ContactController extends ApiController
 
     public function store(StoreContactRequest $request)
     {
-        $userId = auth()->check() ? auth()->id() : null;
-
         Contact::create($request->validated() + [
-                'user_id' => $userId
+                'user_id' => auth()->id()
             ]);
 
         return $this->respondCreated();
@@ -33,11 +30,7 @@ class ContactController extends ApiController
 
     public function show(Contact $contact)
     {
-        abort_if(!auth()->user()->can('show-message'), 403, 'ليس لديك صلاحية الوصول الى الرسالة!');
-
-        if (!$contact) {
-            return $this->respondNotFound('لاتوجد رسائل');
-        }
+        $this->authorize('view-contacts');
 
         $contact->update(['is_read' => 1]);
 
@@ -48,10 +41,10 @@ class ContactController extends ApiController
 
     public function destroy(Contact $contact)
     {
-        abort_if(!auth()->user()->can('delete-message'), 403, 'ليس لديك الصلاحيات على حذف الرسالة!');
+        $this->authorize('delete-contact');
 
         $contact->delete();
 
-        return response(null, Response::HTTP_NO_CONTENT);
+        return $this->respondNoContent();
     }
 }

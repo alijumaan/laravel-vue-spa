@@ -20,7 +20,7 @@
 
                     <div v-for="(building, index) in user.buildings"
                          v-if="user.buildings_count > 0"
-                        class="card-columns p-2" style="display: block" >
+                         class="card-columns p-2" style="display: block" >
                         <h5>
                             {{ index + 1 }} -
                             <span class="text-danger">{{  building.name }}</span>
@@ -36,9 +36,9 @@
 <script>
 export default {
     computed: {
-      user() {
-          return this.$store.state.currentUser.user;
-      }
+        user() {
+            return this.$store.state.currentUser.user;
+        }
     },
     created() {
         this.$store.dispatch('currentUser/user');

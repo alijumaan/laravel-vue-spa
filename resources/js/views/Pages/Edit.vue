@@ -16,6 +16,11 @@
                             <input type="text" class="form-control" v-model="title">
                         </div>
 
+                        <div class="col-lg-5 form-group">
+                            <label> Url </label>
+                            <input type="text" class="form-control" v-model="slug">
+                        </div>
+
                         <div class="col-lg-12 form-group">
                             <label> المحتوى </label>
 
@@ -39,6 +44,7 @@ export default {
     data() {
         return {
             title: '',
+            slug: '',
             content: '',
             errors: {},
             editor: ClassicEditor,
@@ -56,12 +62,14 @@ export default {
         loadPage() {
             axios.get(`/api/v1/pages/${this.$route.params.id}`).then(response => {
                 this.title = response.data.page.title
+                this.slug = response.data.page.slug
                 this.content = response.data.page.content
             })
         },
         update_page() {
             axios.put(`/api/v1/pages/${this.$route.params.id}`, {
                 title: this.title,
+                slug: this.slug,
                 content: this.content,
             }).then(response => {
                 toast.fire({

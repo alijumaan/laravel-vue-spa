@@ -8,10 +8,10 @@ class PeriodController extends ApiController
 {
     public function getPeriods()
     {
-        $periods = Period::all();
+        $periods = Period::select('id', 'period')->get();
 
-        return [
+        return $this->respond([
             'periods' => $periods
-        ];
+        ]);
     }
 }

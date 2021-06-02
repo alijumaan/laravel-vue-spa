@@ -73,7 +73,7 @@
 export default {
     data() {
         return {
-            show: !!localStorage.getItem("authToken"),
+            show: this.$store.state.show_content,
         }
     },
     computed: {

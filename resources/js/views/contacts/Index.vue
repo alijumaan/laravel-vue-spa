@@ -30,7 +30,7 @@
                             <td>{{ message.created_at }}</td>
                             <td>
                                 <div class="btn-group btn-group-toggle">
-                                    <router-link :to="{ name: 'contactShow', params: { id: message.id } }" title="Show"
+                                    <router-link :to="{ name: 'contacts.show', params: { id: message.id } }" title="Show"
                                                  class="btn-primary btn btn-sm">
                                         <i class="fa fa-eye"></i>
                                     </router-link>
@@ -73,6 +73,8 @@ export default {
         loadMessages() {
             axios.get("/api/v1/contacts").then(response => {
                 this.messages = response.data.data
+            }).catch(error => {
+                console.log(error)
             })
         },
         delete_message(msg) {

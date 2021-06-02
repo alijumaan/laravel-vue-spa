@@ -24,7 +24,7 @@ export default {
     data() {
         return {
             navbar_items: [],
-            show: !!localStorage.getItem("authToken"),
+            show: this.$store.state.show_content,
         }
     },
     mounted() {

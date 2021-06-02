@@ -41,7 +41,7 @@
                             </a>
                             <router-link
                                 v-if="isAdmin"
-                                :to="{ name: 'buildingEdit', params: { id: building.slug } }">
+                                :to="{ name: 'buildings.edit', params: { id: building.slug } }">
                                 <i class="fas fa-wrench text-primary"></i>
                             </router-link>
                             <button
@@ -158,6 +158,8 @@ export default {
         showBuilding() {
             axios.get(`/api/v1/buildings/${this.$route.params.id}`).then(response => {
                 this.building = response.data.data
+            }).catch(error => {
+                console.log('Error show the building')
             })
         },
         loadPeriod() {

@@ -18,8 +18,8 @@ class ContactResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'title' => $this->title,
-            'is_read' => $this->isRead(),
-            'created_at' => $this->createdAt(),
+            'is_read' => $this->is_read,
+            'created_at' => $this->created_at->format('Y-m-d')
         ];
     }
 }

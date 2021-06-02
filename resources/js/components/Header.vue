@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <router-link class="navbar-brand" exact :to="{ name: 'home' }">الوقاية والسلامة</router-link>
+            <router-link class="navbar-brand" exact :to="{ name: 'home' }">الوقاية</router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -11,14 +11,14 @@
                 <!-- Left Side Of Navbar -->
                 <div class="navbar-nav mr-auto">
 <!--                    <div v-for="page in pages" v-if="show">-->
-<!--                        <router-link class="nav-link" exact :to="{ name: 'pageShow', params: { id: page.slug } }">-->
+<!--                        <router-link class="nav-link" exact :to="{ name: 'pages.show', params: { id: page.slug } }">-->
 <!--                            {{ page.title }}-->
 <!--                        </router-link>-->
 <!--                    </div>-->
                     <router-link v-if="isAdmin" class="nav-link" exact :to="{ name: 'links' }">
                         الروابط
                     </router-link>
-                    <router-link v-if="isAdmin" class="nav-link" exact :to="{ name: 'permissionsCreate' }">
+                    <router-link v-if="isAdmin" class="nav-link" exact :to="{ name: 'permissions.create' }">
                         انشاء صلاحية
                     </router-link>
                 </div>
@@ -43,7 +43,7 @@
                                 <i class="far fa-user fa-fw"></i>&nbsp;الصفحة الشخصية
                             </router-link>
 
-                            <router-link class="dropdown-item" exact :to="{ name: 'updatePassword' }">
+                            <router-link class="dropdown-item" exact :to="{ name: 'update_password' }">
                                 <i class="far fa-user fa-fw"></i>تغير كلمة المرور
                             </router-link>
 
@@ -67,7 +67,7 @@
 export default {
     data() {
         return {
-            show: !!localStorage.getItem("authToken"),
+            show: this.$store.state.show_content,
         }
     },
     computed: {

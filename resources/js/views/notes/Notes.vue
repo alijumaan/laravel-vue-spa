@@ -16,6 +16,7 @@
             </tr>
             </tbody>
         </table>
+
     </div>
 </template>
 
@@ -27,19 +28,17 @@ export default {
         }
         next();
     },
-    data() {
-        return {
-            buildings: {}
-        }
+    computed: {
+        buildings() {
+            return this.$store.state.building.buildings;
+        },
     },
     created() {
-        this.loadNotes()
+        this.load_buildings()
     },
     methods: {
-        loadNotes() {
-            axios.get("/api/v1/buildings/list").then(response => {
-                this.buildings = response.data.buildings
-            })
+        load_buildings() {
+            this.$store.dispatch('building/getBuilding');
         }
     }
 }

@@ -5,7 +5,7 @@
                 <div class="card-header bg-white d-flex">
                     <h5>تحديث حالة التشيك <span class="text-success" v-text="fields.name"></span></h5>
 
-                    <router-link exact :to="{name: 'buildingShow'}" class="ml-auto btn btn-primary btn-sm">
+                    <router-link exact :to="{name: 'buildings.show'}" class="ml-auto btn btn-primary btn-sm">
                         إلغاء
                     </router-link>
                 </div>

@@ -31,8 +31,8 @@ class PermissionsSeeder extends Seeder
         DB::table('permissions')->insert(['name' => 'restore-user', 'description' => 'استعادة مستخدم محذوف']);
         DB::table('permissions')->insert(['name' => 'force-delete-user', 'description' => 'حذف مستخدم نهائياً']);
 
-        DB::table('permissions')->insert(['name' => 'delete-message', 'description' => 'حذف الرسالةً']);
-        DB::table('permissions')->insert(['name' => 'show-message', 'description' => 'عرض الرسالةً']);
+        DB::table('permissions')->insert(['name' => 'delete-contact', 'description' => 'حذف الرسالةً']);
+        DB::table('permissions')->insert(['name' => 'view-contacts', 'description' => 'عرض الرسالةً']);
 
         DB::table('permissions')->insert(['name' => 'show-link', 'description' => 'عرض الرابط']);
         DB::table('permissions')->insert(['name' => 'add-link', 'description' => 'اضافة الرابط']);

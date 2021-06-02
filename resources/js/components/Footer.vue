@@ -22,11 +22,11 @@ export default {
 </script>
 
 <style scoped>
-    footer {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 90px;
-        line-height: 60px;
-    }
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 90px;
+    line-height: 60px;
+}
 </style>
