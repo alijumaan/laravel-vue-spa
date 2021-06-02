@@ -13,7 +13,7 @@ class PermissionController extends ApiController
     public function __construct()
     {
         if (!auth()->check() || !auth()->user()->isAdmin()) {
-            abort(403, "الطلب مرفوض");
+            $this->authorize('view-permissions');
         }
     }
 

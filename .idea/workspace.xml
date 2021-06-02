@@ -53,6 +53,7 @@
     <setting file="file://$PROJECT_DIR$/resources/js/views/buildings/Show.vue" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/Http/Requests/UpdateBuildingRequest.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/resources/js/views/Pages/Index.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Requests/StoreUserRequest.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/resources/js/views/permissions/Index.vue" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/resources/js/store/store.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Api/PermissionController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
@@ -222,7 +223,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../fire" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../mysite" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -441,6 +442,9 @@
       <workItem from="1622405611803" duration="350000" />
       <workItem from="1622654293806" duration="3403000" />
       <workItem from="1622658052021" duration="9000" />
+      <workItem from="1622661079295" duration="863000" />
+      <workItem from="1622664517172" duration="219000" />
+      <workItem from="1622664949815" duration="1734000" />
     </task>
     <servers />
   </component>

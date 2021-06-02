@@ -35,7 +35,7 @@ class AuthServiceProvider extends ServiceProvider
         Passport::personalAccessTokensExpireIn(now()->addDays(15));
 
         try {
-            Permission::get(['name'])->map(function ($permission) {
+            Permission::get(['name', 'message'])->map(function ($permission) {
                 Gate::define($permission->name, function ($user) use ($permission) {
                     return $user->hasAllow($permission->name)
                         ? Response::allow()
