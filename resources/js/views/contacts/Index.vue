@@ -18,30 +18,30 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="message in messages">
-                            <td>{{ message.name }}</td>
-                            <td>{{ message.title }}</td>
+                        <tr v-for="contact in contacts">
+                            <td>{{ contact.name }}</td>
+                            <td>{{ contact.title }}</td>
                             <td>
                                 <span
-                                    :class="message.is_read === 'جديد' ? 'badge badge-danger' : 'badge badge-success'">
-                                    {{ message.is_read }}
+                                    :class="contact.is_read === 'جديد' ? 'badge badge-danger' : 'badge badge-success'">
+                                    {{ contact.is_read }}
                                 </span>
                             </td>
-                            <td>{{ message.created_at }}</td>
+                            <td>{{ contact.created_at }}</td>
                             <td>
                                 <div class="btn-group btn-group-toggle">
-                                    <router-link :to="{ name: 'contacts.show', params: { id: message.id } }" title="Show"
+                                    <router-link :to="{ name: 'contacts.show', params: { id: contact.id } }" title="Show"
                                                  class="btn-primary btn btn-sm">
                                         <i class="fa fa-eye"></i>
                                     </router-link>
-                                    <a href="javascript:void(0);" @click="delete_message(message.id)"
+                                    <a href="javascript:void(0);" @click="delete_contact_msg(contact.id)"
                                        title="Delete" class="btn-danger btn btn-sm"><i class="fa fa-trash"></i>
                                     </a>
                                 </div>
                             </td>
                         </tr>
 
-                        <tr v-show="!messages.length">
+                        <tr v-show="!contacts.length">
                             <td colspan="5" class="text-center">لاتوجد رسائل.</td>
                         </tr>
 
@@ -57,7 +57,7 @@
 export default {
     data() {
         return {
-            messages: {},
+            contacts: {},
         }
     },
     computed: {
@@ -67,17 +67,17 @@ export default {
     },
     created() {
         this.$store.dispatch('currentUser/isAdmin');
-        this.loadMessages();
+        this.loadContacts();
     },
     methods: {
-        loadMessages() {
+        loadContacts() {
             axios.get("/api/v1/contacts").then(response => {
-                this.messages = response.data.data
+                this.contacts = response.data.contacts
             }).catch(error => {
                 console.log(error)
             })
         },
-        delete_message(msg) {
+        delete_contact_msg(msg) {
             swal.fire({
                 title: 'هل أنت متأكد؟',
                 text: "لن تتمكن من التراجع عن هذا!",
@@ -90,7 +90,7 @@ export default {
                 if (result.isConfirmed) {
                     axios.delete('/api/v1/contacts/' + msg).then(() => {
                         this.$router.push('/contacts');
-                        this.loadMessages();
+                        this.loadContacts();
                     })
                     toast.fire({
                         icon: 'success',

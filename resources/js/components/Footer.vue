@@ -3,7 +3,7 @@
         <div class="container text-center">
             <div class="row justify-content-center">
                 <p class="text-white">
-                    جميع الحقوق محفوظة
+                    {{ $t('allRightsReserved') }}
                     <span class="text-white">© {{ now }}</span>
                     <a class="text-primary transition" href="https://www.alijumaan.com"> alijumaan.com</a></p>
             </div>
