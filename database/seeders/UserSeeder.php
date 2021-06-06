@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'name' => 'مدير النظام',
             'username' => 'admin',
             'email' => 'admin@admin.com',
-            'password' => bcrypt('admin'),
+            'password' => 'admin', // will Hash automatically in setter method (User class)
             'role_id' => 1,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             'name' => 'علي القحطاني',
             'username' => 'ali',
             'email' => 'ali@ali.com',
-            'password' => bcrypt('ali'),
+            'password' => 'ali', // will Hash automatically in setter method (User class)
             'role_id' => 2,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
             'name' => 'ياسر',
             'username' => 'yasser',
             'email' => 'yasser@yasser.com',
-            'password' => bcrypt('yasser'),
+            'password' => 'yasser', // will Hash automatically in setter method (User class)
             'role_id' => 3,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
             'name' => 'سعد',
             'username' => 'saad',
             'email' => 'saad@saad.com',
-            'password' => bcrypt('saad'),
+            'password' => 'saad', // will Hash automatically in setter method (User class)
             'role_id' => 3,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
             'name' => 'احمد',
             'username' => 'ahmed',
             'email' => 'ahmed@ahmed.com',
-            'password' => bcrypt('ahmed'),
+            'password' => 'ahmed', // will Hash automatically in setter method (User class)
             'role_id' => 3,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),

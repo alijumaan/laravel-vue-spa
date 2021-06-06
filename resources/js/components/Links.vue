@@ -35,7 +35,7 @@ export default {
     methods: {
         loadLinks() {
             axios.get('/api/v1/links/get-url').then(response => {
-                this.navbar_items = response.data.data
+                this.navbar_items = response.data.links
             })
         }
     }
