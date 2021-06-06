@@ -7,9 +7,8 @@
     <list default="true" id="43b0e3bc-b334-44df-8d87-e55277b9bb05" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Footer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/ar/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ar/ar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/en.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Header.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/plugins/i18n.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/plugins/i18n.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -451,6 +450,8 @@
       <workItem from="1622664949815" duration="1734000" />
       <workItem from="1622668490882" duration="227000" />
       <workItem from="1622996901982" duration="13068000" />
+      <workItem from="1623016542520" duration="274000" />
+      <workItem from="1623016866583" duration="329000" />
     </task>
     <servers />
   </component>

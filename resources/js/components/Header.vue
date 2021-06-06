@@ -104,8 +104,9 @@ export default {
         }
     },
     methods: {
-        changeLocale(lang) {
-            this.$i18n.locale = lang
+        changeLocale(locale) {
+            localStorage.setItem('locale', locale)
+            this.$i18n.locale = locale
         },
         logout() {
             this.$store.dispatch('currentUser/logout')
