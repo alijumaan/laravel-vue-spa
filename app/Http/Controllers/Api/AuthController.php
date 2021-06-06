@@ -13,15 +13,13 @@ class AuthController extends ApiController
     public function login(LoginRequest $request)
     {
         if (! Auth::attempt(["username" => $request->username, "password" => $request->password])) {
-            throw ValidationException::withMessages(['username' => 'معلومات إدخال خاطئة']);
+            throw ValidationException::withMessages(['error' => 'اسم المستخدم أو كلمة المرور خاطئة']);
         }
 
-        $user = Auth::user();
-
-        $token =  $this->getRefreshedToken($user->email, $request->password);
+        $token =  $this->getRefreshedToken(auth()->user()->email, $request->password);
 
         return $this->respond([
-            "user" => $user,
+            "user" => auth()->user(),
             'token' => $token
         ]);
     }

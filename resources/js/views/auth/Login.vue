@@ -9,6 +9,13 @@
                             <div class="form-group row">
                                 <label for="username" class="col-md-4 col-form-label text-md-right">اسم المستخدم</label>
                                 <div class="col-md-6">
+                                    <div v-if="errors && errors.error">
+                                        <div class="alert alert-danger">
+                                            <ul v-for="error in errors.error">
+                                                <li style="list-style-type:none;">{{ error }}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
                                     <input v-model="loginData.username" id="username" type="text" class="form-control">
                                     <div v-if="errors && errors.username">
                                         <div v-for="error in errors.username"

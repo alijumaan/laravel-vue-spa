@@ -26,9 +26,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        // $schedule->command('check:extinguishers')->monthlyOn(1, '08:00');
-        $schedule->command('php artisan check:extinguishers')->dailyAt('09:00');
-        $schedule->command('php artisan passport:purge')->hourly();
+        $schedule->command('check:extinguishers')->monthlyOn(1, '08:00');
+        $schedule->command('passport:purge')->hourly();
+        $schedule->command('backup:clean')->daily()->at('01:00');
+        $schedule->command('backup:run')->daily()->at('01:30');
 
     }
 

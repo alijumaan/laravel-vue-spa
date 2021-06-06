@@ -16,9 +16,7 @@ class UserController extends ApiController
         if (auth()->user()->isAdmin()) {
             $users = $user->where('id', '<>', 1)->get();
         } else {
-            $users = $user
-                ->where('id', auth()->id())
-                ->get();
+            $users = $user->where('id', auth()->id())->get();
         }
 
         $usersCount = $user->where('id', '<>', 1)->get()->count();
@@ -71,9 +69,7 @@ class UserController extends ApiController
 
         $user->delete();
 
-        return $this->respond([
-            'message' => 'تم الحذف وبامكانك استرجاعه أيضاً'
-        ]);
+        return $this->respondNoContent();
     }
 
     public function restore($id)

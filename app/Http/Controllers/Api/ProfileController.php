@@ -33,9 +33,9 @@ class ProfileController extends ApiController
         auth()->user()->password = bcrypt($request->new_password);
 
         if (auth()->user()->save()) {
-            return $this->respond([
-                'message' => 'Password updated successfully'
-            ]);
+
+            return $this->respondUpdated('Password updated successfully');
+
         } else {
             return $this->respondInternalError();
         }
@@ -51,10 +51,7 @@ class ProfileController extends ApiController
             'bio',
         ]));
 
-        return $this->respond([
-            'Updated your profile successfully'
-        ]);
-
+        return $this->respondUpdated('Updated your profile successfully');
     }
 
     public function updateAvatar(UpdateAvatarRequest $request)
@@ -69,9 +66,7 @@ class ProfileController extends ApiController
 
             auth()->user()->profile()->update(['avatar' => $avatar]);
 
-            return $this->respond([
-                'Updated your avatar successfully'
-            ]);
+            return $this->respondUpdated('Updated your avatar successfully');
         }
     }
 

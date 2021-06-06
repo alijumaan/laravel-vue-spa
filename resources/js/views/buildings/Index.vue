@@ -116,9 +116,9 @@ export default {
                     search: this.search.length >= 2 ? this.search : ""
                 }
             }).then(response => {
-                this.records = response.data.count
+                this.records = response.data.buildings_count
                 this.per_page = response.data.paginate
-                this.buildings = response.data.data.map(data => ({
+                this.buildings = response.data.buildings.map(data => ({
                     slug: data.slug,
                     name: data.name,
                     number: data.number,

@@ -14,14 +14,18 @@ class LinkController extends ApiController
     {
         $links = Link::latest()->get();
 
-        return $this->respond(['links' => $links]);
+        return $this->respond([
+            'links' => $links
+        ]);
     }
 
     public function show(Link $link)
     {
         $this->authorize('show-link');
 
-        return $this->respond(['link' => $link]);
+        return $this->respond([
+            'link' => $link
+        ]);
     }
 
     public function store(StoreLinkRequest $request)
@@ -60,7 +64,7 @@ class LinkController extends ApiController
         }
 
         return $this->respond([
-            'data' => LinkResource::collection($links)
+            'links' => LinkResource::collection($links)
         ]);
     }
 }

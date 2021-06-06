@@ -68,7 +68,7 @@ export default {
     methods: {
         loadExtinguishers() {
             axios.get('/api/v1/extinguishers').then(response => {
-                this.extinguishers = response.data.data
+                this.extinguishers = response.data.extinguishers
             }).catch(error => {
                 console.log(error.message)
             })

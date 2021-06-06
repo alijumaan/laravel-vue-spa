@@ -14,7 +14,7 @@ class ExtinguisherController extends ApiController
         $extinguishers = Extinguisher::with('extinguisherBuildings')->get();
 
         return $this->respond([
-            'data' => ExtinguisherResource::collection($extinguishers)
+            'extinguishers' => ExtinguisherResource::collection($extinguishers)
         ]);
     }
 

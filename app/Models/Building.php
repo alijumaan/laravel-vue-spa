@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Events\ExtinguisherExpiredPeriod;
 use App\Helper\SlugHelper;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -54,9 +53,9 @@ class Building extends Model
     ];
 
 
-    protected $dispatchesEvents = [
-        'checked-building' => ExtinguisherExpiredPeriod::class,
-    ];
+//    protected $dispatchesEvents = [
+//        'checked-building' => ExtinguisherExpiredPeriod::class,
+//    ];
 
     public function getRouteKeyName()
     {
@@ -105,12 +104,5 @@ class Building extends Model
     {
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = SlugHelper::uniqueSlug($value, 'buildings');
-    }
-
-    public function showBuilding()
-    {
-        $userId = auth()->user()->id;
-        $roleId = User::where('role_id', 1)->find(1)->id;
-        return $this->user_id == $userId || auth()->id() == $roleId ? true : false;
     }
 }

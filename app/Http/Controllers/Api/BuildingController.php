@@ -44,13 +44,9 @@ class BuildingController extends ApiController
             $buildings_count = count(Building::where('user_id', auth()->id())->get());
         }
 
-        if (!$buildings) {
-            return $this->respondNotFound('المبنى غير موجود');
-        }
-
         return $this->respond([
-            'data' => BuildingResource::collection($buildings),
-            'count' => $buildings_count,
+            'buildings' => BuildingResource::collection($buildings),
+            'buildings_count' => $buildings_count,
             'paginate' => $paginate
         ]);
     }
@@ -58,7 +54,7 @@ class BuildingController extends ApiController
     public function show(Building $building)
     {
         return $this->respond([
-            'data' => new BuildingResource($building)
+            'building' => new BuildingResource($building)
         ]);
     }
 
@@ -140,7 +136,7 @@ class BuildingController extends ApiController
         }
 
         return $this->respond([
-            'data' => $buildings
+            'buildings' => $buildings
         ]);
     }
 }

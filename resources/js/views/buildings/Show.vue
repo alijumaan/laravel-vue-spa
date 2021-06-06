@@ -157,7 +157,7 @@ export default {
     methods: {
         showBuilding() {
             axios.get(`/api/v1/buildings/${this.$route.params.id}`).then(response => {
-                this.building = response.data.data
+                this.building = response.data.building
             }).catch(error => {
                 console.log('Error show the building')
             })

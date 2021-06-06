@@ -13,7 +13,7 @@ const actions = {
 const mutations = {
     setBuilding(state) {
         axios.get('/api/v1/buildings_list').then(response => {
-            state.buildings = response.data.data
+            state.buildings = response.data.buildings
         });
     }
 }

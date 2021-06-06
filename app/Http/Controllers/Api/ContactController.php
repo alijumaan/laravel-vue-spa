@@ -15,7 +15,7 @@ class ContactController extends ApiController
         $contacts = Contact::latest()->get();
 
         return $this->respond([
-            'data' => ContactResource::collection($contacts)
+            'contacts' => ContactResource::collection($contacts)
         ]);
     }
 
@@ -35,7 +35,7 @@ class ContactController extends ApiController
         $contact->update(['is_read' => 1]);
 
         return $this->respond([
-            'data' => $contact
+            'contact' => $contact
         ]);
     }
 
