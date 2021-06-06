@@ -6,7 +6,7 @@ import App from './App.vue'
 import './plugins/sweetaler2'
 import CKEditor from './plugins/ckeditor'
 import pagination from 'v-pagination-3'
-import i18n from "./plugins/i18n"
+import {i18n} from "./plugins/i18n"
 
 const app = createApp(App);
 

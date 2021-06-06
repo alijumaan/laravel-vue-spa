@@ -7,10 +7,10 @@
                     <div class="card-body-icon">
                         <i class="fas fa-fw fa-th-list"></i>
                     </div>
-                    <div class="mr-5">المباني <span style="display: block"></span></div>
+                    <div class="mr-5">{{ $t('buildings') }} <span style="display: block"></span></div>
                 </router-link>
                 <router-link class="card-footer text-white clearfix small z-1" exact :to="{name: 'buildings'}">
-                    <span class="float-left">المزيد</span>
+                    <span class="float-left">{{ $t('more') }}</span>
                     <span class="float-right"><i class="fa fa-angle-right"></i></span>
                 </router-link>
             </div>
@@ -23,10 +23,10 @@
                     <div class="card-body-icon">
                         <i class="fa fa-fw fa-users"></i>
                     </div>
-                    <div class="mr-5">الأعضاء </div>
+                    <div class="mr-5">{{ $t('members') }}</div>
                 </router-link>
                 <router-link class="card-footer text-white clearfix small z-1" exact :to="{name: 'users'}">
-                    <span class="float-left">المزيد</span>
+                    <span class="float-left">{{ $t('more') }}</span>
                     <span class="float-right"><i class="fa fa-angle-right"></i></span>
                 </router-link>
             </div>
@@ -40,11 +40,11 @@
                     <div class="card-body-icon">
                         <i class="fa fa-fw fa-list"></i>
                     </div>
-                    <div class="mr-5">الطفايات
+                    <div class="mr-5">{{ $t('extinguishers') }}
                     </div>
                 </router-link>
                 <router-link class="card-footer text-white clearfix small z-1" exact :to="{name: 'extinguishers'}">
-                    <span class="float-left">المزيد</span>
+                    <span class="float-left">{{ $t('more') }}</span>
                     <span class="float-right"><i class="fa fa-angle-right"></i></span>
                 </router-link>
             </div>
@@ -57,10 +57,10 @@
                     <div class="card-body-icon">
                         <i class="fa fa-fw fa-comments"></i>
                     </div>
-                    <div class="mr-5">ملاحظات<span style="display: block"></span></div>
+                    <div class="mr-5">{{ $t('notes') }}<span style="display: block"></span></div>
                 </router-link>
                 <router-link class="card-footer text-white clearfix small z-1" exact :to="{name: 'notes'}">
-                    <span class="float-left">المزيد</span>
+                    <span class="float-left">{{ $t('more') }}</span>
                     <span class="float-right"><i class="fa fa-angle-right"></i></span>
                 </router-link>
             </div>

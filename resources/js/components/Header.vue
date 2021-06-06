@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-            <router-link class="navbar-brand" exact :to="{ name: 'home' }">الوقاية</router-link>
+            <router-link class="navbar-brand" exact :to="{ name: 'home' }">{{ app_title }}</router-link>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -15,18 +15,32 @@
 <!--                            {{ page.title }}-->
 <!--                        </router-link>-->
 <!--                    </div>-->
+
+                    <div class="nav-item dropdown">
+                        <a id="langDropdown" href="#" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
+                            {{ $t('changeLang')}}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropdown">
+                            <button @click="changeLocale('ar')"
+                                class="dropdown-item">{{ $t('arabic') }}</button>
+                            <button @click="changeLocale('en')"
+                                    class="dropdown-item">{{ $t('english') }}</button>
+                        </div>
+                    </div>
+
                     <router-link v-if="isAdmin" class="nav-link" exact :to="{ name: 'links' }">
-                        الروابط
+                        {{ $t('links') }}
                     </router-link>
                     <router-link v-if="isAdmin" class="nav-link" exact :to="{ name: 'permissions.create' }">
-                        انشاء صلاحية
+                        {{ $t('createPermission')}}
                     </router-link>
                 </div>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/login" v-show="!show">تسجيل دخول</a>
+                        <a class="nav-link" href="/login" v-show="!show">{{ $t('login') }}</a>
                     </li>
                     <li class="nav-item dropdown" v-show="show">
                         <a id="navbarDropdown" href="#" role="button" data-toggle="dropdown"
@@ -68,6 +82,7 @@ export default {
     data() {
         return {
             show: this.$store.state.show_content,
+            app_title: this.$store.state.app_title
         }
     },
     computed: {
@@ -89,6 +104,9 @@ export default {
         }
     },
     methods: {
+        changeLocale(lang) {
+            this.$i18n.locale = lang
+        },
         logout() {
             this.$store.dispatch('currentUser/logout')
         },

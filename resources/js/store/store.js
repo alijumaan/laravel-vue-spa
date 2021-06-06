@@ -5,7 +5,7 @@ import building from "./modules/building";
 
 export const store = createStore({
     state: { // data
-        app_title: 'الوقاية من الحريق',
+        app_title: 'الوقاية',
         show_content: !!localStorage.getItem("authToken"),
 
     },
