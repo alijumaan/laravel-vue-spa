@@ -7,10 +7,10 @@
                     <div class="card-body-icon">
                         <i class="fas fa-fw fa-th-list"></i>
                     </div>
-                    <div class="mr-5">{{ $t('buildings') }} <span style="display: block"></span></div>
+                    <div class="mr-5">{{ $t('generals.buildings') }} <span style="display: block"></span></div>
                 </router-link>
                 <router-link class="card-footer text-white clearfix small z-1" exact :to="{name: 'buildings'}">
-                    <span class="float-left">{{ $t('more') }}</span>
+                    <span class="float-left">{{ $t('generals.more') }}</span>
                     <span class="float-right"><i class="fa fa-angle-right"></i></span>
                 </router-link>
             </div>
@@ -23,10 +23,10 @@
                     <div class="card-body-icon">
                         <i class="fa fa-fw fa-users"></i>
                     </div>
-                    <div class="mr-5">{{ $t('members') }}</div>
+                    <div class="mr-5">{{ $t('generals.members') }}</div>
                 </router-link>
                 <router-link class="card-footer text-white clearfix small z-1" exact :to="{name: 'users'}">
-                    <span class="float-left">{{ $t('more') }}</span>
+                    <span class="float-left">{{ $t('generals.more') }}</span>
                     <span class="float-right"><i class="fa fa-angle-right"></i></span>
                 </router-link>
             </div>
@@ -40,11 +40,11 @@
                     <div class="card-body-icon">
                         <i class="fa fa-fw fa-list"></i>
                     </div>
-                    <div class="mr-5">{{ $t('extinguishers') }}
+                    <div class="mr-5">{{ $t('generals.extinguishers') }}
                     </div>
                 </router-link>
                 <router-link class="card-footer text-white clearfix small z-1" exact :to="{name: 'extinguishers'}">
-                    <span class="float-left">{{ $t('more') }}</span>
+                    <span class="float-left">{{ $t('generals.more') }}</span>
                     <span class="float-right"><i class="fa fa-angle-right"></i></span>
                 </router-link>
             </div>
@@ -57,10 +57,10 @@
                     <div class="card-body-icon">
                         <i class="fa fa-fw fa-comments"></i>
                     </div>
-                    <div class="mr-5">{{ $t('notes') }}<span style="display: block"></span></div>
+                    <div class="mr-5">{{ $t('generals.notes') }}<span style="display: block"></span></div>
                 </router-link>
                 <router-link class="card-footer text-white clearfix small z-1" exact :to="{name: 'notes'}">
-                    <span class="float-left">{{ $t('more') }}</span>
+                    <span class="float-left">{{ $t('generals.more') }}</span>
                     <span class="float-right"><i class="fa fa-angle-right"></i></span>
                 </router-link>
             </div>

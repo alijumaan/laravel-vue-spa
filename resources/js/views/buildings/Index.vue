@@ -10,7 +10,7 @@
                         <router-link v-if="isSupervisor" :to="{ name: 'buildings.create'}"
                                      class="ml-auto btn btn-primary btn-sm">
                             <i class="fa fa-plus fa-fw"></i>
-                            انشاء مبنى
+                            {{ $t('buttons.create_building') }}
                         </router-link>
                     </div>
                     <div :class="{'loading': loading}">

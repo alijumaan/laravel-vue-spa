@@ -1,14 +1,52 @@
 {
-    "arabic": "العربية",
-    "english": "الإنجليزية",
-    "buildings": "المباني",
-    "members": "الأعضاء",
-    "extinguishers": "الطفايات",
-    "more": "المزيد",
-    "notes": "ملاحظات",
-    "links": "الروابط",
-    "createPermission": "انشاء صلاحية",
-    "changeLang": "تغير اللغة",
-    "login": "تسجيل دخول",
-    "allRightsReserved": "جميع الحقوق محفوظة"
+    "generals": {
+        "language": "اللغة",
+        "arabic": "العربية",
+        "english": "الإنجليزية",
+        "buildings": "المباني",
+        "members": "الأعضاء",
+        "extinguishers": "الطفايات",
+        "more": "المزيد",
+        "notes": "ملاحظات",
+        "links": "الروابط",
+        "all_rights_reserved": "جميع الحقوق محفوظة",
+        "password_creation": "إنشاء كلمة المرور"
+    },
+
+    "buttons": {
+        "create_permission": "انشاء صلاحية",
+        "create_building": "انشاء مبنى",
+        "create": "انشاء",
+        "login": "تسجيل دخول",
+        "register": "التسجيل",
+        "logout": "خروج",
+        "save": "حفظ"
+    },
+
+    "fields": {
+        "username": "اسم المستخدم",
+        "password": "كلمة المرور",
+        "remember_me": "تذكرني",
+        "forget_password?": "نسيت كلمة المرور؟",
+        "password_confirm": "تأكيد كلمة المرور",
+        "building_name": "اسم المبنى",
+        "building_number": "رقم المبنى",
+        "inspector": "المفتش",
+        "choose": "اختر",
+        "date_due": "تاريخ الاستحقاق",
+        "period": "الفترة",
+        "note": "ملاحظة"
+    },
+
+    "messages": {
+        "please_wait": "نرجوا الانتظار"
+    },
+
+    "titles":{
+        "building_creation": "مبنى جديد"
+    },
+
+    "actions": {
+        "cancel": "إلغاء"
+    }
 }

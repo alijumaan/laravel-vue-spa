@@ -19,28 +19,28 @@
                     <div class="nav-item dropdown">
                         <a id="langDropdown" href="#" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">
-                            {{ $t('changeLang')}}
+                            {{ $t('generals.language')}}
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropdown">
                             <button @click="changeLocale('ar')"
-                                class="dropdown-item">{{ $t('arabic') }}</button>
+                                class="dropdown-item">{{ $t('generals.arabic') }}</button>
                             <button @click="changeLocale('en')"
-                                    class="dropdown-item">{{ $t('english') }}</button>
+                                    class="dropdown-item">{{ $t('generals.english') }}</button>
                         </div>
                     </div>
 
                     <router-link v-if="isAdmin" class="nav-link" exact :to="{ name: 'links' }">
-                        {{ $t('links') }}
+                        {{ $t('generals.links') }}
                     </router-link>
                     <router-link v-if="isAdmin" class="nav-link" exact :to="{ name: 'permissions.create' }">
-                        {{ $t('createPermission')}}
+                        {{ $t('buttons.create_permission')}}
                     </router-link>
                 </div>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
                     <!-- Authentication Links -->
                     <li class="nav-item">
-                        <a class="nav-link" href="/login" v-show="!show">{{ $t('login') }}</a>
+                        <a class="nav-link" href="/login" v-show="!show">{{ $t('buttons.login') }}</a>
                     </li>
                     <li class="nav-item dropdown" v-show="show">
                         <a id="navbarDropdown" href="#" role="button" data-toggle="dropdown"

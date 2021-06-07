@@ -12,7 +12,7 @@
                 </span>
                 <router-link v-show="!show" class="mt-2 mr-1 btn btn-success" exact to="/login">
                     <i class="fas fa-sign-in-alt"></i>
-                    تسجيل دخول
+                    {{ $t('buttons.login')}}
                 </router-link>
             </div>
         </section>

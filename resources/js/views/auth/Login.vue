@@ -3,11 +3,11 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card shadow bg-transparent text-white">
-                    <div class="card-header border-0">تسجيل الدخول</div>
+                    <div class="card-header border-0">{{ $t('buttons.login') }}</div>
                     <div class="card-body">
                         <form @submit.prevent="login">
                             <div class="form-group row">
-                                <label for="username" class="col-md-4 col-form-label text-md-right">اسم المستخدم</label>
+                                <label for="username" class="col-md-4 col-form-label text-md-right">{{ $t('fields.username') }}</label>
                                 <div class="col-md-6">
                                     <div v-if="errors && errors.error">
                                         <div class="alert alert-danger">
@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">كلمة المرور</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ $t('fields.password')}}</label>
                                 <div class="col-md-6">
                                     <input v-model="loginData.password" id="password" :type="fieldType"
                                            class="form-control">
@@ -47,7 +47,7 @@
                                     <div class="form-check">
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember">
                                         <label class="form-check-label" for="remember">
-                                            تذكرني
+                                            {{ $t('fields.remember_me') }}
                                         </label>
                                     </div>
                                 </div>
@@ -55,12 +55,12 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-success"
-                                            :value="form_submitting ? 'يرجى الإنتظار..' : 'دخول'"
+                                            :value="form_submitting ? $t('fields.please_wait') : $t('buttons.login')"
                                             :disabled="form_submitting">
-                                        دخول
+                                        {{ $t('buttons.login') }}
                                     </button>
                                     <a class="btn btn-link text-white" href="#">
-                                        هل نسيت كلمة المرور ؟
+                                       {{ $t('fields.forget_password?') }}
                                     </a>
                                 </div>
                             </div>

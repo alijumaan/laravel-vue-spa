@@ -1,14 +1,53 @@
 {
-    "arabic": "Arabic",
-    "english": "English",
-    "buildings": "Buildings",
-    "members": "Members",
-    "extinguishers": "Extinguishers",
-    "more": "More",
-    "notes": "Notes",
-    "links": "Links",
-    "createPermission": "Create new permission",
-    "changeLang": "Change Language",
-    "login": "Log in",
-    "allRightsReserved": "All Rights Reserved"
+    "generals": {
+        "language": "Language",
+        "arabic": "Arabic",
+        "english": "English",
+        "buildings": "Buildings",
+        "members": "Members",
+        "extinguishers": "Extinguishers",
+        "more": "More",
+        "notes": "Notes",
+        "links": "Links",
+        "all_rights_reserved": "All Rights Reserved",
+        "password_creation": "Password creation"
+    },
+
+    "buttons": {
+        "create_permission": "Create new permission",
+        "create_building": "Create building",
+        "create": "Create",
+        "login": "Log in",
+        "register": "Register",
+        "logout": "Logout",
+        "save": "Save"
+    },
+
+    "fields": {
+        "username": "Username",
+        "password": "Password",
+        "remember_me": "Remember me",
+        "forget_password?": "Forget password?",
+        "password_confirm": "Confirm password",
+        "building_name": "Building name",
+        "building_number": "Building number",
+        "inspector": "Inspector",
+        "choose": "Choose",
+        "date_due": "Date due",
+        "period": "Period",
+        "note": "Note"
+    },
+
+    "messages": {
+        "please_wait": "Please wait"
+    },
+
+    "titles": {
+        "building_creation": "Building creation"
+    },
+
+    "actions": {
+        "cancel": "Cancel"
+    }
+
 }

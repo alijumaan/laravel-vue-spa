@@ -4,17 +4,17 @@
             <div class="card">
                 <div class="card-header d-flex">
                     <h5>
-                        <span class="">انشاء مبنى جديد</span>
+                        <span class="">{{ $t('titles.building_creation')}}</span>
                     </h5>
                     <router-link exact :to="{ name: 'buildings' }" class="ml-auto btn btn-danger btn-sm">
-                        إلغاء
+                        {{ $t('actions.cancel') }}
                     </router-link>
                 </div>
 
                 <div class="card-body">
                     <form @submit.prevent="create_building">
                         <div class="form-group">
-                            <label for="name">اسم المبنى</label>
+                            <label for="name">{{ $t('fields.building_name') }}</label>
                             <input v-model="fields.name" type="text" id="name" class="form-control">
                             <div v-if="errors && errors.name">
                                 <div v-for="error in errors.name"
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="number">رقم المبنى</label>
+                            <label for="number">{{ $t('fields.building_number') }}</label>
                             <input v-model="fields.number" type="text" id="number" class="form-control">
                             <div v-if="errors && errors.number">
                                 <div v-for="error in errors.number"
@@ -36,9 +36,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="userId">المسؤول عنه</label>
+                            <label for="userId">{{ $t('fields.inspector')}}</label>
                             <select v-model="fields.user_id" id="userId" class="form-control">
-                                <option value="">-- اختر مسؤول عن المبنى --</option>
+                                <option value="">-- {{ $t('fields.choose') }} --</option>
                                 <option v-for="user in users" :value="user.id">{{ user.name }}</option>
                             </select>
                             <div v-if="errors && errors.user_id">
@@ -50,9 +50,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="periodId">فترة صلاحية الفحص</label>
+                            <label for="periodId">{{ $t('fields.period')}}</label>
                             <select v-model="fields.period_id" id="periodId" class="form-control">
-                                <option value="">-- اختر فترة الصلاحية --</option>
+                                <option value="">-- {{ $t('fields.choose') }} --</option>
                                 <option v-for="period in periods" :value="period.id">{{ period.period }}</option>
                             </select>
                             <div v-if="errors && errors.period_id">
@@ -64,7 +64,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="notes">ملاحظات</label>
+                            <label for="notes">{{ $t('fields.note') }}</label>
                             <input v-model="fields.notes" type="text" id="notes" class="form-control">
                             <div v-if="errors && errors.notes">
                                 <div v-for="error in errors.notes"
@@ -74,7 +74,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" name="submit" class="btn btn-primary">انشاء مبنى</button>
+                            <button type="submit" name="submit" class="btn btn-primary">{{ $t('buttons.create_building') }}</button>
                         </div>
                     </form>
                 </div>

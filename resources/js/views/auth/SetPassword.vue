@@ -3,12 +3,12 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">إنشاء كلمة مرور</div>
+                    <div class="card-header">{{ $t('password_creation') }}</div>
 
                     <div class="card-body">
                         <form @submit.prevent="set_password">
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">كلمة المرور</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ $t('fields.password') }}</label>
 
                                 <div class="col-md-6">
                                     <input v-model="password" id="password" type="password" class="form-control">
@@ -22,7 +22,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">تأكيد كلمة المرور</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ $t('password_confirm')}}</label>
                                 <div class="col-md-6">
                                     <input v-model="password_confirmation" id="password-confirm" type="password" class="form-control" name="password_confirmation">
                                     <div v-if="errors && errors.password_confirmation">
@@ -37,7 +37,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">
-                                        حفظ كلمة المرور
+                                        {{ $t('save') }}
                                     </button>
                                 </div>
                             </div>
