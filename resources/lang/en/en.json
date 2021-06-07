@@ -16,7 +16,9 @@
     "buttons": {
         "create_permission": "Create new permission",
         "create_building": "Create building",
+        "update_building": "Update building",
         "create": "Create",
+        "update": "Update",
         "login": "Log in",
         "register": "Register",
         "logout": "Logout",
@@ -35,15 +37,29 @@
         "choose": "Choose",
         "date_due": "Date due",
         "period": "Period",
-        "note": "Note"
+        "note": "Note",
+        "status": "Status",
+        "expired": "Expired",
+        "valid": "Valid",
+        "search": "Search",
+        "building": "Building",
+        "expiry_date": "Expiry date",
+        "from_date": "From date",
+        "action": "Action"
     },
 
     "messages": {
-        "please_wait": "Please wait"
+        "please_wait": "Please wait",
+        "updating...": "Updating...",
+        "creating...": "Creating...",
+        "created_successfully": "Created successfully",
+        "updated_successfully": "Updated successfully",
+        "no_results": "No results"
     },
 
     "titles": {
-        "building_creation": "Building creation"
+        "building_creation": "Building creation",
+        "edit_building": "Edit building"
     },
 
     "actions": {

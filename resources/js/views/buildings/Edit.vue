@@ -3,17 +3,19 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-white d-flex">
-                    <h5>تحديث حالة التشيك <span class="text-success" v-text="fields.name"></span></h5>
+                    <h5> {{ $t('titles.edit_building')}}
+                        (<span class="text-success" v-text="fields.name"></span>)
+                    </h5>
 
                     <router-link exact :to="{name: 'buildings.show'}" class="ml-auto btn btn-primary btn-sm">
-                        إلغاء
+                        {{ $t('actions.cancel') }}
                     </router-link>
                 </div>
                 <div class="card-body">
                     <form @submit.prevent="update_building">
                         <!-- name -->
                         <div class="form-group">
-                            <label for="name">اسم المبنى</label>
+                            <label for="name">{{ $t('fields.building_name') }}</label>
                             <input v-model="fields.name" type="text" id="name" class="form-control">
                             <div v-if="errors && errors.name">
                                 <div v-for="error in errors.name"
@@ -24,7 +26,7 @@
                         </div>
                         <!-- number -->
                         <div class="form-group">
-                            <label for="number">رقم المبنى</label>
+                            <label for="number">{{ $t('fields.building_number') }}</label>
                             <input v-model="fields.number" id="number" class="form-control">
                             <div v-if="errors && errors.number">
                                 <div v-for="error in errors.number"
@@ -35,9 +37,9 @@
                         </div>
                         <!-- user_id -->
                         <div class="form-group">
-                            <label for="user_id">المسؤول عنه</label>
+                            <label for="user_id">{{ $t('fields.inspector') }}</label>
                             <select v-model="fields.user_id" id="user_id" class="form-control">
-                                <option value="">-- اختر مسؤول عن المبنى --</option>
+                                <option value="">-- {{ $t('fields.choose') }} --</option>
                                 <option v-for="user in users" :value="user.id">{{ user.name }}</option>
                             </select>
                             <div v-if="errors && errors.user_id">
@@ -49,23 +51,23 @@
                         </div>
                         <!-- period_id -->
                         <div class="form-group">
-                            <label for="period_id">فترة صلاحية الفحص</label>
+                            <label for="period_id">{{ $t('fields.period') }}</label>
                             <select v-model="fields.period_id" id="period_id" class="form-control">
-                                <option value="">-- اختر فترة الصلاحية --</option>
+                                <option value="">-- {{ $t('fields.choose') }} --</option>
                                 <option v-for="period in periods" :value="period.id">{{ period.period }}</option>
                             </select>
                         </div>
                         <!-- status -->
                         <div class="form-group">
-                            <label for="status">الحالة</label>
+                            <label for="status">{{ $t('fields.status') }}</label>
                             <select v-model="fields.status" id="status" class="form-control">
-                                <option value="0">منتهي</option>
-                                <option value="1">مشيك</option>
+                                <option value="0">{{ $t('fields.expired') }}</option>
+                                <option value="1">{{ $t('fields.valid') }}</option>
                             </select>
                         </div>
                         <!-- notes -->
                         <div class="form-group">
-                            <label for="notes">ملاحظات</label>
+                            <label for="notes">{{ $t('fields.note') }}</label>
                             <input v-model="fields.notes" type="text" id="notes" class="form-control">
                             <div v-if="errors && errors.notes">
                                 <div v-for="error in errors.notes"
@@ -78,7 +80,7 @@
                         <div class="form-group">
                             <input class="btn btn-primary" type="submit"
                                    :class="form_submitting ? 'btn btn-secondary' : 'btn btn-primary'"
-                                   :value="form_submitting ? 'جار التحديث...' : 'تحديث'"
+                                   :value="form_submitting ? $t('messages.please_waite') : $t('buttons.update_building')"
                                    :disabled="form_submitting"/>
                         </div>
 
@@ -116,7 +118,7 @@ export default {
     methods: {
         loadBuilding() {
             axios.get('/api/v1/buildings/' + this.$route.params.id).then(response => {
-                this.fields = response.data.data;
+                this.fields = response.data.building;
             })
         },
         loadUsers() {
@@ -134,7 +136,7 @@ export default {
             axios.put(`/api/v1/buildings/${this.fields.slug}`, this.fields).then(response => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم تحديث المبنى بنجاح'
+                    title: this.$i18n.t('messages.updated_successfully')
                 })
                 this.$router.push('/buildings');
                 this.form_submitting = false;

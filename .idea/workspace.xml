@@ -7,14 +7,10 @@
     <list default="true" id="43b0e3bc-b334-44df-8d87-e55277b9bb05" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Footer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Header.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Header.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/components/Links.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Links.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/Home.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/auth/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/auth/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/auth/SetPassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/auth/SetPassword.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Create.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Edit.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Show.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Show.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/lang/ar/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ar/ar.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/lang/en/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/en.json" afterDir="false" />
     </list>
@@ -460,7 +456,8 @@
       <workItem from="1622996901982" duration="13068000" />
       <workItem from="1623016542520" duration="274000" />
       <workItem from="1623016866583" duration="519000" />
-      <workItem from="1623047041427" duration="4296000" />
+      <workItem from="1623047041427" duration="4538000" />
+      <workItem from="1623064005197" duration="5206000" />
     </task>
     <servers />
   </component>

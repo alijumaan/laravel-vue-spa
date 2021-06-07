@@ -74,7 +74,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" name="submit" class="btn btn-primary">{{ $t('buttons.create_building') }}</button>
+                            <button type="submit" name="submit" class="btn btn-primary">
+                                {{ $t('buttons.create_building') }}
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -121,7 +123,7 @@ export default {
             axios.post("/api/v1/buildings", this.fields).then(response => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم الإنشاء بنجاح'
+                    title: this.$i18n.t('messages.created_successfully')
                 })
                 this.$router.push('/buildings');
             }).catch(error => {

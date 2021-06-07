@@ -5,7 +5,7 @@
                 <div class="card shadow">
                     <div class="p-2 d-flex">
                         <input type="text" class="form-control w-50" v-model="search"
-                               placeholder="بحث">
+                               :placeholder="$t('fields.search')">
 
                         <router-link v-if="isSupervisor" :to="{ name: 'buildings.create'}"
                                      class="ml-auto btn btn-primary btn-sm">
@@ -25,9 +25,10 @@
                                     </th>
                                 </tr>
                                 <tr class="bg-dark text-white">
-                                    <th>المبنى</th>
-                                    <th>الانتهاء</th>
-                                    <th>الحالة</th>
+                                    <th>{{ $t('fields.building') }}</th>
+                                    <th>{{ $t('fields.expiry_date') }}</th>
+                                    <th>{{ $t('fields.status') }}</th>
+
                                 </tr>
                                 </thead>
                                 <tbody v-if="buildings.length > 0">
@@ -59,7 +60,7 @@
 
                                 </tbody>
                             </table>
-                            <p class="text-center" v-show="!buildings.length > 0">لاتوجد نتائج.</p>
+                            <p class="text-center" v-show="!buildings.length > 0">{{ $t('messages.no_results')}}</p>
                         </div>
                     </div>
                 </div>

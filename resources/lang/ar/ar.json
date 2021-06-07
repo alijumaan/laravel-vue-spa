@@ -16,7 +16,9 @@
     "buttons": {
         "create_permission": "انشاء صلاحية",
         "create_building": "انشاء مبنى",
+        "update_building": "تحديث مبنى",
         "create": "انشاء",
+        "update": "تحديث",
         "login": "تسجيل دخول",
         "register": "التسجيل",
         "logout": "خروج",
@@ -35,15 +37,29 @@
         "choose": "اختر",
         "date_due": "تاريخ الاستحقاق",
         "period": "الفترة",
-        "note": "ملاحظة"
+        "note": "ملاحظة",
+        "status": "الحالة",
+        "expired": "منتهي",
+        "valid": "مشيك",
+        "search": "بحث",
+        "building": "المبنى",
+        "expiry_date": "تاريخ الإنتهاء",
+        "from_date": "من تاريخ",
+        "action": "الإجراء"
     },
 
     "messages": {
-        "please_wait": "نرجوا الانتظار"
+        "please_wait": "نرجوا الانتظار",
+        "updating...": "جار التحديث...",
+        "creating...": "جار الانشاء...",
+        "created_successfully": "تم الإنشاء بنجاح",
+        "updated_successfully": "تم التحديث بنجاح",
+        "no_results": "لاتوجد نتائج"
     },
 
     "titles":{
-        "building_creation": "مبنى جديد"
+        "building_creation": "مبنى جديد",
+        "edit_building": "تعديل المبنى"
     },
 
     "actions": {

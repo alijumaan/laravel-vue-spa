@@ -4,7 +4,7 @@
             <div class="card-header d-flex">
                 <h5>
                     <span :class="building.checked_at > now ? 'badge badge-success' : 'badge badge-danger'">
-                        مبنى {{ building.name }}
+                        {{ building.name }}
                     </span>
 
                     ({{ building.number }})
@@ -13,20 +13,19 @@
                         {{ building.statusText }}
                     </span>
                 </h5>
-                <router-link exact :to="{name: 'buildings', params: { id: building.slug }}"
-                             class="ml-auto btn btn-primary btn-sm">
-                    رجوع
+                <router-link exact :to="{name: 'buildings', params: { id: building.slug }}" class="ml-auto btn btn-primary btn-sm">
+                    {{ $t('actions.cancel') }}
                 </router-link>
             </div>
             <div class="table-responsive">
                 <table class="table table-borderless table-sm">
                     <thead class="table-dark">
                     <tr>
-                        <th>المفتش</th>
-                        <th>تاريخ التشييك</th>
-                        <th>تاريخ الإنتهاء</th>
-                        <th>ملاحظات</th>
-                        <th width="25%">إجراءات</th>
+                        <th>{{ $t('fields.inspector') }}</th>
+                        <th>{{ $t('fields.from_date') }}</th>
+                        <th>{{ $t('fields.expiry_date') }}</th>
+                        <th>{{ $t('fields.note') }}</th>
+                        <th width="25%">{{ $t('fields.action') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -61,18 +60,18 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header bg-primary">
-                        <h5 class="modal-title text-white">تحديث المبنى</h5>
+                        <h5 class="modal-title text-white">{{ $t('titles.edit_building') }}</h5>
                     </div>
                     <div class="modal-body">
                         <div class="card-body p-3">
                             <form @submit.prevent="update_building">
                                 <!-- status -->
                                 <div class="form-group">
-                                    <label for="status">الحالة</label>
+                                    <label for="status">{{ $t('fields.status') }}</label>
                                     <select v-model="building.status" id="status" class="form-control">
-                                        <option value="">-- اختر حالة الصلاحية --</option>
-                                        <option value="0">منتهي</option>
-                                        <option value="1">مشيك</option>
+                                        <option value="">-- {{ $t('fields.choose') }} --</option>
+                                        <option value="0">{{ $t('fields.valid') }}</option>
+                                        <option value="1">{{ $t('fields.expired') }}</option>
                                     </select>
                                     <div v-if="errors && errors.status">
                                         <div v-for="error in errors.status"
@@ -83,9 +82,9 @@
                                 </div>
                                 <!-- period_id -->
                                 <div class="form-group">
-                                    <label for="period_id">فترة صلاحية الفحص</label>
+                                    <label for="period_id">{{ $t('fields.period') }}</label>
                                     <select v-model="building.period_id" id="period_id" class="form-control">
-                                        <option value="">-- اختر فترة الصلاحية --</option>
+                                        <option value="">-- {{ $t('fields.choose') }} --</option>
                                         <option v-for="period in periods" :value="period.id">
                                             {{ period.period }}
                                         </option>
@@ -99,7 +98,7 @@
                                 </div>
                                 <!-- notes -->
                                 <div class="form-group">
-                                    <label for="notes">ملاحظات</label>
+                                    <label for="notes">{{ $t('fields.note') }}</label>
                                     <input v-model="building.notes" type="text" id="notes" class="form-control">
 
                                     <div v-if="errors && errors.notes">
@@ -112,14 +111,14 @@
                                 <div class="form-group">
                                     <button type="submit"
                                             :class="form_submitting ? 'btn btn-secondary' : 'btn btn-primary'"
-                                            v-text="form_submitting ? 'جار التحديث...' : 'تحديث المبنى'"
+                                            v-text="form_submitting ? $t('updating...') : $t('buttons.update_building')"
                                             :disabled="form_submitting"></button>
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="close" type="button" class="btn btn-danger" data-dismiss="modal">إغلاق</button>
+                        <button id="close" type="button" class="btn btn-danger" data-dismiss="modal">{{ $t('actions.cancel') }}</button>
                     </div>
                 </div>
             </div>
