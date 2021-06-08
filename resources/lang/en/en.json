@@ -14,18 +14,23 @@
     },
 
     "buttons": {
-        "create_permission": "Create new permission",
-        "create_building": "Create building",
+        "create_new_permission": "Create new permission",
+        "create_new_building": "Create new building",
+        "create_new_page": "Create new page",
+        "create_new_link": "Create new link",
         "update_building": "Update building",
         "create": "Create",
         "update": "Update",
         "login": "Log in",
         "register": "Register",
         "logout": "Logout",
-        "save": "Save"
+        "save": "Save",
+        "execute": "Execute",
+        "pull_extinguisher": "Pull extinguisher"
     },
 
     "fields": {
+        "name": "Name",
         "username": "Username",
         "password": "Password",
         "remember_me": "Remember me",
@@ -45,7 +50,19 @@
         "building": "Building",
         "expiry_date": "Expiry date",
         "from_date": "From date",
-        "action": "Action"
+        "action": "Action",
+        "type": "Type",
+        "belong_to": "Belong to",
+        "count": "Count",
+        "icon": "Icon",
+        "url": "Url",
+        "url_address": "Url address",
+        "show": "Show",
+        "hide": "Hide",
+        "title": "Title",
+        "content": "Content",
+        "topic": "Topic",
+        "topic_page": "Topic page"
     },
 
     "messages": {
@@ -54,16 +71,38 @@
         "creating...": "Creating...",
         "created_successfully": "Created successfully",
         "updated_successfully": "Updated successfully",
-        "no_results": "No results"
+        "executed_successfully": "Executed successfully",
+        "deleted_successfully": "Deleted successfully",
+        "no_results": "No results",
+        "are_you_sour?": "?Are you sour",
+        "You_wont_be_able_to_undo_this": "!You won't be able to undo this",
+        "delete_confirmation": "Delete confirmation"
     },
 
     "titles": {
-        "building_creation": "Building creation",
-        "edit_building": "Edit building"
+        "creation_new_building": "Creation new building",
+        "create_new_link": "Create new link",
+        "create_new_page": "Create new page",
+        "edit_building": "Edit building",
+        "pull_extinguisher_from_building": "Pulling extinguisher from building",
+        "extinguishers_under_maintenance": "Extinguishers under maintenance",
+        "details": "Details",
+        "website_links": "Website links",
+        "edit_link": "Edit link"
     },
 
     "actions": {
-        "cancel": "Cancel"
+        "cancel": "Cancel",
+        "back": "Back",
+        "edit": "Edit",
+        "delete": "Delete"
+    },
+
+    "placeholders": {
+        "ex_homepage": "Ex. Homepage",
+        "ex_/home": "Ex. /home",
+        "ex_home": "Ex. home"
+
     }
 
 }

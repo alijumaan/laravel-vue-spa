@@ -4,7 +4,7 @@
             <div class="card-header d-flex">
                 {{ title }}
                 <router-link exact :to="{name: 'pages'}" class="ml-auto btn btn-danger btn-sm">
-                    إلغاء
+                    {{ $t('actions.cancel') }}
                 </router-link>
             </div>
             <div class="card-body">
@@ -12,23 +12,23 @@
                     <form @submit.prevent="update_page" enctype="multipart/form-data">
 
                         <div class="col-lg-5 form-group">
-                            <label> العنوان </label>
+                            <label> {{ $t('fields.title') }} </label>
                             <input type="text" class="form-control" v-model="title">
                         </div>
 
                         <div class="col-lg-5 form-group">
-                            <label> Url </label>
+                            <label> {{ $t('fields.url') }} </label>
                             <input type="text" class="form-control" v-model="slug">
                         </div>
 
                         <div class="col-lg-12 form-group">
-                            <label> المحتوى </label>
+                            <label> {{ $t('fields.content') }} </label>
 
                             <ckeditor :editor="editor" v-model="content" :config="editorConfig"></ckeditor>
                         </div>
 
                         <div class="col-lg-12 form-group">
-                            <button type="submit" class="btn btn-primary mt-3">تعديل </button>
+                            <button type="submit" class="btn btn-primary mt-3">{{ $t('buttons.update') }}</button>
                         </div>
                     </form>
                 </div>
@@ -74,7 +74,7 @@ export default {
             }).then(response => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم تحديث الصفحة بنجاح'
+                    title: this.$i18n.t('messages.updated_successfully')
                 })
                 this.$router.push({name: 'pages'})
             }).catch(error => {

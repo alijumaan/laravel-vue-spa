@@ -3,20 +3,20 @@
         <div class="col-md-12">
             <div class="d-flex mb-3">
                 <router-link exact :to="{ name: 'extinguishers' }" class="ml-auto btn btn-primary btn-sm">
-                    عودة
+                    {{ $t('actions.back') }}
                 </router-link>
             </div>
             <div class="card shadow">
                 <div class="p-3 d-flex">
-                    <h4>تفاصيل عن الطفاية من نوع ( {{ extinguisher.extinguisherType }} )</h4>
+                    <h4>{{ $t('titles.details') }} ( {{ extinguisher.extinguisherType }} )</h4>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <thead class="">
                         <tr class="bg-dark text-white">
-                            <th>نوع الطفاية</th>
-                            <th>عدد</th>
-                            <th>المبني</th>
+                            <th>{{ $t('fields.type') }}</th>
+                            <th>{{ $t('fields.count') }}</th>
+                            <th>{{ $t('fields.building') }}</th>
                         </tr>
                         </thead>
                         <tbody>

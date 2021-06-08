@@ -14,18 +14,23 @@
     },
 
     "buttons": {
-        "create_permission": "انشاء صلاحية",
-        "create_building": "انشاء مبنى",
+        "create_new_permission": "انشاء صلاحية",
+        "create_new_building": "انشاء مبنى",
+        "create_new_link": "إنشاء رابط",
+        "create_new_page": "انشاء مبنى",
         "update_building": "تحديث مبنى",
         "create": "انشاء",
         "update": "تحديث",
         "login": "تسجيل دخول",
         "register": "التسجيل",
         "logout": "خروج",
-        "save": "حفظ"
+        "save": "حفظ",
+        "execute": "تنفيذ",
+        "pull_extinguisher": "سحب طفاية"
     },
 
     "fields": {
+        "name": "الاسم",
         "username": "اسم المستخدم",
         "password": "كلمة المرور",
         "remember_me": "تذكرني",
@@ -45,7 +50,19 @@
         "building": "المبنى",
         "expiry_date": "تاريخ الإنتهاء",
         "from_date": "من تاريخ",
-        "action": "الإجراء"
+        "action": "الإجراء",
+        "type": "النوع",
+        "belong_to": "تابع الى",
+        "count": "العدد",
+        "icon": "الأيقونة",
+        "url": "الرابط",
+        "url_address": "عنوان الرابط",
+        "show": "إظهار",
+        "hide": "إخفاء",
+        "title": "العنوان",
+        "content": "المحتوى",
+        "topic": "الموضوع",
+        "topic_page": "موضوع الصفحة"
     },
 
     "messages": {
@@ -54,15 +71,36 @@
         "creating...": "جار الانشاء...",
         "created_successfully": "تم الإنشاء بنجاح",
         "updated_successfully": "تم التحديث بنجاح",
-        "no_results": "لاتوجد نتائج"
+        "executed_successfully": "تم التنفيذ بنجاح",
+        "deleted_successfully": "تم الحذف بنجاح",
+        "no_results": "لاتوجد نتائج",
+        "are_you_sour?": "هل أنت متأكد؟",
+        "You_wont_be_able_to_undo_this": "لن تتمكن من التراجع عن هذا!",
+        "delete_confirmation": "تأكيد الحذف"
     },
 
     "titles":{
-        "building_creation": "مبنى جديد",
-        "edit_building": "تعديل المبنى"
+        "creation_new_building": "إنشاء مبنى جديد",
+        "create_new_link": "إنشاء مبنى جديد",
+        "create_new_page": "إنشاء صفحة جديد",
+        "edit_building": "تعديل المبنى",
+        "pull_extinguisher_from_building": "سحب طفاية من مبنى",
+        "extinguishers_under_maintenance": "طفايات تحت الصيانة",
+        "details": "تفاصيل",
+        "website_links": "روابط الموقع",
+        "edit_link": "تعديل الرابط"
     },
 
     "actions": {
-        "cancel": "إلغاء"
+        "cancel": "إلغاء",
+        "back": "عودة",
+        "edit": "تعديل",
+        "delete": "حذف"
+    },
+
+    "placeholders": {
+        "ex_homepage": "مثال: الرئيسية",
+        "ex_/home": "مثال: الرئيسية/",
+        "ex_home": "مثال: home"
     }
 }

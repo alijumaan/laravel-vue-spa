@@ -4,7 +4,7 @@
             <div class="card-header d-flex">
                 <h5 class="text-primary font-weight-bold"> {{ page.title }} </h5>
                 <router-link exact :to="{name: 'pages'}" class="ml-auto btn btn-primary btn-sm">
-                    عودة
+                    {{ $t('actions.back') }}
                 </router-link>
             </div>
             <div class="table-responsive">

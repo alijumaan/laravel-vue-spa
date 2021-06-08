@@ -3,11 +3,11 @@
         <div class="col-md-12">
             <div v-show="isAdmin" class="card shadow-sm mb-4">
                 <div class="card-header d-flex py-3">
-                    <h4 class="m-0">روابط الموقع</h4>
+                    <h4 class="m-0">{{ $t('titles.website_links') }}</h4>
                     <router-link :to="{ name: 'links.create'}"
                                  class="ml-auto btn btn-primary btn-sm">
                         <i class="fa fa-plus fa-fw"></i>
-                        انشاء رابط
+                        {{ $t('buttons.create_new_link') }}
                     </router-link>
                 </div>
 
@@ -15,11 +15,11 @@
                     <table class="table table-content table-hover">
                         <thead>
                         <tr>
-                            <th>الاسم</th>
-                            <th>Url</th>
-                            <th>الايقونة</th>
-                            <th>امكانية الوصول</th>
-                            <th>الإجراءات</th>
+                            <th>{{ $t('fields.name') }}</th>
+                            <th>{{ $t('fields.url') }}</th>
+                            <th>{{ $t('fields.icon') }}</th>
+                            <th>{{ $t('fields.status') }}</th>
+                            <th>{{ $t('fields.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -30,12 +30,12 @@
                             <td>{{ link.access }}</td>
                             <td>
                                 <div class="btn-group btn-group-toggle">
-                                    <router-link :to="{ name: 'links.edit', params: { id: link.id } }" title="تعديل"
+                                    <router-link :to="{ name: 'links.edit', params: { id: link.id } }" :title="$t('actions.edit')"
                                                  class="btn-primary btn btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </router-link>
                                     <a href="javascript:void(0);" @click="delete_link(link.id)"
-                                       title="حذف" class="btn-danger btn btn-sm"><i class="fa fa-trash"></i>
+                                       :title="$t('actions.delete')" class="btn-danger btn btn-sm"><i class="fa fa-trash"></i>
                                     </a>
                                 </div>
                             </td>
@@ -77,13 +77,13 @@ export default {
         },
         delete_link(link_id) {
             swal.fire({
-                title: 'هل أنت متأكد؟',
-                text: "لن تتمكن من التراجع عن هذا!",
+                title: this.$i18n.t('messages.are_you_sour?'),
+                text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: 'تأكيد الحذف'
+                confirmButtonText: this.$i18n.t('messages.delete_confirmation')
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete('/api/v1/links/' + link_id).then(() => {
@@ -92,7 +92,7 @@ export default {
                     })
                     toast.fire({
                         icon: 'success',
-                        title: 'تم حذف الرابط نجاح'
+                        title: this.$i18n.t('messages.deleted_successfully')
                     })
                 }
             })

@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header d-flex">
                     <h5>
-                        <span class="">{{ $t('titles.building_creation')}}</span>
+                        <span class="">{{ $t('titles.creation_new_building')}}</span>
                     </h5>
                     <router-link exact :to="{ name: 'buildings' }" class="ml-auto btn btn-danger btn-sm">
                         {{ $t('actions.cancel') }}

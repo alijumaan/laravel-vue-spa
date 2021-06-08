@@ -2,9 +2,9 @@
     <div>
         <div class="card mb-3">
             <div class="card-header d-flex">
-                انشاء صحفة جديدة
+                {{ $t('titles.create_new_page') }}
                 <router-link exact :to="{name: 'pages'}" class="ml-auto btn btn-danger btn-sm">
-                    إلغاء
+                    {{ $t('actions.cancel') }}
                 </router-link>
             </div>
             <div class="card-body">
@@ -12,7 +12,7 @@
                     <form @submit.prevent="create_page">
 
                         <div class="col-lg-5 form-group">
-                            <label> العنوان </label>
+                            <label> {{ $t('fields.title') }} </label>
                             <input type="text" class="form-control" v-model="fields.title">
                             <div v-if="errors && errors.title">
                                 <div v-for="error in errors.title"
@@ -23,7 +23,7 @@
                         </div>
 
                         <div class="col-lg-5 form-group">
-                            <label> Url </label>
+                            <label> {{ $t('fields.url') }} </label>
                             <input type="text" class="form-control" v-model="fields.slug">
                             <div v-if="errors && errors.slug">
                                 <div v-for="error in errors.slug"
@@ -34,7 +34,7 @@
                         </div>
 
                         <div class="col-lg-12 form-group">
-                            <label> المحتوى </label>
+                            <label> {{ $t('fields.content') }} </label>
 
                             <ckeditor :editor="editor" v-model="fields.content" :config="editorConfig"></ckeditor>
                             <div v-if="errors && errors.content">
@@ -46,7 +46,7 @@
                         </div>
 
                         <div class="col-lg-12 form-group">
-                            <button type="submit" class="btn btn-primary mt-3">إنشاء </button>
+                            <button type="submit" class="btn btn-primary mt-3">{{ $t('buttons.create') }}</button>
                         </div>
                     </form>
                 </div>
@@ -79,7 +79,7 @@ export default {
             axios.post("/api/v1/pages", this.fields).then( () => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم إنشاء الصفحة بنجاح'
+                    title: this.$i18n.t('messages.created_successfully')
                 })
                 this.$router.push({name: 'pages'})
             }).catch(error => {

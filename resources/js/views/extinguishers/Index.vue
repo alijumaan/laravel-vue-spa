@@ -4,21 +4,20 @@
             <div v-if="isSupervisor" class="d-flex mb-3">
                 <router-link :to="{ name: 'extinguishers.create'}"
                              class="ml-auto btn btn-primary btn-sm">
-                    <i class="fa fa-plus fa-fw"></i>
-                    سحب طفاية من مبنى
+                    <h5>{{ $t('buttons.pull_extinguisher') }}</h5>
                 </router-link>
             </div>
             <div class="card shadow">
                 <div class="p-3 d-flex">
-                    <h4>طفايات تحت الصيانة</h4>
+                    <h4>{{ $t('titles.extinguishers_under_maintenance') }}</h4>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
                         <thead class="">
                         <tr class="bg-dark text-white">
-                            <th>نوع الطفاية</th>
-                            <th>عدد</th>
-                            <th width="10%">مزيد</th>
+                            <th>{{ $t('fields.type') }}</th>
+                            <th>{{ $t('fields.count') }}</th>
+                            <th width="10%">{{ $t('fields.action') }}</th>
                         </tr>
                         </thead>
                         <tbody v-if="extinguishers.length > 0">
@@ -34,8 +33,8 @@
                         </tr>
                         </tbody>
                     </table>
-                    <p v-show="!extinguishers.length > 0"
-                       class="text-center">لاتوجد نتائج .</p>
+                    <p v-show="extinguishers.length > 0"
+                       class="text-center">{{ $t('messages.no_results') }}</p>
                 </div>
             </div>
         </div>

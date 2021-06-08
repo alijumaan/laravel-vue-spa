@@ -4,15 +4,15 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex">
-                        <h5>سحب طفاية من مبنى</h5>
+                        <h5>{{ $t('titles.pull_extinguisher_from_building') }}</h5>
                         <router-link exact :to="{ name: 'extinguishers' }" class="ml-auto btn btn-danger btn-sm">
-                            إلغاء
+                            {{ $t('actions.cancel') }}
                         </router-link>
                     </div>
                     <div class="card-body">
                         <form @submit.prevent="submit_form">
                             <div class="form-group">
-                                <label for="type">نوع الطفاية</label>
+                                <label for="type">{{ $t('fields.type') }}</label>
                                 <select  v-model="extinguisher_id" id="type" class="form-control">
                                     <option value=""> --- </option>
                                     <option v-for="(extinguisher, index) in extinguishersType" :value="extinguisher.id">
@@ -22,7 +22,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="building_id">تابعة لمبنى</label>
+                                <label for="building_id">{{ $t('fields.belong_to') }}</label>
                                 <select v-model="building_id" id="building_id" class="form-control">
                                     <option value=""> --- </option>
                                     <option v-for="building in buildings" :value="building.id">
@@ -31,7 +31,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <button type="submit" name="submit" class="btn btn-dark">سحب</button>
+                                <button type="submit" name="submit" class="btn btn-dark">{{ $t('buttons.execute') }}</button>
                             </div>
                         </form>
                     </div>
@@ -72,7 +72,7 @@ export default {
             }).then( () => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم السحب بنجاح'
+                    title: this.$i18n.t('messages.executed_successfully')
                 })
                 this.$router.push('/extinguishers');
             })

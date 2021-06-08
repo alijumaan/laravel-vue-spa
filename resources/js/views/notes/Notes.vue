@@ -4,8 +4,8 @@
             <thead class="table-dark">
             <tr>
                 <th scope="col" width="5%">#</th>
-                <th scope="col">المبنى</th>
-                <th scope="col">الملاحظة</th>
+                <th scope="col">{{ $t('fields.building') }}</th>
+                <th scope="col">{{ $t('fields.note') }}</th>
             </tr>
             </thead>
             <tbody>

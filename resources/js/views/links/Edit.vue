@@ -3,17 +3,17 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-white d-flex">
-                    <h5>تحديث الرابط:  <span class="text-success" v-text="fields.name"></span></h5>
+                    <h5>{{ $t('titles.edit_link')}} (<span class="text-success" v-text="fields.name"></span>)</h5>
 
                     <router-link exact :to="{name: 'links'}" class="ml-auto btn btn-primary btn-sm">
-                        إلغاء
+                        {{  $t('actions.back') }}
                     </router-link>
                 </div>
                 <div class="card-body">
                     <form @submit.prevent="update_link">
                         <!-- name -->
                         <div class="form-group">
-                            <label for="name">اسم الرابط</label>
+                            <label for="name">{{ $t('fields.name') }}</label>
                             <input v-model="fields.name" type="text" id="name" class="form-control">
                             <div v-if="errors && errors.name">
                                 <div v-for="error in errors.name"
@@ -35,7 +35,7 @@
                         </div>
                         <!-- Icon -->
                         <div class="form-group">
-                            <label for="icon">الأيقونة</label>
+                            <label for="icon">{{ $t('fields.icon') }}</label>
                             <input v-model="fields.icon" type="text" id="icon" class="form-control">
                             <div v-if="errors && errors.icon">
                                 <div v-for="error in errors.icon"
@@ -46,11 +46,10 @@
                         </div>
                         <!-- Access -->
                         <div class="form-group">
-                            <label for="userId">امكانية الظهور</label>
+                            <label for="userId">{{ $t('fields.status') }}</label>
                             <select v-model="fields.access" id="userId" class="form-control">
-                                <option value="">-- حدد امكانية الظهور --</option>
-                                <option value="1">اظهار</option>
-                                <option value="0">اخفاء</option>
+                                <option value="1">{{ $t('fields.show') }}</option>
+                                <option value="0">{{ $t('fields.hide') }}</option>
                             </select>
                             <div v-if="errors && errors.access">
                                 <div v-for="error in errors.access"
@@ -61,7 +60,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input class="btn btn-primary" type="submit" value="تحديث"/>
+                            <input class="btn btn-primary" type="submit" :value="$t('buttons.update')"/>
                         </div>
 
                     </form>
@@ -84,10 +83,10 @@ export default {
         }
     },
     created() {
-        this.loadLink();
+        this.getLink();
     },
     methods: {
-        loadLink() {
+        getLink() {
             axios.get('/api/v1/links/' + this.$route.params.id).then(response => {
                 this.fields = response.data.link;
             })
@@ -96,7 +95,7 @@ export default {
             axios.put(`/api/v1/links/${this.fields.id}`, this.fields).then( () => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم تحديث المبنى بنجاح'
+                    title: this.$i18n.t('messages.updated_successfully')
                 })
                 this.$router.push('/links');
             }).catch( error => this.errors = error.response.data.errors)

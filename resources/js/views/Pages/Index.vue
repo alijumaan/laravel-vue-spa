@@ -5,7 +5,7 @@
                 <router-link :to="{ name: 'pages.create'}"
                              class="ml-auto btn btn-primary btn-sm">
                     <i class="fa fa-plus fa-fw"></i>
-                    إنشاء صفحة
+                    {{ $t('buttons.create_new_page') }}
                 </router-link>
             </div>
 
@@ -13,10 +13,10 @@
                 <table class="table table-hover bg-white">
                     <thead>
                     <tr>
-                        <th>موضوع الصفحة</th>
-                        <th>عنوان الصفحة URI</th>
-                        <th>تحرير</th>
-                        <th>حذف</th>
+                        <th>{{ $t('fields.topic_page') }}</th>
+                        <th>{{ $t('fields.url_address') }}</th>
+                        <th>{{ $t('actions.edit') }}</th>
+                        <th>{{ $t('actions.delete') }}</th>
                     </tr>
                     </thead>
                     <tbody>
