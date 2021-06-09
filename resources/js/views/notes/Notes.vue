@@ -16,7 +16,6 @@
             </tr>
             </tbody>
         </table>
-
     </div>
 </template>
 
@@ -34,12 +33,12 @@ export default {
         },
     },
     created() {
-        this.load_buildings()
+        this.load_buildings();
     },
     methods: {
         load_buildings() {
             this.$store.dispatch('building/getBuilding');
-        }
+        },
     }
 }
 </script>

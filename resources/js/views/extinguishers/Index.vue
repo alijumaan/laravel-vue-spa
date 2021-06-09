@@ -4,7 +4,7 @@
             <div v-if="isSupervisor" class="d-flex mb-3">
                 <router-link :to="{ name: 'extinguishers.create'}"
                              class="ml-auto btn btn-primary btn-sm">
-                    <h5>{{ $t('buttons.pull_extinguisher') }}</h5>
+                    <h6>{{ $t('buttons.pull_extinguisher') }}</h6>
                 </router-link>
             </div>
             <div class="card shadow">
@@ -27,13 +27,13 @@
                             <td>
                                 <router-link
                                     :to="{ name: 'extinguishers.show', params: { id: extinguisher.id } }">
-                                    التفاصيل
+                                    {{ $t('fields.details') }}
                                 </router-link>
                             </td>
                         </tr>
                         </tbody>
                     </table>
-                    <p v-show="extinguishers.length > 0"
+                    <p v-show="!extinguishers.length > 0"
                        class="text-center">{{ $t('messages.no_results') }}</p>
                 </div>
             </div>

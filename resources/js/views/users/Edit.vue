@@ -3,17 +3,17 @@
         <div class="col-md-12">
             <div class="d-flex mb-3">
                 <router-link exact :to="{name: 'users', params: { id: user.id }}" class="ml-auto btn btn-primary btn-sm">
-                    عودة
+                    {{ $t('actions.back') }}
                 </router-link>
             </div>
             <div class="card shadow">
                 <div class="p-3 d-flex">
-                    <h4>تعديل البيانات</h4>
+                    <h4>{{ $t('titles.edit_user_information') }}</h4>
                 </div>
                 <div class="card-body">
                     <form @submit.prevent="updateUser">
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">الإسم</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ $t('fields.name') }}</label>
                             <div class="col-md-8">
                                 <input v-model="user.name" id="name" type="text" class="form-control" >
 
@@ -26,7 +26,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">البريد الإلكتروني</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ $t('fields.email') }}</label>
                             <div class="col-md-8">
                                 <input v-model="user.email" id="email" type="email" class="form-control">
 
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="roleId" class="col-md-4 col-form-label text-md-right">الصلاحية</label>
+                            <label for="roleId" class="col-md-4 col-form-label text-md-right">{{ $t('fields.role') }}</label>
                             <div class="col-md-8">
                                 <select v-model="user.role_id" id="roleId" class="form-control">
                                     <option v-for="role in roles" :value="role.id">{{ role.role }}</option>
@@ -56,7 +56,7 @@
                         <div class="form-group row">
                             <div class="col-md-12 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    تعديل
+                                    {{ $t('buttons.update') }}
                                 </button>
                             </div>
                         </div>
@@ -102,7 +102,7 @@ export default {
             }).then( () => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم تحديث معلومات المستخدم بنجاح'
+                    title: this.$i18n.t('messages.updated_successfully')
                 })
                 this.$router.push('/users');
             }).catch( (error) => {

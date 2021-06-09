@@ -3,24 +3,24 @@
         <div class="col-md-12 mb-3">
             <div class="d-flex mb-3">
                 <router-link class="ml-auto btn btn-primary btn-sm" :to="{name: 'users.create'}">
-                    إضافة مستخدم جديد
+                    {{ $t('buttons.create_new_user') }}
                 </router-link>
             </div>
             <div class="card shadow">
                 <div class="p-3 d-flex">
-                    <h4 class="text-success">المستخدمين الفعالين</h4>
-                    <h4 class="ml-auto">العدد الكلي <span class="badge badge-success">{{ usersCount }}</span></h4>
+                    <h4 class="text-success">{{ $t('titles.active_users') }}</h4>
+                    <h4 class="ml-auto">{{ $t('generals.total_count')}} <span class="badge badge-success">{{ usersCount }}</span></h4>
                 </div>
                 <div class="table table-responsive">
                     <table class="table table-striped table-sm">
                         <thead class="">
                         <tr class="bg-dark text-white">
                             <th>ID</th>
-                            <th>الاسم</th>
-                            <th>البريد الإلكتروني</th>
-                            <th>الصلاحية</th>
-                            <th>تاريخ التسجيل</th>
-                            <th>الإجراءات</th>
+                            <th>{{ $t("fields.name") }}</th>
+                            <th>{{ $t("fields.email") }}</th>
+                            <th>{{ $t("fields.role") }}</th>
+                            <th>{{ $t("fields.created_at") }}</th>
+                            <th>{{ $t("fields.action") }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,7 +40,7 @@
                             </td>
                         </tr>
                         <tr v-show="!users.length > 0">
-                            <td colspan="6" class="text-center">لايوجد نتائج .</td>
+                            <td colspan="6" class="text-center">{{ $t('messages.no_results') }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -51,8 +51,8 @@
         <div class="col-md-12">
             <div class="card shadow">
                 <div class="p-3 d-flex">
-                    <h4 class="text-danger">المستخدمين غير المفعلين</h4>
-                    <h4 class="ml-auto">العدد الكلي <span class="badge badge-success">{{ unActiveUsersCount }}</span>
+                    <h4 class="text-danger">{{ $t('titles.inactive_users') }}</h4>
+                    <h4 class="ml-auto">{{ $t('generals.total_count') }} <span class="badge badge-success">{{ unActiveUsersCount }}</span>
                     </h4>
                 </div>
                 <div class="table-responsive">
@@ -60,11 +60,11 @@
                         <thead class="">
                         <tr class="bg-dark text-white">
                             <th>ID</th>
-                            <th>الاسم</th>
-                            <th>البريد الإلكتروني</th>
-                            <th>الصلاحية</th>
-                            <th>تاريخ التسجيل</th>
-                            <th>الإجراءات</th>
+                            <th>{{ $t("fields.name") }}</th>
+                            <th>{{ $t("fields.email") }}</th>
+                            <th>{{ $t("fields.role") }}</th>
+                            <th>{{ $t("fields.created_at") }}</th>
+                            <th>{{ $t("fields.action") }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -84,7 +84,7 @@
                             </td>
                         </tr>
                         <tr v-show="!unActiveUsers.length > 0">
-                            <td colspan="6" class="text-center">لايوجد مستخدمين غير مفعلين .</td>
+                            <td colspan="6" class="text-center">{{ $t('messages.no_results') }}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -118,13 +118,13 @@ export default {
         },
         delete_user(userId) {
             swal.fire({
-                title: 'هل أنت متأكد؟',
-                text: "لن تتمكن من التراجع عن هذا!",
+                title: this.$i18n.t('messages.are_you_sour?'),
+                text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: 'تأكيد الحذف'
+                confirmButtonText: this.$i18n.t('messages.delete_confirmation')
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete("/api/v1/users/" + userId).then(response => {
@@ -132,20 +132,20 @@ export default {
                     })
                     toast.fire({
                         icon: 'success',
-                        title: 'تم حذف المستخدم وبإمكانك استراجاعه'
+                        title: this.$i18n.t('messages.deleted_successfully')
                     })
                 }
             })
         },
         delete_user_force(userId) {
             swal.fire({
-                title: 'هل أنت متأكد؟',
-                text: "لن تتمكن من التراجع عن هذا!",
+                title: this.$i18n.t('messages.are_you_sour?'),
+                text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: 'تأكيد الحذف'
+                confirmButtonText: this.$i18n.t('messages.delete_confirmation')
             }).then((result) => {
                 if (result.isConfirmed) {
                     // axios.delete(`/api/users/${userId}/forceDelete`).then(response => {
@@ -154,7 +154,7 @@ export default {
                     })
                     toast.fire({
                         icon: 'success',
-                        title: 'تم حذف المستخدم نهائي'
+                        title: this.$i18n.t('messages.deleted_successfully')
                     })
                 }
             })
@@ -164,7 +164,7 @@ export default {
                 this.loadUsers()
                 toast.fire({
                     icon: 'success',
-                    title: 'تم استعادة المستخدم نجاح'
+                    title: this.$i18n.t('messages.restored_successfully')
                 })
             })
         }

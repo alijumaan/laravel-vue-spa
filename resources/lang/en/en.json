@@ -10,12 +10,15 @@
         "notes": "Notes",
         "links": "Links",
         "all_rights_reserved": "All Rights Reserved",
-        "password_creation": "Password creation"
+        "password_creation": "Password creation",
+        "total_count": "Total count",
+        "no_image": "No image"
     },
 
     "buttons": {
         "create_new_permission": "Create new permission",
         "create_new_building": "Create new building",
+        "create_new_user": "Create new user",
         "create_new_page": "Create new page",
         "create_new_link": "Create new link",
         "update_building": "Update building",
@@ -32,10 +35,14 @@
     "fields": {
         "name": "Name",
         "username": "Username",
+        "email": "Email",
         "password": "Password",
+        "password_confirmation": "Password confirmation",
         "remember_me": "Remember me",
-        "forget_password?": "Forget password?",
+        "forget_password?": "?Forget password",
         "password_confirm": "Confirm password",
+        "curren_password": "Current password",
+        "new_password": "New password",
         "building_name": "Building name",
         "building_number": "Building number",
         "inspector": "Inspector",
@@ -62,7 +69,14 @@
         "title": "Title",
         "content": "Content",
         "topic": "Topic",
-        "topic_page": "Topic page"
+        "topic_page": "Topic page",
+        "permission": "Permission",
+        "description": "Description",
+        "details": "Details",
+        "role": "Role",
+        "created_at": "Created At",
+        "bio": "Bio",
+        "sender": "Sender"
     },
 
     "messages": {
@@ -73,22 +87,31 @@
         "updated_successfully": "Updated successfully",
         "executed_successfully": "Executed successfully",
         "deleted_successfully": "Deleted successfully",
+        "restored_successfully": "Restored successfully",
         "no_results": "No results",
         "are_you_sour?": "?Are you sour",
         "You_wont_be_able_to_undo_this": "!You won't be able to undo this",
-        "delete_confirmation": "Delete confirmation"
+        "delete_confirmation": "Delete confirmation",
+        "no_buildings_under_your_charge": "No buildings under your charge yet"
     },
 
     "titles": {
         "creation_new_building": "Creation new building",
         "create_new_link": "Create new link",
+        "add_new_user": "Add new user",
         "create_new_page": "Create new page",
         "edit_building": "Edit building",
+        "edit_user_information": "Edit user information",
+        "edit_my_information": "Edit my information",
         "pull_extinguisher_from_building": "Pulling extinguisher from building",
         "extinguishers_under_maintenance": "Extinguishers under maintenance",
         "details": "Details",
         "website_links": "Website links",
-        "edit_link": "Edit link"
+        "edit_link": "Edit link",
+        "active_users": "Action users",
+        "inactive_users": "Inaction users",
+        "buildings_under_your_charge": "Buildings under your charge",
+        "change_my_password": "Change my password"
     },
 
     "actions": {

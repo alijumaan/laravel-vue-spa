@@ -33,7 +33,7 @@
                         {{ $t('generals.links') }}
                     </router-link>
                     <router-link v-if="isAdmin" class="nav-link" exact :to="{ name: 'permissions.create' }">
-                        {{ $t('buttons.create_permission')}}
+                        {{ $t('buttons.create_new_permission')}}
                     </router-link>
                 </div>
                 <!-- Right Side Of Navbar -->

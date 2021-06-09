@@ -1,10 +1,10 @@
 <template>
     <div class="row pb-5">
         <div class="card-body bg-white">
-            <h4 class="">تغير كلمة المرور</h4><hr>
+            <h4 class="">{{ $t('titles.change_my_password') }}</h4><hr>
             <form @submit.prevent="updatePassword">
                 <div class="form-group row">
-                    <label for="current_password" class="col-md-4 col-form-label text-md-right">كلمة المرور الحالية</label>
+                    <label for="current_password" class="col-md-4 col-form-label text-md-right">{{ $t('fields.curren_password') }}</label>
                     <div class="col-md-6">
                         <input v-model="current_password" id="current_password" type="password" class="form-control">
 
@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="new-password" class="col-md-4 col-form-label text-md-right">كلمة المرور الجديدة</label>
+                    <label for="new-password" class="col-md-4 col-form-label text-md-right">{{ $t('fields.new_password') }}</label>
                     <div class="col-md-6">
                         <input v-model="new_password" id="new-password" type="password" class="form-control">
 
@@ -32,7 +32,7 @@
                 </div>
 
                 <div class="form-group row">
-                    <label for="new-password-confirm" class="col-md-4 col-form-label text-md-right">تأكيد كلمة المرور</label>
+                    <label for="new-password-confirm" class="col-md-4 col-form-label text-md-right">{{ $t('fields.password_confirmation') }}</label>
                     <div class="col-md-6">
                         <input v-model="new_password_confirmation" id="new-password-confirm" type="password" class="form-control">
 
@@ -47,7 +47,7 @@
 
                 <div class="form-group row mb-0">
                     <div class="col-md-8 offset-md-4">
-                        <button type="submit" class="btn btn-primary">تغير كلمة المرور</button>
+                        <button type="submit" class="btn btn-primary">{{ $t('buttons.save') }}</button>
                     </div>
                 </div>
             </form>
@@ -74,7 +74,7 @@ export default {
             }).then(response => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم تغير كلمة المرور بنجاح يمكنك استخدامها الان'
+                    title: this.$i18n.t('messages.updated_successfully')
                 })
             }).catch(error => {
                 this.errors = error.response.data.errors;

@@ -6,14 +6,14 @@
                 <div class="card-header d-flex">
 
                     <select v-model="role_id" @change="checkPermissionByRoleId(role_id)" class="form-control w-50">
-                        <option disabled value="">-- اختر الدور --</option>
+                        <option disabled value="">-- {{ $t('fields.choose') }} --</option>
                         <option v-for="role in roles" :value="role.id">{{ role.role }}</option>
                     </select>
 
                     <router-link v-if="isAdmin" :to="{ name: 'permissions.create'}"
                                  class="ml-auto btn btn-primary btn-sm">
                         <i class="fa fa-plus fa-fw"></i>
-                        انشاء صلاحية
+                        {{ $t('buttons.create_new_permission')}}
                     </router-link>
 
                 </div>
@@ -27,7 +27,7 @@
 
                 </div>
                 <div class="card-footer small text-muted">
-                    <input type="submit" class="btn btn-primary" name="" value="حفظ">
+                    <input type="submit" class="btn btn-primary" name="" :value="$t('buttons.save')">
                 </div>
             </form>
         </div>
@@ -70,7 +70,7 @@ export default {
             }).then(() => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم حفظ التغيرات بنجاح'
+                    title: this.$i18n.t('messages.created_successfully')
                 })
             });
         },

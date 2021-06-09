@@ -11,10 +11,10 @@ import Pages from "../views/Pages/Index.vue";
 import PageShow from "../views/Pages/Show.vue";
 import PageCreate from "../views/Pages/Create.vue";
 import PageEdit from "../views/Pages/Edit.vue";
-import Profile from "../views/user/Profile.vue";
 import Login from "../views/auth/Login.vue";
-import Setting from "../views/user/Setting.vue";
-import UpdatePassword from "../views/user/UpdatePassword.vue";
+import Profile from "../views/currentUser/Profile.vue";
+import Setting from "../views/currentUser/Setting.vue";
+import UpdatePassword from "../views/currentUser/UpdatePassword.vue";
 import BuildingCreate from "../views/buildings/Create.vue"
 import User from "../views/users/Index.vue";
 import UserEdit from "../views/users/Edit.vue";

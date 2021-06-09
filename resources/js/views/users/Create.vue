@@ -5,16 +5,16 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header d-flex">
-                        <span>اضافة مستخدم جديد</span>
+                        <span>{{ $t('titles.add_new_user') }}</span>
                         <router-link exact :to="{ name: 'users' }" class="ml-auto btn btn-danger btn-sm">
-                            إلغاء
+                            {{ $t('actions.cancel') }}
                         </router-link>
                     </div>
 
                     <div class="card-body">
                         <form @submit.prevent="create">
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">الإسم</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ $t('fields.name') }}</label>
                                 <div class="col-md-6">
                                     <input v-model="name" id="name" type="text" class="form-control">
                                     <div v-if="errors && errors.name">
@@ -27,7 +27,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="username" class="col-md-4 col-form-label text-md-right">اسم المستخدم</label>
+                                <label for="username" class="col-md-4 col-form-label text-md-right">{{ $t('fields.username') }}</label>
                                 <div class="col-md-6">
                                     <input v-model="username" id="username" type="text" class="form-control">
                                     <div v-if="errors && errors.username">
@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">البريد الإلكتروني</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ $t('fields.email') }}</label>
                                 <div class="col-md-6">
                                     <input v-model="email" id="email" type="email" class="form-control">
                                     <div v-if="errors && errors.email">
@@ -53,7 +53,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">كلمة المرور</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ $t('fields.password') }}</label>
 
                                 <div class="col-md-6">
                                     <input v-model="password" id="password" type="password" class="form-control">
@@ -67,7 +67,7 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">تأكيد كلمة المرور</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ $t('fields.password_confirmation') }}</label>
                                 <div class="col-md-6">
                                     <input v-model="password_confirmation" id="password-confirm" type="password" class="form-control" name="password_confirmation">
                                     <div v-if="errors && errors.password_confirmation">
@@ -83,7 +83,7 @@
                                 <div class="col-md-12 offset-md-4">
                                     <button type="submit"
                                             :class="form_submitting ? 'btn btn-secondary' : 'btn btn-primary'"
-                                            v-text="form_submitting ? 'جار الارسال...' : 'إنشاء'"
+                                            v-text="form_submitting ? $t('messages.creating') : $t('buttons.create')"
                                             :disabled="form_submitting"></button>
                                 </div>
                             </div>

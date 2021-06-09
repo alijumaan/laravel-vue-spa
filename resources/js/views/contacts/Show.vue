@@ -2,9 +2,9 @@
     <div class="card shadow-sm">
         <div class="card-header d-flex">
             <div class="ml-auto">
-                <router-link exact :to="{name: 'contacts', params: { id: message.id }}"
+                <router-link exact :to="{name: 'contacts', params: { id: contact.id }}"
                              class="ml-auto btn btn-primary btn-sm">
-                    رجوع
+                    {{ $t('actions.back') }}
                 </router-link>
             </div>
         </div>
@@ -13,20 +13,20 @@
             <table class="table">
                 <tbody>
                 <tr>
-                    <th>المرسل</th>
-                    <td>{{ message.name }}</td>
+                    <th>{{ $t('fields.sender') }}</th>
+                    <td>{{ contact.name }}</td>
                 </tr>
                 <tr>
-                    <th>البريد الإلكتروني</th>
-                    <td>{{ message.email }}</td>
+                    <th>{{ $t('fields.email') }}</th>
+                    <td>{{ contact.email }}</td>
                 </tr>
                 <tr>
-                    <th>العنوان</th>
-                    <td>{{ message.title }}</td>
+                    <th>{{ $t('fields.title') }}</th>
+                    <td>{{ contact.title }}</td>
                 </tr>
                 <tr>
-                    <th>الرسالة</th>
-                    <td>{{ message.body }}}</td>
+                    <th>{{ $t('fields.content') }}</th>
+                    <td>{{ contact.body }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -38,7 +38,7 @@
 export default {
     data() {
         return {
-            message: {}
+            contact: {}
         }
     },
     created() {
@@ -47,7 +47,7 @@ export default {
     methods: {
         showMessage() {
             axios.get(`/api/v1/contacts/${this.$route.params.id}`).then(response => {
-                this.message = response.data.data
+                this.contact = response.data.contact
             })
         },
     }

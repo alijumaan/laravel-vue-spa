@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white p-5">
-        <h4>تعديل البيانات الشخصية</h4>
+        <h4>{{ $t('titles.edit_my_information') }}</h4>
         <form @submit.prevent="updateProfile" enctype="multipart/form-data">
             <div class="row mt-5">
 
@@ -19,13 +19,13 @@
                 <div class="col-lg-8">
                     <form @submit.prevent="updateProfile" enctype="multipart/form-data">
                         <div class="form-group row">
-                            <label class="col-lg-3">اسم المستخدم </label>
+                            <label class="col-lg-3">{{ $t('fields.username') }}</label>
                             <div class="col-lg-9">
                                 <p>{{ user.username }}</p>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-3">الاسم </label>
+                            <label class="col-lg-3">{{ $t('fields.name')}}</label>
                             <div class="col-lg-9">
                                 <input class="form-control" type="text" v-model="user.name">
                                 <div v-if="errors">
@@ -36,7 +36,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-3" id="email">البريد الإلكتروني</label>
+                            <label class="col-lg-3" id="email">{{ $t('fields.email')}}</label>
                             <div class="col-lg-9">
                                 <input class="form-control" type="email" v-model="user.email">
 
@@ -49,15 +49,15 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-3">النبذة الشخصية:</label>
+                            <label class="col-lg-3">{{ $t('fields.bio')}}</label>
                             <div class="col-lg-9" v-if="user">
                                 <textarea class="form-control" rows="5" name="bio" v-model="user.bio"></textarea>
                             </div>
                         </div>
                         <div class="form-group row">
                             <div class="col-lg-9">
-                                <input type="submit" class="btn btn-primary" value="حفظ التعديلات ">
-                                <input type="reset" class="btn btn-secondary mr-1" value="إلغاء">
+                                <input type="submit" class="btn btn-primary" :value="$t('buttons.save')">
+                                <input type="reset" class="btn btn-secondary mr-1" :value="$t('actions.cancel')">
                             </div>
                         </div>
                     </form>
@@ -111,7 +111,7 @@ export default {
             }).then(() => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم تحديث البروفايل بنجاح'
+                    title: this.$i18n.t('messages.updated_successfully')
                 })
             }).catch(error => {
                 this.errors = error.response.data.errors;
@@ -126,7 +126,7 @@ export default {
                     location.reload();
                     toast.fire({
                         icon: 'success',
-                        title: 'تم تحديث الصورة بنجاح'
+                        title: this.$i18n.t('messages.updated_successfully')
                     })
                 }).catch(error => {
                     this.errors = error.response.data.errors;

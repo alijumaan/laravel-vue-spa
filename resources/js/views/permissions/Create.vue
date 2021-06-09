@@ -4,17 +4,17 @@
             <div class="card">
                 <div class="card-header d-flex">
                     <h5>
-                        <span class="">انشاء رابط جديد</span>
+                        <span class="">{{ $t('buttons.create_new_permission')}}</span>
                     </h5>
                     <router-link exact :to="{ name: 'permissions' }" class="ml-auto btn btn-danger btn-sm">
-                        إلغاء
+                        {{ $t('actions.cancel') }}
                     </router-link>
                 </div>
 
                 <div class="card-body">
                     <form @submit.prevent="create_permission">
                         <div class="form-group">
-                            <label for="name">الصلاحية</label>
+                            <label for="name">{{ $t('fields.permission')}}</label>
                             <input v-model="fields.name" type="text" id="name" class="form-control" placeholder="مثال: add-building">
                             <div v-if="errors && errors.name">
                                 <div v-for="error in errors.name"
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="description">وصفها</label>
+                            <label for="description">{{ $t('fields.description') }}</label>
                             <input v-model="fields.description" type="text" id="description" class="form-control" placeholder="مثال: اضافة مبنى">
                             <div v-if="errors && errors.description">
                                 <div v-for="error in errors.description"
@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" name="submit" class="btn btn-primary">انشاء</button>
+                            <button type="submit" name="submit" class="btn btn-primary">{{ $t('buttons.create')}}</button>
                         </div>
                     </form>
                 </div>

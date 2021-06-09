@@ -10,14 +10,17 @@
         "notes": "ملاحظات",
         "links": "الروابط",
         "all_rights_reserved": "جميع الحقوق محفوظة",
-        "password_creation": "إنشاء كلمة المرور"
+        "password_creation": "إنشاء كلمة المرور",
+        "total_count": "العدد الكلي",
+        "no_image": "لاتوجد صورة"
     },
 
     "buttons": {
-        "create_new_permission": "انشاء صلاحية",
-        "create_new_building": "انشاء مبنى",
-        "create_new_link": "إنشاء رابط",
-        "create_new_page": "انشاء مبنى",
+        "create_new_permission": "انشاء صلاحية جديد",
+        "create_new_building": "انشاء مبنى جديد",
+        "create_new_user": "إضافة مستخدم جديد",
+        "create_new_link": "إنشاء رابط جديد",
+        "create_new_page": "انشاء مبنى جديد",
         "update_building": "تحديث مبنى",
         "create": "انشاء",
         "update": "تحديث",
@@ -31,11 +34,15 @@
 
     "fields": {
         "name": "الاسم",
+        "email": "البريد الإلكتروني",
         "username": "اسم المستخدم",
         "password": "كلمة المرور",
+        "password_confirmation": "تأكيد كلمة المرور",
         "remember_me": "تذكرني",
         "forget_password?": "نسيت كلمة المرور؟",
         "password_confirm": "تأكيد كلمة المرور",
+        "curren_password": "كلمة المرور الحالية",
+        "new_password": "كلمة مرور جديدة",
         "building_name": "اسم المبنى",
         "building_number": "رقم المبنى",
         "inspector": "المفتش",
@@ -62,7 +69,14 @@
         "title": "العنوان",
         "content": "المحتوى",
         "topic": "الموضوع",
-        "topic_page": "موضوع الصفحة"
+        "topic_page": "موضوع الصفحة",
+        "permission": "الصلاحية",
+        "description": "الوصف",
+        "details": "التفاصيل",
+        "role": "الوظيفة",
+        "created_at": "تاريخ التسجيل",
+        "bio": "نبذه عني",
+        "sender": "المرسل"
     },
 
     "messages": {
@@ -73,22 +87,31 @@
         "updated_successfully": "تم التحديث بنجاح",
         "executed_successfully": "تم التنفيذ بنجاح",
         "deleted_successfully": "تم الحذف بنجاح",
+        "restored_successfully": "تم الاستعادة بنجاح",
         "no_results": "لاتوجد نتائج",
         "are_you_sour?": "هل أنت متأكد؟",
         "You_wont_be_able_to_undo_this": "لن تتمكن من التراجع عن هذا!",
-        "delete_confirmation": "تأكيد الحذف"
+        "delete_confirmation": "تأكيد الحذف",
+        "no_buildings_under_your_charge": "لاتوجد مباني تحت مسؤوليتك حاليا"
     },
 
     "titles":{
         "creation_new_building": "إنشاء مبنى جديد",
         "create_new_link": "إنشاء مبنى جديد",
         "create_new_page": "إنشاء صفحة جديد",
+        "add_new_user": "إنشاء مستخدم جديد",
         "edit_building": "تعديل المبنى",
+        "edit_user_information": "تعديل بيانات المستخدم",
+        "edit_my_information": "تعديل بياناتي الشخصية",
         "pull_extinguisher_from_building": "سحب طفاية من مبنى",
         "extinguishers_under_maintenance": "طفايات تحت الصيانة",
         "details": "تفاصيل",
         "website_links": "روابط الموقع",
-        "edit_link": "تعديل الرابط"
+        "edit_link": "تعديل الرابط",
+        "active_users": "المستخدمين المفعالين",
+        "inactive_users": "المستخدمين غير النشطين",
+        "buildings_under_your_charge": "المباني المسؤول عنها",
+        "change_my_password": "تغير كلمة المرور"
     },
 
     "actions": {
