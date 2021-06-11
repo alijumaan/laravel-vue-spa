@@ -6,18 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="43b0e3bc-b334-44df-8d87-e55277b9bb05" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ApiController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BuildingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BuildingController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Requests/LoginRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/LoginRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Requests/UpdateBuildingRequest.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Requests/UpdateBuildingRequest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeders/UserSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/UserSeeder.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/auth/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/auth/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Create.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/ar/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ar/ar.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/ar/messages.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/ar/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/ar/validation.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/en.json" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/en.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/lang/en/validation.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/lang/en/validation.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Edit.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Show.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Show.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +232,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../fire" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -469,7 +466,9 @@
       <workItem from="1623185616948" duration="656000" />
       <workItem from="1623224281899" duration="9586000" />
       <workItem from="1623245486447" duration="2696000" />
-      <workItem from="1623392625585" duration="386000" />
+      <workItem from="1623392625585" duration="2211000" />
+      <workItem from="1623396450689" duration="1695000" />
+      <workItem from="1623398158480" duration="2264000" />
     </task>
     <servers />
   </component>

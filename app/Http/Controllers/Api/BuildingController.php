@@ -74,13 +74,13 @@ class BuildingController extends ApiController
         $checked_at = $building->checked_at;
 
         if ($request->status == 1) {
-            if ($request->period_id == 1) {
+            if ($request->period_id == Building::ONE_MONTH) {
                 $checked_at = Carbon::now()->addMonth();
-            } elseif ($request->period_id == 2) {
+            } elseif ($request->period_id == Building::THREE_MONTHS) {
                 $checked_at = Carbon::now()->addDays('90');
-            } elseif ($request->period_id == 3) {
+            } elseif ($request->period_id == Building::SIX_MONTHS) {
                 $checked_at = Carbon::now()->addDays('180');
-            } elseif ($request->period_id == 4) {
+            } elseif ($request->period_id == Building::YEAR) {
                 $checked_at = Carbon::now()->addYear();
             }
         }

@@ -69,9 +69,8 @@
                                 <div class="form-group">
                                     <label for="status">{{ $t('fields.status') }}</label>
                                     <select v-model="building.status" id="status" class="form-control">
-                                        <option value="">-- {{ $t('fields.choose') }} --</option>
-                                        <option value="0">{{ $t('fields.valid') }}</option>
-                                        <option value="1">{{ $t('fields.expired') }}</option>
+                                        <option value="0">{{ $t('fields.expired') }}</option>
+                                        <option value="1">{{ $t('fields.valid') }}</option>
                                     </select>
                                     <div v-if="errors && errors.status">
                                         <div v-for="error in errors.status"
@@ -175,7 +174,7 @@ export default {
             }).then(response => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم تحديث المبنى بنجاح'
+                    title: this.$i18n.t('messages.updated_successfully')
                 })
                 // this.$router.push(`/buildings`);
                 location.replace('/buildings')
@@ -187,13 +186,13 @@ export default {
         },
         delete_building(building) {
             swal.fire({
-                title: 'هل أنت متأكد؟',
-                text: "لن تتمكن من التراجع عن هذا!",
+                title: this.$i18n.t('messages.are_you_sour?'),
+                text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: 'تأكيد الحذف'
+                confirmButtonText: this.$i18n.t('messages.delete_confirmation')
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete('/api/v1/buildings/' + building).then(response => {
@@ -201,7 +200,7 @@ export default {
                     })
                     toast.fire({
                         icon: 'success',
-                        title: 'تم حذف المبنى نجاح'
+                        title: this.$i18n.t('messages.deleted_successfully')
                     })
                 }
             })

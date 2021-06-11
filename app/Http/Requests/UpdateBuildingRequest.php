@@ -31,7 +31,6 @@ class UpdateBuildingRequest extends FormRequest
             'notes' => 'nullable',
             'user_id' => 'required',
             'period_id' => 'required',
-            'checked_at' => 'nullable'
         ];
     }
 }

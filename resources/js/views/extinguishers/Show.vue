@@ -74,13 +74,13 @@ export default {
         },
         restore_extinguisher(extinguisher, building) {
             swal.fire({
-                title: 'هل أنت متأكد؟',
-                text: "لن تتمكن من التراجع!",
+                title: this.$i18n.t('messages.are_you_sour?'),
+                text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
                 icon: 'warning',
                 showCancelButton: true,
-                confirmButtonColor: '#ddc133',
+                confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: 'تأكيد'
+                confirmButtonText: this.$i18n.t('messages.delete_confirmation')
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete(`/api/v1/extinguishers/${extinguisher}/${building}`).then(response => {
@@ -89,7 +89,7 @@ export default {
                     })
                     toast.fire({
                         icon: 'success',
-                        title: 'تم ارجاع الطفاية نجاح'
+                        title: this.$i18n.t('messages.deleted_successfully')
                     })
                 }
             })

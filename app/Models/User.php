@@ -56,6 +56,11 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = Hash::make($password);
+    }
+
     public function profile()
     {
         return $this->hasOne(Profile::class);
@@ -102,10 +107,4 @@ class User extends Authenticatable implements MustVerifyEmail
 
         return $role->permissions()->whereName($permission)->first() ? true : false;
     }
-
-    public function setPasswordAttribute($password)
-    {
-        $this->attributes['password'] = Hash::make($password);
-    }
-
 }

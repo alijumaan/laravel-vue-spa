@@ -80,7 +80,7 @@
                         <div class="form-group">
                             <input class="btn btn-primary" type="submit"
                                    :class="form_submitting ? 'btn btn-secondary' : 'btn btn-primary'"
-                                   :value="form_submitting ? $t('messages.please_waite') : $t('buttons.update_building')"
+                                   :value="form_submitting ? $t('messages.please_wait') : $t('buttons.update_building')"
                                    :disabled="form_submitting"/>
                         </div>
 

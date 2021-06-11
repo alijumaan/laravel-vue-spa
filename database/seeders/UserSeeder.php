@@ -28,7 +28,7 @@ class UserSeeder extends Seeder
             'name' => 'علي القحطاني',
             'username' => 'ali',
             'email' => 'ali@ali.com',
-            'password' => 'ali', // will Hash automatically in setter method (User class)
+            'password' => 'ali',
             'role_id' => 2,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
             'name' => 'ياسر',
             'username' => 'yasser',
             'email' => 'yasser@yasser.com',
-            'password' => 'yasser', // will Hash automatically in setter method (User class)
+            'password' => 'yasser',
             'role_id' => 3,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
             'name' => 'سعد',
             'username' => 'saad',
             'email' => 'saad@saad.com',
-            'password' => 'saad', // will Hash automatically in setter method (User class)
+            'password' => 'saad',
             'role_id' => 3,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
             'name' => 'احمد',
             'username' => 'ahmed',
             'email' => 'ahmed@ahmed.com',
-            'password' => 'ahmed', // will Hash automatically in setter method (User class)
+            'password' => 'ahmed',
             'role_id' => 3,
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
