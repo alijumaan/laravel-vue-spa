@@ -88,6 +88,7 @@
         "executed_successfully": "تم التنفيذ بنجاح",
         "deleted_successfully": "تم الحذف بنجاح",
         "restored_successfully": "تم الاستعادة بنجاح",
+        "login_successfully": "تم تسجيل الدخول بنجاح",
         "no_results": "لاتوجد نتائج",
         "are_you_sour?": "هل أنت متأكد؟",
         "You_wont_be_able_to_undo_this": "لن تتمكن من التراجع عن هذا!",

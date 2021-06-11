@@ -75,7 +75,7 @@
                         </div>
                         <div class="form-group">
                             <button type="submit" name="submit" class="btn btn-primary">
-                                {{ $t('buttons.create_building') }}
+                                {{ $t('buttons.create_new_building') }}
                             </button>
                         </div>
                     </form>

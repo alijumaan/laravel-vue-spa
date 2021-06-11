@@ -1,17 +1,6 @@
 <?php
 
 return [
-    /*
-    |--------------------------------------------------------------------------
-    | Validation Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines contain the default error messages used by
-    | the validator class. Some of these rules have multiple versions such
-    | as the size rules. Feel free to tweak each of these messages here.
-    |
-    */
-
     'accepted'             => 'يجب قبول :attribute.',
     'active_url'           => ':attribute لا يُمثّل رابطًا صحيحًا.',
     'after'                => 'يجب على :attribute أن يكون تاريخًا لاحقًا للتاريخ :date.',
@@ -131,7 +120,7 @@ return [
 
     'custom' => [
         'attribute-name' => [
-            'rule-name' => 'custom-message',
+            'rule-name' => 'custom-message'
         ],
     ],
 
@@ -152,7 +141,7 @@ return [
         'email'                         => 'البريد الالكتروني',
         'number'                        => 'الرقم',
         'first_name'                    => 'الاسم الأول',
-        'last_name'                     => 'اسم العائلة',
+        'last_name'                     => 'الاسم الأخير',
         'password'                      => 'كلمة المرور',
         'password_confirmation'         => 'تأكيد كلمة المرور',
         'current_password'              => 'كلمة المرور الحالية',
@@ -188,6 +177,14 @@ return [
         'type'                          => 'النوع',
         'building_id'                   => 'المبنى',
         'role_id'                       => 'الصلاحية',
-        'body'                          => 'المحتوى'
+        'body'                          => 'المحتوى',
+        'birth_date'                    => 'تاريخ الميلاد',
+        'text'                          => 'النص',
+        'price'                         => 'السعر',
+        'filename'                      => 'الصورة',
+        'comment'                       => 'التعليق',
+        'category_id'                   => 'التصنيف',
+        'country_id'                    => 'البلد',
+        'currency_id'                   => 'العملة',
     ],
 ];

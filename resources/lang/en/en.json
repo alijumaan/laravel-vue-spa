@@ -88,6 +88,7 @@
         "executed_successfully": "Executed successfully",
         "deleted_successfully": "Deleted successfully",
         "restored_successfully": "Restored successfully",
+        "login_successfully": "Login successfully",
         "no_results": "No results",
         "are_you_sour?": "?Are you sour",
         "You_wont_be_able_to_undo_this": "!You won't be able to undo this",
@@ -125,7 +126,5 @@
         "ex_homepage": "Ex. Homepage",
         "ex_/home": "Ex. /home",
         "ex_home": "Ex. home"
-
     }
-
 }

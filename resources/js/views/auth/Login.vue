@@ -103,7 +103,7 @@ export default {
 
                     toast.fire({
                         icon: 'success',
-                        title: 'تم تسجيل الدخول بنجاح'
+                        title: this.$i18n.t('messages.login_successfully')
                     })
 
                     window.location.replace('/')

@@ -26,27 +26,27 @@ class ApiController extends Controller
         return $this;
     }
 
-    public function respondNotFound($message = 'NotFound')
+    public function respondNotFound($message = 'Not Found')
     {
         return $this->setStatusCode(404)->respondWithError($message);
     }
 
-    public function respondInvalidRequest($message = 'Invalid request')
+    public function respondInvalidRequest($message = 'Invalid Request')
     {
         return $this->setStatusCode(400)->respondWithError($message);
     }
 
-    public function respondCreated($message = 'Created successfully')
+    public function respondCreated($message = 'Created Successfully')
     {
-        return $this->setStatusCode(201)->respondWithError($message);
+        return $this->setStatusCode(201)->respondWithSuccess($message);
     }
 
-    public function respondUpdated($message = 'Updated successfully')
+    public function respondUpdated($message = 'Updated Successfully')
     {
-        return $this->setStatusCode(201)->respondWithError($message);
+        return $this->setStatusCode(201)->respondWithSuccess($message);
     }
 
-    public function respondInternalError($message = 'Created successfully')
+    public function respondInternalError($message = 'Internal Server Error')
     {
         return $this->setStatusCode(500)->respondWithError($message);
     }
@@ -59,6 +59,16 @@ class ApiController extends Controller
     public function respond($data, $headers = [])
     {
         return response()->json($data, $this->getStatusCode(), $headers);
+    }
+
+    public function respondWithSuccess($message)
+    {
+        return $this->respond([
+            'success' => [
+                'message' => $message
+            ]
+        ]);
+
     }
 
     public function respondWithError($message)
