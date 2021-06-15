@@ -52,7 +52,7 @@
                                     </td>
                                     <td>
                                     <span
-                                        :class="building.status === 'مشيك' ? 'badge badge-success' : 'badge badge-danger'">
+                                        :class="building.status === 'Valid' ? 'badge badge-success' : 'badge badge-danger'">
                                         {{ building.status }}
                                     </span>
                                     </td>

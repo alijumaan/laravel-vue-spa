@@ -79,7 +79,8 @@ class Building extends Model
 
     public function status()
     {
-        return $this->status == 1 ? 'مشيك' : 'منتهي';
+//        return $this->status == 1 ? 'مشيك' : 'منتهي';
+        return $this->status == 1 ? __('message.valid') : __('message.invalid');
     }
 
     public function periodArabic()

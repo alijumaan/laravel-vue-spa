@@ -10,9 +10,15 @@
                         {{ item.name }}
                     </router-link>
                 </span>
-                <router-link v-show="!show" class="mt-2 mr-1 btn btn-success" exact to="/login">
+                <router-link v-show="!show" class="mt-2 mr-1 btn btn-secondary" exact to="/login">
                     <i class="fas fa-sign-in-alt"></i>
                     {{ $t('buttons.login')}}
+                </router-link>
+                <router-link v-show="isAdmin" class="mt-2 mr-1 btn btn-secondary" exact :to="{ name: 'links' }">
+                    {{ $t('generals.links') }}
+                </router-link>
+                <router-link v-show="isAdmin" class="mt-2 mr-1 btn btn-secondary" exact :to="{ name: 'permissions.create' }">
+                    {{ $t('buttons.new_permission')}}
                 </router-link>
             </div>
         </section>
@@ -27,10 +33,17 @@ export default {
             show: this.$store.state.show_content,
         }
     },
+    computed: {
+        isAdmin() {
+            return this.$store.state.currentUser.isAdmin;
+        },
+    },
     mounted() {
         if (this.show) {
+            this.$store.dispatch('currentUser/isAdmin');
             this.loadLinks();
         }
+
     },
     methods: {
         loadLinks() {

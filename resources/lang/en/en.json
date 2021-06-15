@@ -12,11 +12,12 @@
         "all_rights_reserved": "All Rights Reserved",
         "password_creation": "Password creation",
         "total_count": "Total count",
-        "no_image": "No image"
+        "no_image": "No image",
+        "valid": "Valid"
     },
 
     "buttons": {
-        "create_new_permission": "Create new permission",
+        "new_permission": "new permission",
         "create_new_building": "Create new building",
         "create_new_user": "Create new user",
         "create_new_page": "Create new page",

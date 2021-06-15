@@ -28,13 +28,6 @@
                                     class="dropdown-item">English</button>
                         </div>
                     </div>
-
-                    <router-link v-if="isAdmin" class="nav-link" exact :to="{ name: 'links' }">
-                        {{ $t('generals.links') }}
-                    </router-link>
-                    <router-link v-if="isAdmin" class="nav-link" exact :to="{ name: 'permissions.create' }">
-                        {{ $t('buttons.create_new_permission')}}
-                    </router-link>
                 </div>
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -82,7 +75,7 @@ export default {
     data() {
         return {
             show: this.$store.state.show_content,
-            app_title: this.$store.state.app_title
+            app_title: this.$store.state.app_title,
         }
     },
     computed: {

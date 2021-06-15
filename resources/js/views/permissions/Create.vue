@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header d-flex">
                     <h5>
-                        <span class="">{{ $t('buttons.create_new_permission')}}</span>
+                        <span class="">{{ $t('buttons.new_permission')}}</span>
                     </h5>
                     <router-link exact :to="{ name: 'permissions' }" class="ml-auto btn btn-danger btn-sm">
                         {{ $t('actions.cancel') }}

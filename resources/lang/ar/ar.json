@@ -12,11 +12,12 @@
         "all_rights_reserved": "جميع الحقوق محفوظة",
         "password_creation": "إنشاء كلمة المرور",
         "total_count": "العدد الكلي",
-        "no_image": "لاتوجد صورة"
+        "no_image": "لاتوجد صورة",
+        "valid": "مشيك"
     },
 
     "buttons": {
-        "create_new_permission": "انشاء صلاحية جديد",
+        "new_permission": "صلاحية جديد",
         "create_new_building": "انشاء مبنى جديد",
         "create_new_user": "إضافة مستخدم جديد",
         "create_new_link": "إنشاء رابط جديد",

@@ -13,7 +13,7 @@
                     <router-link v-if="isAdmin" :to="{ name: 'permissions.create'}"
                                  class="ml-auto btn btn-primary btn-sm">
                         <i class="fa fa-plus fa-fw"></i>
-                        {{ $t('buttons.create_new_permission')}}
+                        {{ $t('buttons.new_permission')}}
                     </router-link>
 
                 </div>
