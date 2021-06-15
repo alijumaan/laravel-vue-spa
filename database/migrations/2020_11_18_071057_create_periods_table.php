@@ -15,7 +15,7 @@ class CreatePeriodsTable extends Migration
     {
         Schema::create('periods', function (Blueprint $table) {
             $table->id();
-            $table->enum('period', ['شهري', 'كل ثلاث أشهر','كل ستة أشهر','سنوي']);
+            $table->enum('period', ['monthly', 'every three months','every six months','yearly']);
             $table->timestamps();
         });
     }

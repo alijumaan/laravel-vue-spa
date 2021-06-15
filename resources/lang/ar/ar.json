@@ -1,6 +1,6 @@
 {
     "generals": {
-        "language": "اللغة",
+        "language": "Language",
         "arabic": "العربية",
         "english": "الإنجليزية",
         "buildings": "المباني",
@@ -28,8 +28,13 @@
         "register": "التسجيل",
         "logout": "خروج",
         "save": "حفظ",
+        "send": "إرسال",
         "execute": "تنفيذ",
-        "pull_extinguisher": "سحب طفاية"
+        "pull_extinguisher": "سحب طفاية",
+        "settings": "الإعدادات",
+        "profile": "الصفحة الشخصية",
+        "change_password": "تغير كلمة المرور",
+        "control_board": "لوحة التحكم"
     },
 
     "fields": {
@@ -76,7 +81,8 @@
         "role": "الوظيفة",
         "created_at": "تاريخ التسجيل",
         "bio": "نبذه عني",
-        "sender": "المرسل"
+        "sender": "المرسل",
+        "address": "العنوان"
     },
 
     "messages": {
@@ -90,6 +96,7 @@
         "restored_successfully": "تم الاستعادة بنجاح",
         "login_successfully": "تم تسجيل الدخول بنجاح",
         "no_results": "لاتوجد نتائج",
+        "no_messages": "لاتوجد رسائل",
         "are_you_sour?": "هل أنت متأكد؟",
         "You_wont_be_able_to_undo_this": "لن تتمكن من التراجع عن هذا!",
         "delete_confirmation": "تأكيد الحذف",
@@ -112,7 +119,8 @@
         "active_users": "المستخدمين المفعالين",
         "inactive_users": "المستخدمين غير النشطين",
         "buildings_under_your_charge": "المباني المسؤول عنها",
-        "change_my_password": "تغير كلمة المرور"
+        "change_my_password": "تغير كلمة المرور",
+        "contact_us": "تواصل معنا"
     },
 
     "actions": {
@@ -125,6 +133,7 @@
     "placeholders": {
         "ex_homepage": "مثال: الرئيسية",
         "ex_/home": "مثال: الرئيسية/",
-        "ex_home": "مثال: home"
+        "ex_home": "مثال: home",
+        "email_is_optional" : "البريد الإلكتروني اختياري"
     }
 }

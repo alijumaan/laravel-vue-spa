@@ -3,13 +3,13 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header d-flex py-3">
-                    <h4 class="m-0">اتصل بنا</h4>
+                    <h4 class="m-0">{{ $t('titles.contact_us') }}</h4>
                 </div>
 
                 <div class="card-body">
                     <form @submit.prevent="send_message">
                         <div class="form-group">
-                            <label for="name">الاسم*</label>
+                            <label for="name">{{ $t('fields.name') }}*</label>
                             <input v-model="fields.name" type="text" class="form-control" id="name">
                             <div v-if="errors && errors.name">
                                 <div v-for="error in errors.name"
@@ -19,8 +19,8 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="email">البريد الإلكتروني</label>
-                            <input v-model="fields.email" type="email" class="form-control" id="email" placeholder="البريد الإلكتروني اختياري">
+                            <label for="email">{{ $t('fields.email') }}</label>
+                            <input v-model="fields.email" type="email" class="form-control" id="email" :placeholder="$t('placeholders.email_is_optional')">
                             <div v-if="errors && errors.email">
                                 <div v-for="error in errors.email"
                                      class="text-danger" role="alert">
@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="title">العنوان*</label>
+                            <label for="title">{{ $t('fields.address') }}*</label>
                             <input v-model="fields.title" type="text" class="form-control" id="title">
                             <div v-if="errors && errors.title">
                                 <div v-for="error in errors.title"
@@ -39,7 +39,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="body">الرسالة*</label>
+                            <label for="body">{{ $t('fields.content') }}*</label>
                             <textarea v-model="fields.body" class="form-control" id="body" rows="5"></textarea>
                             <div v-if="errors && errors.body">
                                 <div v-for="error in errors.body"
@@ -49,7 +49,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary">إرسال</button>
+                            <button type="submit" class="btn btn-primary">{{ $t('buttons.send') }}</button>
                         </div>
                     </form>
                 </div>

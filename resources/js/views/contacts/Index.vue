@@ -3,18 +3,18 @@
         <div class="col-md-12">
             <div v-show="isAdmin" class="card shadow-sm mb-4">
                 <div class="card-header d-flex py-3">
-                    <h4 class="m-0">التواصل او الشكاوي</h4>
+                    <h4 class="m-0">{{ $t('titles.contact_us') }}</h4>
                 </div>
 
                 <div class="table-responsive">
                     <table class="table table-content table-hover">
                         <thead>
                         <tr>
-                            <th>المرسل</th>
-                            <th>العنوان</th>
-                            <th>الحالة</th>
-                            <th>التاريخ</th>
-                            <th>الإجراءات</th>
+                            <th>{{ $t('fields.sender') }}</th>
+                            <th>{{ $t('fields.address') }}</th>
+                            <th>{{ $t('fields.status') }}</th>
+                            <th>{{ $t('fields.created_at') }}</th>
+                            <th>{{ $t('fields.action') }}</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -42,7 +42,7 @@
                         </tr>
 
                         <tr v-show="!contacts.length">
-                            <td colspan="5" class="text-center">لاتوجد رسائل.</td>
+                            <td colspan="5" class="text-center">{{ $t('messages.no_messages') }}</td>
                         </tr>
 
                         </tbody>

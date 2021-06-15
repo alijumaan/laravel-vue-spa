@@ -17,17 +17,17 @@ class ProfileSeeder extends Seeder
         Profile::create([
             'user_id' => '1',
             'avatar' => 'avatar.png',
-            'bio' => 'مؤسس موقع إدارة السلامة'
+            'bio' => 'Administrator'
         ]);
         Profile::create([
             'user_id' => '2',
             'avatar' => 'avatar.png',
-            'bio' => 'مشرف الموقع'
+            'bio' => 'Supervisor'
         ]);
         Profile::create([
             'user_id' => '3',
             'avatar' => 'avatar.png',
-            'bio' => 'مفتش السلامة'
+            'bio' => 'Inspector'
         ]);
 
     }

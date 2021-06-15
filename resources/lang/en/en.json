@@ -1,6 +1,6 @@
 {
     "generals": {
-        "language": "Language",
+        "language": "اللغة",
         "arabic": "Arabic",
         "english": "English",
         "buildings": "Buildings",
@@ -28,8 +28,13 @@
         "register": "Register",
         "logout": "Logout",
         "save": "Save",
+        "send": "Send",
         "execute": "Execute",
-        "pull_extinguisher": "Pull extinguisher"
+        "pull_extinguisher": "Pull extinguisher",
+        "settings": "Settings",
+        "profile": "Profile",
+        "change_password": "Change password",
+        "control_board": "Control board"
     },
 
     "fields": {
@@ -76,7 +81,8 @@
         "role": "Role",
         "created_at": "Created At",
         "bio": "Bio",
-        "sender": "Sender"
+        "sender": "Sender",
+        "address": "Address"
     },
 
     "messages": {
@@ -90,6 +96,7 @@
         "restored_successfully": "Restored successfully",
         "login_successfully": "Login successfully",
         "no_results": "No results",
+        "no_messages": "No messages",
         "are_you_sour?": "?Are you sour",
         "You_wont_be_able_to_undo_this": "!You won't be able to undo this",
         "delete_confirmation": "Delete confirmation",
@@ -112,7 +119,8 @@
         "active_users": "Action users",
         "inactive_users": "Inaction users",
         "buildings_under_your_charge": "Buildings under your charge",
-        "change_my_password": "Change my password"
+        "change_my_password": "Change my password",
+        "contact_us": "Contact us"
     },
 
     "actions": {
@@ -125,6 +133,7 @@
     "placeholders": {
         "ex_homepage": "Ex. Homepage",
         "ex_/home": "Ex. /home",
-        "ex_home": "Ex. home"
+        "ex_home": "Ex. home",
+        "email_is_optional" : "Email is optional"
     }
 }

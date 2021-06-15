@@ -23,9 +23,9 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropdown">
                             <button @click="changeLocale('ar')"
-                                class="dropdown-item">{{ $t('generals.arabic') }}</button>
+                                class="dropdown-item">العربية</button>
                             <button @click="changeLocale('en')"
-                                    class="dropdown-item">{{ $t('generals.english') }}</button>
+                                    class="dropdown-item">English</button>
                         </div>
                     </div>
 
@@ -50,23 +50,23 @@
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                             <router-link class="dropdown-item" exact :to="{ name: 'setting' }">
-                                <i class="fas fa-cog fa-fw"></i>&nbsp;الإعدادات
+                                <i class="fas fa-cog fa-fw"></i>&nbsp;{{ $t('buttons.settings')}}
                             </router-link>
 
                             <router-link class="dropdown-item" exact :to="{ name: 'profile' }">
-                                <i class="far fa-user fa-fw"></i>&nbsp;الصفحة الشخصية
+                                <i class="far fa-user fa-fw"></i>&nbsp;{{ $t('buttons.profile')}}
                             </router-link>
 
                             <router-link class="dropdown-item" exact :to="{ name: 'update_password' }">
-                                <i class="far fa-user fa-fw"></i>تغير كلمة المرور
+                                <i class="far fa-user fa-fw"></i>{{ $t('buttons.change_password') }}
                             </router-link>
 
                             <router-link v-if="isAdmin" class="dropdown-item" exact :to="{ name: 'permissions' }">
-                                <i class="far fa-user fa-fw"></i>&nbsp;لوحة التحكم
+                                <i class="far fa-user fa-fw"></i>&nbsp;{{ $t('buttons.control_board') }}
                             </router-link>
 
                             <a href="javascript:void(0)" class="dropdown-item" @click="logout">
-                                <i class="fa fa-sign-out-alt fa-fw"></i>خروج
+                                <i class="fa fa-sign-out-alt fa-fw"></i>{{ $t('buttons.logout') }}
                             </a>
                         </div>
                     </li>

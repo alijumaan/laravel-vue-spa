@@ -16,7 +16,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         User::create([
-            'name' => 'مدير النظام',
+            'name' => 'Administrator',
             'username' => 'admin',
             'email' => 'admin@admin.com',
             'password' => 'admin', // will Hash automatically in setter method (User class)
@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         User::create([
-            'name' => 'علي القحطاني',
+            'name' => 'Ali AlQahtani',
             'username' => 'ali',
             'email' => 'ali@ali.com',
             'password' => 'ali',
@@ -34,7 +34,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         User::create([
-            'name' => 'ياسر',
+            'name' => 'Yasser',
             'username' => 'yasser',
             'email' => 'yasser@yasser.com',
             'password' => 'yasser',
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         User::create([
-            'name' => 'سعد',
+            'name' => 'Saad',
             'username' => 'saad',
             'email' => 'saad@saad.com',
             'password' => 'saad',
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
             'remember_token' => Str::random(10),
         ]);
         User::create([
-            'name' => 'احمد',
+            'name' => 'Ahmed',
             'username' => 'ahmed',
             'email' => 'ahmed@ahmed.com',
             'password' => 'ahmed',

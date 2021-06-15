@@ -14,9 +14,9 @@ class PeriodSeeder extends Seeder
      */
     public function run()
     {
-        Period::create(['period' => 'شهري']);
-        Period::create(['period' => 'كل ثلاث أشهر']);
-        Period::create(['period' => 'كل ستة أشهر']);
-        Period::create(['period' => 'سنوي']);
+        Period::create(['period' => 'monthly']);
+        Period::create(['period' => 'every three months']);
+        Period::create(['period' => 'every six months']);
+        Period::create(['period' => 'yearly']);
     }
 }

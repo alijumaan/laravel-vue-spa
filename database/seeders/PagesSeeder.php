@@ -14,21 +14,21 @@ class PagesSeeder extends Seeder
     public function run()
     {
         DB::table('pages')->insert([
-            'title' => "نبذة عنا",
-            'slug' => "نبذة-عنا",
-            'content' => "تطبيق إدارة السلامة والاطفاء",
+            'title' => "About us",
+            'slug' => "about-us",
+            'content' => "Safety and fire management application",
         ]);
 
         DB::table('pages')->insert([
-            'title' => "اتصل بنا",
-            'slug' => "اتصل-بنا",
-            'content' => "اتصل بنا",
+            'title' => "Contact us",
+            'slug' => "contact-us",
+            'content' => "Contact us",
         ]);
 
         DB::table('pages')->insert([
-            'title' => "السياسة والخصوصية",
-            'slug' => "السياسة-والخصوصية",
-            'content' => "السياسة والخصوصية",
+            'title' => "Policy and Privacy",
+            'slug' => "policy-and-privacy",
+            'content' => "Policy and Privacy here...",
         ]);
     }
 }
