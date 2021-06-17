@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="{'loading': loading}">
         <table class="table table-striped table-light">
             <thead class="table-dark">
             <tr>
@@ -31,13 +31,16 @@ export default {
         buildings() {
             return this.$store.state.building.buildings;
         },
+        loading() {
+            return this.$store.state.building.loading;
+        },
     },
     created() {
-        this.load_buildings();
+        this.loadBuildings();
     },
     methods: {
-        load_buildings() {
-            this.$store.dispatch('building/getBuilding');
+        loadBuildings() {
+            this.$store.dispatch('building/getAllBuildings');
         },
     }
 }

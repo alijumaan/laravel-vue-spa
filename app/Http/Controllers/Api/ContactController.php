@@ -10,7 +10,7 @@ class ContactController extends ApiController
 {
     public function index()
     {
-        $this->authorize('view-contacts');
+        $this->authorize('view-contact');
 
         $contacts = Contact::latest()->get();
 
@@ -30,7 +30,7 @@ class ContactController extends ApiController
 
     public function show(Contact $contact)
     {
-        $this->authorize('view-contacts');
+        $this->authorize('view-contact');
 
         $contact->update(['is_read' => 1]);
 

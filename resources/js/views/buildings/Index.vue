@@ -60,23 +60,33 @@
 
                                 </tbody>
                             </table>
-                            <p class="text-center" v-show="!buildings.length > 0">{{ $t('messages.no_results')}}</p>
+                            <p class="text-center" v-show="!buildings.length > 0">{{ $t('messages.no_results') }}</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="row" v-show="buildings.length">
-            <div class="col-12 mt-3">
-                <pagination v-model="page" :records="records" :per-page="per_page" @paginate="loadBuildings" />
+        <div class="row mt-3" v-show="buildings.length">
+            <div>
+                <Pagination
+                    :page="page"
+                    :viewingAmount="per_page"
+                    :total="records"
+                    @change="handlePageUpdate"
+                />
             </div>
         </div>
     </div>
 </template>
 
 <script>
+import Pagination from "../../components/Pagination";
+
 export default {
+    components: {
+        Pagination
+    },
     beforeRouteEnter(to, from, next) {
         if (!localStorage.getItem("authToken")) {
             return next({name: 'login'})
@@ -86,12 +96,12 @@ export default {
     data() {
         return {
             buildings: {},
-            now: new Date().toISOString(),
-            search: "",
             page: 1,
             records: 0,
             per_page: 0,
             loading: true,
+            now: new Date().toISOString(),
+            search: "",
         }
     },
     watch: {
@@ -104,13 +114,19 @@ export default {
     computed: {
         isSupervisor() {
             return this.$store.state.currentUser.isSupervisor;
-        }
+        },
     },
-    created() {
-        this.loadBuildings()
+    mounted() {
+        this.loadBuildings();
         this.$store.dispatch('currentUser/isSupervisor');
     },
     methods: {
+        handlePageUpdate([page, per_page]) {
+            this.page = page;
+            this.per_page = per_page;
+            this.loadBuildings();
+        },
+
         loadBuildings(page = this.page) {
             axios.get('/api/v1/buildings?page=' + page, {
                 params: {
@@ -118,18 +134,18 @@ export default {
                 }
             }).then(response => {
                 this.records = response.data.buildings_count
-                this.per_page = response.data.paginate
-                this.buildings = response.data.buildings.map(data => ({
-                    slug: data.slug,
-                    name: data.name,
-                    number: data.number,
-                    checked_at: data.checked_at,
-                    checked_at_string: data.checked_at_string,
-                    status: data.statusText
-                }))
-                this.loading = false;
-            })
-        },
+                 this.per_page = response.data.pagination
+                 this.buildings = response.data.buildings.map(data => ({
+                     slug: data.slug,
+                     name: data.name,
+                     number: data.number,
+                     checked_at: data.checked_at,
+                     checked_at_string: data.checked_at_string,
+                     status: data.statusText
+                 }))
+                 this.loading = false;
+             })
+         },
     }
 }
 </script>

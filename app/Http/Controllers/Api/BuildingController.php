@@ -13,7 +13,7 @@ class BuildingController extends ApiController
 {
     public function index()
     {
-        $paginate = 15;
+        $paginate = 10;
 
         if (auth()->user()->isAdmin()) {
             $buildings = Building::with('user')
@@ -47,7 +47,7 @@ class BuildingController extends ApiController
         return $this->respond([
             'buildings' => BuildingResource::collection($buildings),
             'buildings_count' => $buildings_count,
-            'paginate' => $paginate
+            'pagination' => $paginate
         ]);
     }
 

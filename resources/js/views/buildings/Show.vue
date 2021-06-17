@@ -14,7 +14,7 @@
                     </span>
                 </h5>
                 <router-link exact :to="{name: 'buildings', params: { id: building.slug }}" class="ml-auto btn btn-primary btn-sm">
-                    {{ $t('actions.cancel') }}
+                    {{ $t('actions.back') }}
                 </router-link>
             </div>
             <div class="table-responsive">
@@ -131,7 +131,6 @@ export default {
     data() {
         return {
             now: new Date().toISOString(),
-            building: {},
             periods: {},
             errors: [],
             fields: {
@@ -145,20 +144,21 @@ export default {
     computed: {
         isAdmin() {
             return this.$store.state.currentUser.isAdmin;
-        }
+        },
+        building() {
+            return this.$store.state.building.building;
+        },
     },
-    created() {
+    mounted() {
         this.$store.dispatch('currentUser/isAdmin');
-        this.showBuilding();
+        this.getBuilding();
         this.loadPeriod()
     },
     methods: {
-        showBuilding() {
-            axios.get(`/api/v1/buildings/${this.$route.params.id}`).then(response => {
-                this.building = response.data.building
-            }).catch(error => {
-                console.log('Error show the building')
-            })
+        getBuilding() {
+            this.$store.dispatch('building/getBuilding', {
+                param: this.$route.params.id
+            });
         },
         loadPeriod() {
             axios.get('/api/v1/periods').then(response => {
@@ -204,7 +204,6 @@ export default {
                     })
                 }
             })
-
         }
     }
 }

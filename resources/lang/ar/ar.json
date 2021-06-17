@@ -35,7 +35,9 @@
         "settings": "الإعدادات",
         "profile": "الصفحة الشخصية",
         "change_password": "تغير كلمة المرور",
-        "control_board": "لوحة التحكم"
+        "control_board": "لوحة التحكم",
+        "first": "الأول",
+        "last": "الأخير"
     },
 
     "fields": {

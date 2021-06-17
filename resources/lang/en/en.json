@@ -35,7 +35,9 @@
         "settings": "Settings",
         "profile": "Profile",
         "change_password": "Change password",
-        "control_board": "Control board"
+        "control_board": "Control board",
+        "first": "First",
+        "last": "Last"
     },
 
     "fields": {

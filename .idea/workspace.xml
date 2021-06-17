@@ -5,9 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43b0e3bc-b334-44df-8d87-e55277b9bb05" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/public/css/loading.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/schedule_fire_extinguishers.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/schedule_fire_extinguishers.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/app.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/app.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeders/PermissionsSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeders/PermissionsSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/BuildingController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/BuildingController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Api/ContactController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Api/ContactController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Resources/BuildingResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/BuildingResource.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/store/modules/building.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store/modules/building.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Index.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Show.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Show.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/views/notes/Notes.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/notes/Notes.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/vue.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/vue.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,44 +50,44 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/composer.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/.env" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Resources/ContactResource.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Api/BuildingController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Models/User.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Resources/ExtinguisherResource.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/database/migrations/2020_12_14_202438_create_buildings_table.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Resources/BuildingResource.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/views/buildings/Edit.vue" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/views/buildings/Create.vue" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Requests/UpdateUserRequest.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/public/index.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/views/buildings/Show.vue" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Requests/UpdateBuildingRequest.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/Http/Requests/StoreUserRequest.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/views/Pages/Index.vue" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/views/permissions/Index.vue" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/store/store.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Api/PermissionController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/views/users/Index.vue" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/views/extinguishers/Index.vue" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/views/Home.vue" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Traits/ImageUploadTrait.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/views/users/Edit.vue" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Models/Profile.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/storage/logs/laravel.log" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/components/Links.vue" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Api/ProfileController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Requests/UpdateBuildingRequest.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/resources/js/router/router.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/App.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Traits/ImageUploadTrait.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/database/migrations/2020_12_14_202438_create_buildings_table.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Models/User.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Api/PermissionController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/resources/js/bootstrap.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/views/currentUser/Profile.vue" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/resources/js/app.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/resources/js/views/buildings/Index.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/views/extinguishers/Index.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/App.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/store/store.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/views/Home.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/views/buildings/Create.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/views/buildings/Edit.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/views/buildings/Show.vue" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/resources/js/views/currentUser/Setting.vue" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Api/UserController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Resources/BuildingResource.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Models/Profile.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/views/currentUser/Profile.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/.env" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Requests/UpdateUserRequest.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/views/permissions/Index.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/views/buildings/Index.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/package.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/composer.json" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/views/users/Index.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/views/users/Edit.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/storage/logs/laravel.log" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Api/ProfileController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Controllers/Api/BuildingController.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/routes/api.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/views/Pages/Index.vue" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Resources/ExtinguisherResource.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/app/Http/Resources/ContactResource.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/public/index.php" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/resources/js/components/Links.vue" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
@@ -225,7 +236,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/resources/lang/en" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../laravel-vue" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -240,11 +251,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/css" />
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/resources/lang/en" />
       <recent name="$PROJECT_DIR$/resources/lang/ar" />
       <recent name="$PROJECT_DIR$/resources/js/plugins/i18n/locale" />
-      <recent name="$PROJECT_DIR$/resources/js/store/modules" />
-      <recent name="$PROJECT_DIR$/resources/js/views/Pages" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/js/plugins" />
@@ -469,6 +480,8 @@
       <workItem from="1623679074614" duration="58000" />
       <workItem from="1623738665461" duration="7535000" />
       <workItem from="1623748066300" duration="530000" />
+      <workItem from="1623877950947" duration="623000" />
+      <workItem from="1623907263845" duration="11380000" />
     </task>
     <servers />
   </component>
