@@ -87,14 +87,7 @@ export default {
         },
         pages() {
             return this.$store.state.page.pages;
-        }
-    },
-    created() {
-        if (this.show) {
-            this.$store.dispatch('currentUser/isAdmin');
-            this.$store.dispatch('currentUser/user');
-            this.$store.dispatch('page/getPagesUrl');
-        }
+        },
     },
     methods: {
         changeLocale(locale) {

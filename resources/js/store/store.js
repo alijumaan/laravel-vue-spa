@@ -2,9 +2,12 @@ import {createStore} from "vuex";
 import currentUser from "./modules/currentUser";
 import page from "./modules/page";
 import building from "./modules/building";
+import extinguisher from "./modules/extinguisher";
+import period from "./modules/period";
+import contact from "./modules/contact";
 
 export const store = createStore({
-    state: { // data
+    state: {
         app_title: 'الوقاية',
         show_content: !!localStorage.getItem("authToken"),
 
@@ -15,12 +18,15 @@ export const store = createStore({
     actions: { // methods
 
     },
-    mutations: { // used for changing the state
+    mutations: { // for changing the state
 
     },
     modules: {
         currentUser,
         page,
-        building
+        building,
+        extinguisher,
+        period,
+        contact
     }
 })

@@ -7,7 +7,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form @submit.prevent="send_message">
+                    <form @submit.prevent="sendMessage">
                         <div class="form-group">
                             <label for="name">{{ $t('fields.name') }}*</label>
                             <input v-model="fields.name" type="text" class="form-control" id="name">
@@ -73,7 +73,7 @@ export default {
         }
     },
     methods: {
-        send_message() {
+        sendMessage() {
             axios.post("/api/v1/contacts", this.fields).then( () => {
                 toast.fire({
                     icon: 'success',

@@ -55,28 +55,15 @@
 
 <script>
 export default {
-    data() {
-        return {
-            contacts: {},
-        }
-    },
     computed: {
         isAdmin() {
             return this.$store.state.currentUser.isAdmin;
+        },
+        contacts() {
+            return this.$store.state.contact.contacts;
         }
     },
-    created() {
-        this.$store.dispatch('currentUser/isAdmin');
-        this.loadContacts();
-    },
     methods: {
-        loadContacts() {
-            axios.get("/api/v1/contacts").then(response => {
-                this.contacts = response.data.contacts
-            }).catch(error => {
-                console.log(error)
-            })
-        },
         delete_contact_msg(msg) {
             swal.fire({
                 title: this.$i18n.t('messages.are_you_sour?'),
@@ -89,8 +76,8 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete('/api/v1/contacts/' + msg).then(() => {
-                        this.$router.push('/contacts');
-                        this.loadContacts();
+                        // this.$router.push('/contacts');
+                        location.replace('/contacts')
                     })
                     toast.fire({
                         icon: 'success',

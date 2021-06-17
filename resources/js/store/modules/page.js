@@ -9,7 +9,7 @@ const actions = {
         context.commit('setPagesUrl')
     },
     delete_page(context, data) {
-        context.commit('delete_page', data)
+        context.commit('delete_page', data.pageId)
     }
 
 }
@@ -20,7 +20,7 @@ const mutations = {
             state.pages = response.data.pages
         });
     },
-    delete_page(state, data) {
+    delete_page(state, pageId) {
         swal.fire({
             title: this.$i18n.t('messages.are_you_sour?'),
             text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
@@ -31,7 +31,7 @@ const mutations = {
             confirmButtonText: this.$i18n.t('messages.delete_confirmation')
         }).then( (result) => {
             if (result.isConfirmed) {
-                axios.delete('/api/v1/pages/' + data).then( () => {
+                axios.delete('/api/v1/pages/' + pageId).then( () => {
                     toast.fire({
                         icon: 'success',
                         title: this.$i18n.t('messages.deleted_successfully')
@@ -40,6 +40,8 @@ const mutations = {
                 })
 
             }
+        }).catch(error => {
+            console.log(error)
         })
     }
 }

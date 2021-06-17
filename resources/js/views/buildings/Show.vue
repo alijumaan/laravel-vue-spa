@@ -131,7 +131,6 @@ export default {
     data() {
         return {
             now: new Date().toISOString(),
-            periods: {},
             errors: [],
             fields: {
                 "status": "",
@@ -148,22 +147,18 @@ export default {
         building() {
             return this.$store.state.building.building;
         },
+        periods() {
+            return this.$store.state.period.periods
+        }
     },
     mounted() {
-        this.$store.dispatch('currentUser/isAdmin');
         this.getBuilding();
-        this.loadPeriod()
     },
     methods: {
         getBuilding() {
             this.$store.dispatch('building/getBuilding', {
                 param: this.$route.params.id
             });
-        },
-        loadPeriod() {
-            axios.get('/api/v1/periods').then(response => {
-                this.periods = response.data.periods;
-            })
         },
         update_building() {
             this.form_submitting = true;

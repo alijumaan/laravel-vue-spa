@@ -57,13 +57,18 @@ export default {
     },
     created() {
         this.extinguisherType();
-        this.$store.dispatch('building/getBuilding');
+        this.loadBuildings();
     },
     methods: {
         extinguisherType() {
             axios.get('/api/v1/extinguishers/type').then(response => {
                 this.extinguishersType = response.data.extinguishersType
             })
+        },
+        loadBuildings() {
+            this.$store.dispatch('building/getAllBuildings', {
+                page: null
+            });
         },
         submit_form() {
             axios.post('/api/v1/extinguishers', {

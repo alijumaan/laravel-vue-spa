@@ -44,11 +44,6 @@
 
 <script>
 export default {
-    data() {
-        return {
-            extinguishers: [],
-        }
-    },
     beforeRouteEnter(to, from, next) {
         if (!localStorage.getItem("authToken")) {
             return next({name: 'login'})
@@ -58,19 +53,9 @@ export default {
     computed: {
         isSupervisor() {
             return this.$store.state.currentUser.isSupervisor;
-        }
-    },
-    created() {
-        this.$store.dispatch('currentUser/isSupervisor');
-        this.loadExtinguishers()
-    },
-    methods: {
-        loadExtinguishers() {
-            axios.get('/api/v1/extinguishers').then(response => {
-                this.extinguishers = response.data.extinguishers
-            }).catch(error => {
-                console.log(error.message)
-            })
+        },
+        extinguishers() {
+            return this.$store.state.extinguisher.extinguishers;
         },
     }
 }

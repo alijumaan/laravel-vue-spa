@@ -61,13 +61,9 @@ export default {
             return this.$store.state.page.pages;
         }
     },
-    created() {
-        this.$store.dispatch('currentUser/isAdmin');
-        this.$store.dispatch('page/getPagesUrl');
-    },
     methods: {
-        delete_page(page_slug) {
-            this.$store.dispatch('page/delete_page', page_slug)
+        delete_page(pageId) {
+            this.$store.dispatch('page/delete_page', {pageId: pageId})
         }
     },
 

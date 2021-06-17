@@ -40,7 +40,6 @@ export default {
     },
     mounted() {
         if (this.show) {
-            this.$store.dispatch('currentUser/isAdmin');
             this.loadLinks();
         }
 

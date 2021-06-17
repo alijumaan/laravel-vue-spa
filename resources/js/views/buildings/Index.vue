@@ -68,6 +68,7 @@
         </div>
 
         <div class="row mt-3" v-show="buildings.length">
+<!--        <pagination v-model="page" :records="records" :per-page="per_page" @paginate="loadBuildings" />-->
             <div>
                 <Pagination
                     :page="page"
@@ -95,11 +96,12 @@ export default {
     },
     data() {
         return {
-            buildings: {},
-            page: 1,
-            records: 0,
-            per_page: 0,
-            loading: true,
+            // buildings: {},
+            // page: 1,
+            // records: 0,
+            // per_page: 0,
+            // loading: true,
+            page: this.$store.state.building.page,
             now: new Date().toISOString(),
             search: "",
         }
@@ -115,37 +117,48 @@ export default {
         isSupervisor() {
             return this.$store.state.currentUser.isSupervisor;
         },
+        buildings() {
+            return this.$store.state.building.buildings;
+        },
+        loading() {
+            return this.$store.state.building.loading;
+        },
+        per_page() {
+            return this.$store.state.building.per_page;
+        },
+        records() {
+            return this.$store.state.building.records;
+        },
     },
-    mounted() {
-        this.loadBuildings();
-        this.$store.dispatch('currentUser/isSupervisor');
-    },
+    // mounted() {
+    //     this.loadBuildings();
+    // },
     methods: {
         handlePageUpdate([page, per_page]) {
             this.page = page;
             this.per_page = per_page;
-            this.loadBuildings();
+            this.$store.dispatch('building/getAllBuildings', { page: this.page });
         },
 
-        loadBuildings(page = this.page) {
-            axios.get('/api/v1/buildings?page=' + page, {
-                params: {
-                    search: this.search.length >= 2 ? this.search : ""
-                }
-            }).then(response => {
-                this.records = response.data.buildings_count
-                 this.per_page = response.data.pagination
-                 this.buildings = response.data.buildings.map(data => ({
-                     slug: data.slug,
-                     name: data.name,
-                     number: data.number,
-                     checked_at: data.checked_at,
-                     checked_at_string: data.checked_at_string,
-                     status: data.statusText
-                 }))
-                 this.loading = false;
-             })
-         },
+        // loadBuildings(page = this.page) {
+        //     axios.get('/api/v1/buildings?page=' + page, {
+        //         params: {
+        //             search: this.search.length >= 2 ? this.search : ""
+        //         }
+        //     }).then(response => {
+        //         this.records = response.data.buildings_count
+        //          this.per_page = response.data.pagination
+        //          this.buildings = response.data.buildings.map(data => ({
+        //              slug: data.slug,
+        //              name: data.name,
+        //              number: data.number,
+        //              checked_at: data.checked_at,
+        //              checked_at_string: data.checked_at_string,
+        //              status: data.statusText
+        //          }))
+        //          this.loading = false;
+        //      })
+        //  },
     }
 }
 </script>

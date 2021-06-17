@@ -24,6 +24,7 @@ const mutations = {
             state.records = response.data.buildings_count
             state.per_page = response.data.pagination
             state.buildings = response.data.buildings.map(data => ({
+                id: data.id,
                 slug: data.slug,
                 name: data.name,
                 number: data.number,

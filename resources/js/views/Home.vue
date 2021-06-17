@@ -81,11 +81,6 @@ export default {
             return this.$store.state.currentUser.isAdmin;
         }
     },
-    created() {
-        if (this.show) {
-            this.$store.dispatch('currentUser/isAdmin');
-        }
-    },
 }
 </script>
 

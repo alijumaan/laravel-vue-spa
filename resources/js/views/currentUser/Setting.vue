@@ -82,9 +82,6 @@ export default {
             return this.$store.state.currentUser.user;
         }
     },
-    created() {
-        this.$store.dispatch('currentUser/user');
-    },
     methods: {
         chooseFile() {
             $('#avatar_img').click(function () {

@@ -39,9 +39,6 @@ export default {
         user() {
             return this.$store.state.currentUser.user;
         }
-    },
-    created() {
-        this.$store.dispatch('currentUser/user');
     }
 }
 </script>

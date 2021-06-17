@@ -10,22 +10,38 @@
             </thead>
             <tbody>
             <tr v-for="(building, index) in buildings">
-                <th scope="row">{{ index + 1 }}</th>
+                <th scope="row">{{ building.id }}</th>
                 <td>{{ building.name }}</td>
                 <td class="text-danger">{{ building.notes }}</td>
             </tr>
             </tbody>
         </table>
+        <Pagination
+            :page="page"
+            :viewingAmount="per_page"
+            :total="records"
+            @change="handlePageUpdate"
+        />
     </div>
 </template>
 
 <script>
+import Pagination from "../../components/Pagination";
+
 export default {
     beforeRouteEnter(to, from, next) {
         if (!localStorage.getItem("authToken")) {
             return next({name: 'login'})
         }
         next();
+    },
+    data() {
+      return {
+          page: this.$store.state.building.page,
+      }
+    },
+    components: {
+        Pagination
     },
     computed: {
         buildings() {
@@ -34,13 +50,18 @@ export default {
         loading() {
             return this.$store.state.building.loading;
         },
-    },
-    created() {
-        this.loadBuildings();
+        per_page() {
+            return this.$store.state.building.per_page;
+        },
+        records() {
+            return this.$store.state.building.records;
+        },
     },
     methods: {
-        loadBuildings() {
-            this.$store.dispatch('building/getAllBuildings');
+        handlePageUpdate([page, per_page]) {
+            this.page = page;
+            this.per_page = per_page;
+            this.$store.dispatch('building/getAllBuildings', { page: this.page });
         },
     }
 }
