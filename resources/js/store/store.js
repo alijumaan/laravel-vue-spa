@@ -11,17 +11,13 @@ export const store = createStore({
     state: {
         app_title: 'الوقاية',
         show_content: !!localStorage.getItem("authToken"),
-
     },
-    getters: { // computed properties
+    getters: {},// computed properties
 
-    },
-    actions: { // methods
+    actions: {}, // methods
 
-    },
-    mutations: { // for changing the state
+    mutations: {}, // for changing the state
 
-    },
     modules: {
         currentUser,
         page,
@@ -31,4 +27,4 @@ export const store = createStore({
         contact,
         link
     }
-})
+});

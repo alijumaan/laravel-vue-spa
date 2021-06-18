@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="card shadow">
                     <div class="p-2 d-flex">
-                        <input type="text" class="form-control w-50" v-model="search"
+                        <input type="text" class="form-control w-50" v-model="state.search"
                                :placeholder="$t('fields.search')">
 
                         <router-link v-if="isSupervisor" :to="{ name: 'buildings.create'}"
@@ -13,7 +13,7 @@
                             {{ $t('buttons.create_new_building') }}
                         </router-link>
                     </div>
-                    <div >
+                    <div>
                         <div class="table-responsive">
                             <table class="table table-striped table-sm">
                                 <thead class="">
@@ -42,7 +42,7 @@
                                     </span>
                                     </td>
                                     <td>
-                                    <span :class="building.checked_at > now ? 'text-success' : 'text-danger'">
+                                    <span :class="building.checked_at > state.now ? 'text-success' : 'text-danger'">
                                         {{ building.checked_at }}
                                     </span>
                                         <br>
@@ -69,15 +69,12 @@
 
         <div class="row mt-3" v-show="buildings.length">
 <!--        <pagination v-model="page" :records="records" :per-page="per_page" @paginate="loadBuildings" />-->
-            <div>
-                {{ records }} {{ per_page }}
-                <Pagination
-                    :page="paginationState.page"
-                    :viewingAmount="per_page"
-                    :total="records"
-                    @change="handlePageUpdate"
-                />
-            </div>
+            <Pagination
+                :page="state.page"
+                :viewingAmount="per_page"
+                :total="records"
+                @change="handlePageUpdate"
+            />
         </div>
     </div>
 </template>
@@ -101,36 +98,34 @@ export default {
     setup() {
         const store = useStore()
 
-        const search = ref("")
-        const now = new Date().toISOString();
-        const paginationState = reactive({
+        const state = reactive({
             page: store.state.building.page,
-        })
+            now: new Date().toISOString(),
+            search: "",
+        });
 
-        const isSupervisor = computed( () => store.state.currentUser.isSupervisor);
-        const buildings = computed( () => store.state.building.buildings);
-        const records = computed( () => store.state.building.records);
-        const per_page = computed( () => store.state.building.per_page);
-        const loading = computed( () => store.state.building.loading);
+        const isSupervisor = computed(() => store.state.currentUser.isSupervisor);
+        const buildings = computed(() => store.state.building.buildings);
+        const records = computed(() => store.state.building.records);
+        const per_page = computed(() => store.state.building.per_page);
+        const loading = computed(() => store.state.building.loading);
 
         const handlePageUpdate = ([page]) => {
-            paginationState.page = page;
-            store.dispatch('building/getAllBuildings', { page: paginationState.page});
+            state.page = page;
+            store.dispatch('building/getAllBuildings', {page: state.page});
         };
 
         // watch(search, (val, old) => {
         //     if (val.length >= 2 || old.length >= 2) {
-        //         store.dispatch('building/getAllBuildings', { page: paginationState.page});
+        //         store.dispatch('building/getAllBuildings', { page: state.page});
         //     }
         // });
 
         return {
             handlePageUpdate,
-            search,
-            paginationState,
+            state,
             records,
             buildings,
-            now,
             loading,
             per_page,
             isSupervisor
