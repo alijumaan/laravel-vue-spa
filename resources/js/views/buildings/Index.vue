@@ -4,10 +4,10 @@
             <div class="col-md-12">
                 <div class="card shadow">
                     <div class="p-2 d-flex">
-                        <input type="text" class="form-control w-50" v-model="state.search"
+                        <input type="text" class="form-control w-50" v-model= "search"
                                :placeholder="$t('fields.search')">
 
-                        <router-link v-if="isSupervisor" :to="{ name: 'buildings.create'}"
+                        <router-link v-if= "isSupervisor" :to="{ name: 'buildings.create'}"
                                      class="ml-auto btn btn-primary btn-sm">
                             <i class="fa fa-plus fa-fw"></i>
                             {{ $t('buttons.create_new_building') }}
@@ -31,7 +31,7 @@
 
                                 </tr>
                                 </thead>
-                                <tbody v-if="buildings.length > 0">
+                                <tbody v-if= "buildings.length > 0">
                                 <tr v-for="(building, index) in buildings" :key="index">
                                     <td>
                                     <span class="text-dark">
@@ -42,7 +42,7 @@
                                     </span>
                                     </td>
                                     <td>
-                                    <span :class="building.checked_at > state.now ? 'text-success' : 'text-danger'">
+                                    <span :class="building.checked_at > now ? 'text-success' : 'text-danger'">
                                         {{ building.checked_at }}
                                     </span>
                                         <br>
@@ -67,12 +67,12 @@
             </div>
         </div>
 
-        <div class="row mt-3" v-show="buildings.length">
+        <div class="row mt-3" v-show= "buildings.length">
 <!--        <pagination v-model="page" :records="records" :per-page="per_page" @paginate="loadBuildings" />-->
             <Pagination
-                :page="state.page"
-                :viewingAmount="per_page"
-                :total="records"
+                :page= "page"
+                :viewingAmount= "per_page"
+                :total= "records"
                 @change="handlePageUpdate"
             />
         </div>
@@ -82,7 +82,7 @@
 <script>
 import Pagination from "../../components/Pagination";
 import {useStore} from 'vuex'
-import {ref, reactive, computed, watch} from "vue";
+import {ref, reactive, computed, watch, toRefs} from "vue";
 
 export default {
     components: {
@@ -94,7 +94,6 @@ export default {
         }
         next();
     },
-
     setup() {
         const store = useStore()
 
@@ -102,33 +101,33 @@ export default {
             page: store.state.building.page,
             now: new Date().toISOString(),
             search: "",
+            isSupervisor: computed(() => store.state.currentUser.isSupervisor),
+            buildings: computed(() => store.state.building.buildings),
+            records: computed(() => store.state.building.records),
+            per_page: computed(() => store.state.building.per_page),
+            loading: computed(() => store.state.building.loading),
         });
 
-        const isSupervisor = computed(() => store.state.currentUser.isSupervisor);
-        const buildings = computed(() => store.state.building.buildings);
-        const records = computed(() => store.state.building.records);
-        const per_page = computed(() => store.state.building.per_page);
-        const loading = computed(() => store.state.building.loading);
+        // const isSupervisor = computed(() => store.state.currentUser.isSupervisor);
+        // const buildings = computed(() => store.state.building.buildings);
+        // const records = computed(() => store.state.building.records);
+        // const per_page = computed(() => store.state.building.per_page);
+        // const loading = computed(() => store.state.building.loading);
 
         const handlePageUpdate = ([page]) => {
             state.page = page;
             store.dispatch('building/getAllBuildings', {page: state.page});
         };
 
-        // watch(search, (val, old) => {
+        // watch(state.search, (val, old) => {
         //     if (val.length >= 2 || old.length >= 2) {
         //         store.dispatch('building/getAllBuildings', { page: state.page});
         //     }
         // });
 
         return {
+            ...toRefs(state),
             handlePageUpdate,
-            state,
-            records,
-            buildings,
-            loading,
-            per_page,
-            isSupervisor
         }
     },
 }
