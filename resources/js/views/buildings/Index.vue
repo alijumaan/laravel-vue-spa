@@ -13,7 +13,7 @@
                             {{ $t('buttons.create_new_building') }}
                         </router-link>
                     </div>
-                    <div :class="{'loading': loading}">
+                    <div >
                         <div class="table-responsive">
                             <table class="table table-striped table-sm">
                                 <thead class="">
@@ -70,8 +70,9 @@
         <div class="row mt-3" v-show="buildings.length">
 <!--        <pagination v-model="page" :records="records" :per-page="per_page" @paginate="loadBuildings" />-->
             <div>
+                {{ records }} {{ per_page }}
                 <Pagination
-                    :page="page"
+                    :page="paginationState.page"
                     :viewingAmount="per_page"
                     :total="records"
                     @change="handlePageUpdate"
@@ -83,6 +84,8 @@
 
 <script>
 import Pagination from "../../components/Pagination";
+import {useStore} from 'vuex'
+import {ref, reactive, computed, watch} from "vue";
 
 export default {
     components: {
@@ -94,72 +97,45 @@ export default {
         }
         next();
     },
-    data() {
-        return {
-            // buildings: {},
-            // page: 1,
-            // records: 0,
-            // per_page: 0,
-            // loading: true,
-            page: this.$store.state.building.page,
-            now: new Date().toISOString(),
-            search: "",
-        }
-    },
-    watch: {
-        search(val, old) {
-            if (val.length >= 2 || old.length >= 2) {
-                this.loadBuildings();
-            }
-        }
-    },
-    computed: {
-        isSupervisor() {
-            return this.$store.state.currentUser.isSupervisor;
-        },
-        buildings() {
-            return this.$store.state.building.buildings;
-        },
-        loading() {
-            return this.$store.state.building.loading;
-        },
-        per_page() {
-            return this.$store.state.building.per_page;
-        },
-        records() {
-            return this.$store.state.building.records;
-        },
-    },
-    // mounted() {
-    //     this.loadBuildings();
-    // },
-    methods: {
-        handlePageUpdate([page, per_page]) {
-            this.page = page;
-            this.per_page = per_page;
-            this.$store.dispatch('building/getAllBuildings', { page: this.page });
-        },
 
-        // loadBuildings(page = this.page) {
-        //     axios.get('/api/v1/buildings?page=' + page, {
-        //         params: {
-        //             search: this.search.length >= 2 ? this.search : ""
-        //         }
-        //     }).then(response => {
-        //         this.records = response.data.buildings_count
-        //          this.per_page = response.data.pagination
-        //          this.buildings = response.data.buildings.map(data => ({
-        //              slug: data.slug,
-        //              name: data.name,
-        //              number: data.number,
-        //              checked_at: data.checked_at,
-        //              checked_at_string: data.checked_at_string,
-        //              status: data.statusText
-        //          }))
-        //          this.loading = false;
-        //      })
-        //  },
-    }
+    setup() {
+        const store = useStore()
+
+        const search = ref("")
+        const now = new Date().toISOString();
+        const paginationState = reactive({
+            page: store.state.building.page,
+        })
+
+        const isSupervisor = computed( () => store.state.currentUser.isSupervisor);
+        const buildings = computed( () => store.state.building.buildings);
+        const records = computed( () => store.state.building.records);
+        const per_page = computed( () => store.state.building.per_page);
+        const loading = computed( () => store.state.building.loading);
+
+        const handlePageUpdate = ([page]) => {
+            paginationState.page = page;
+            store.dispatch('building/getAllBuildings', { page: paginationState.page});
+        };
+
+        // watch(search, (val, old) => {
+        //     if (val.length >= 2 || old.length >= 2) {
+        //         store.dispatch('building/getAllBuildings', { page: paginationState.page});
+        //     }
+        // });
+
+        return {
+            handlePageUpdate,
+            search,
+            paginationState,
+            records,
+            buildings,
+            now,
+            loading,
+            per_page,
+            isSupervisor
+        }
+    },
 }
 </script>
 

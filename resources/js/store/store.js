@@ -5,6 +5,7 @@ import building from "./modules/building";
 import extinguisher from "./modules/extinguisher";
 import period from "./modules/period";
 import contact from "./modules/contact";
+import link from "./modules/link";
 
 export const store = createStore({
     state: {
@@ -27,6 +28,7 @@ export const store = createStore({
         building,
         extinguisher,
         period,
-        contact
+        contact,
+        link
     }
 })

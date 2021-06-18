@@ -64,7 +64,7 @@ export default {
     methods: {
         delete_page(pageId) {
             this.$store.dispatch('page/delete_page', {pageId: pageId})
-        }
+        },
     },
 
 }

@@ -55,26 +55,15 @@
 
 <script>
 export default {
-    data() {
-        return {
-            links: {},
-        }
-    },
     computed: {
         isAdmin() {
             return this.$store.state.currentUser.isAdmin;
+        },
+        links() {
+            return this.$store.state.link.links;
         }
     },
-    created() {
-        this.$store.dispatch('currentUser/isAdmin');
-        this.loadLinks();
-    },
     methods: {
-        loadLinks() {
-            axios.get("/api/v1/links").then( response => {
-                this.links = response.data.links
-            })
-        },
         delete_link(link_id) {
             swal.fire({
                 title: this.$i18n.t('messages.are_you_sour?'),

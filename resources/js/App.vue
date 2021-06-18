@@ -30,6 +30,7 @@ export default {
             this.$store.dispatch('extinguisher/getExtinguishers')
             this.$store.dispatch('period/getPeriods')
             this.$store.dispatch('contact/getContacts')
+            this.$store.dispatch('link/getLinks')
             this.$store.dispatch('building/getAllBuildings', { page: this.page });
         }
     },
