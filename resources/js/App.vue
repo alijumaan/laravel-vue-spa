@@ -23,7 +23,7 @@ export default {
             return this.$store.state.app_title;
         }
     },
-    created() {
+    mounted() {
         if (this.show) {
             this.$store.dispatch('currentUser/isAdmin');
             this.$store.dispatch('currentUser/isSupervisor');

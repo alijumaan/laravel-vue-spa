@@ -20,7 +20,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="page in pages">
+                    <tr v-for="page in pages" @getPages="getNewPage">
                         <td>{{ page.title }}</td>
                         <td>
                             <router-link :to="{ name: 'pages.show', params: { id: page.slug } }">
@@ -52,6 +52,7 @@
 </template>
 
 <script>
+
 export default {
     computed: {
         isAdmin() {
@@ -62,11 +63,33 @@ export default {
         }
     },
     methods: {
+        getNewPage(event) {
+            console.log(event)
+            console.log("page updated")
+        },
         delete_page(pageId) {
-            this.$store.dispatch('page/delete_page', {pageId: pageId})
+            swal.fire({
+                title: this.$i18n.t('messages.are_you_sour?'),
+                text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: this.$i18n.t('messages.delete_confirmation')
+            }).then( (result) => {
+                if (result.isConfirmed) {
+                    this.$store.dispatch('page/delete_page', {pageId: pageId})
+                    toast.fire({
+                        icon: 'success',
+                        title: this.$i18n.t('messages.deleted_successfully')
+                    })
+                    location.reload();
+                }
+            }).catch(error => {
+                console.log(error)
+            })
         },
     },
-
 }
 </script>
 

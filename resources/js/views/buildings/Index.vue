@@ -13,7 +13,7 @@
                             {{ $t('buttons.create_new_building') }}
                         </router-link>
                     </div>
-                    <div>
+                    <div :class="{'loading': loading}">
                         <div class="table-responsive">
                             <table class="table table-striped table-sm">
                                 <thead class="">
@@ -96,9 +96,7 @@ export default {
     },
     setup() {
         const store = useStore()
-
         const search = ref("");
-
         const state = reactive({
             search: "",
             page: store.state.building.page,
@@ -109,7 +107,6 @@ export default {
             per_page: computed(() => store.state.building.per_page),
             loading: computed(() => store.state.building.loading),
         });
-
         const handlePageUpdate = ([page]) => {
             state.page = page;
             store.dispatch('building/getAllBuildings', {page: state.page, search: search.value});

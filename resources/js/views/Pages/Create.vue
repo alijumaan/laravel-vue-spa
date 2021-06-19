@@ -57,10 +57,16 @@
 
 <script>
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import {reactive, toRefs} from "vue";
+import {useI18n} from "vue-i18n/index";
+import {useRouter} from "vue-router";
 
 export default {
-    data() {
-        return {
+    setup(props, context) {
+        const i18n = useI18n()
+        const router = useRouter()
+
+        const state = reactive({
             fields: {
                 title: '',
                 slug: '',
@@ -72,20 +78,30 @@ export default {
                 language: 'ar'
             },
             editorDisabled: true,
-        }
-    },
-    methods: {
-        create_page() {
-            axios.post("/api/v1/pages", this.fields).then( () => {
+        })
+
+        function create_page() {
+            axios.post("/api/v1/pages", state.fields).then(response => {
                 toast.fire({
                     icon: 'success',
-                    title: this.$i18n.t('messages.created_successfully')
+                    title: i18n.t('messages.created_successfully')
                 })
-                this.$router.push({name: 'pages'})
+                context.emit("getPages");
+                router.push({name: 'pages'});
             }).catch(error => {
-                this.errors = error.response.data.errors;
+                if (error.response.status === 422) {
+                    state.errors = error.response.data.errors;
+                }else {
+                    console.log(error)
+                }
             })
         }
+
+        return {
+            ...toRefs(state),
+            create_page
+        }
+
     }
 }
 
