@@ -9,18 +9,14 @@ const state = {
 
 const getters = {}
 
-const actions = {
-    getAllBuildings(context, data) {
-        context.commit('setAllBuildings', data.page)
-    },
-    getBuilding(context, data) {
-        context.commit('setBuilding', data.param)
-    }
-}
-
 const mutations = {
-    setAllBuildings(state, page = state.page) {
-        axios.get(`/api/v1/buildings?page=${page}`).then(response => {
+
+    setAllBuildings(state, page = state.page, search) {
+        axios.get(`/api/v1/buildings?page=${page}`, {
+            params: {
+                search: search
+            }
+        }).then(response => {
             state.records = response.data.buildings_count
             state.per_page = response.data.pagination
             state.buildings = response.data.buildings.map(data => ({
@@ -43,6 +39,15 @@ const mutations = {
             console.log('Error show the building')
         })
     },
+}
+
+const actions = {
+    getAllBuildings(context, data) {
+        context.commit('setAllBuildings', data.page, data.search)
+    },
+    getBuilding(context, data) {
+        context.commit('setBuilding', data.param)
+    }
 }
 
 export default {

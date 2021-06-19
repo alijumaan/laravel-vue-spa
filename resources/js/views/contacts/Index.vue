@@ -59,6 +59,7 @@ export default {
         isAdmin() {
             return this.$store.state.currentUser.isAdmin;
         },
+
         contacts() {
             return this.$store.state.contact.contacts;
         }

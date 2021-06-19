@@ -15,10 +15,12 @@ import Links from "./components/Links.vue";
 import Footer from "./components/Footer.vue";
 export default {
     components: {Footer, Links, Header},
-    data() {
-        return {
-            show: this.$store.state.show_content,
-            app_title: this.$store.state.app_title,
+    computed: {
+        show() {
+            return this.$store.state.show_content;
+        },
+        app_title() {
+            return this.$store.state.app_title;
         }
     },
     created() {

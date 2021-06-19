@@ -1,5 +1,5 @@
 <template>
-    <nav>
+    <nav v-show="pages > 1">
         <ul class="pagination justify-content-start">
             <li class="page-item" @click="changePage(1)">
                 <a class="page-link" href="#">{{ $t('buttons.first') }}</a>

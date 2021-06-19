@@ -9,7 +9,7 @@ import link from "./modules/link";
 
 export const store = createStore({
     state: {
-        app_title: 'الوقاية',
+        app_title: 'الإطفاء والسلامة',
         show_content: !!localStorage.getItem("authToken"),
     },
     getters: {},// computed properties
