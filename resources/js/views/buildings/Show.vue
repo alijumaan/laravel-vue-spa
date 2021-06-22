@@ -154,17 +154,20 @@ export default {
         let form_submitting = false;
 
         const isAdmin = computed(() => store.state.currentUser.isAdmin);
-        const building = computed(() => store.state.building.building);
         const periods = computed(() => store.state.period.periods);
 
         onMounted(() => {
             getBuilding();
         })
 
+        const building = ref({});
+
         function getBuilding() {
-            store.dispatch('building/getBuilding', {
-                param: route.params.id
-            });
+            axios.get(`/api/v1/buildings/${route.params.id}`).then(response => {
+                building.value = response.data.building
+            }).catch(error => {
+                console.log('Error show the building')
+            })
         }
 
         function update_building() {

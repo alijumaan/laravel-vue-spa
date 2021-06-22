@@ -81,7 +81,7 @@
 
 <script>
 import {useStore} from 'vuex'
-import {computed, watch, ref} from "vue";
+import {computed, watch, ref, onMounted} from "vue";
 import Pagination from "../../components/Pagination";
 import useBuildings from "../../modules/buildings";
 
@@ -98,18 +98,18 @@ export default {
 
     setup() {
         const store = useStore();
-        const search = ref(store.state.building.search);
 
         const {records,
             loadBuildings, buildings,
-            per_page, page, loading,
+            per_page, page, loading, search,
             handlePageUpdate, now} = useBuildings();
 
         const isSupervisor = computed(() => store.state.currentUser.isSupervisor);
 
+        onMounted(() => { loadBuildings() })
+
         const stopWatch = watch(search, (val, old) => {
             if (val.length >= 2 || old.length >= 2) {
-                // store.dispatch('building/getAllBuildings', { page : page });
                 loadBuildings();
             }
             if (val.length === 50) {

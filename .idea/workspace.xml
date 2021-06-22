@@ -5,23 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="43b0e3bc-b334-44df-8d87-e55277b9bb05" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/public/js/resources_js_views_buildings_Index_vue.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/Loading.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/modules/buildings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Resources/BuildingResource.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Resources/BuildingResource.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/App.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/modules/buildings.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/modules/buildings.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/store/modules/building.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/store/modules/building.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/auth/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/auth/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/auth/SetPassword.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/auth/SetPassword.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Create.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Edit.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Edit.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Index.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Index.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Index_old.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Index_old.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/views/buildings/Show.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/buildings/Show.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/extinguishers/Create.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/extinguishers/Create.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/views/notes/Notes.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/views/notes/Notes.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -496,7 +486,8 @@
       <workItem from="1624202970495" duration="13349000" />
       <workItem from="1624265917475" duration="19896000" />
       <workItem from="1624293014749" duration="4012000" />
-      <workItem from="1624368899805" duration="1044000" />
+      <workItem from="1624368899805" duration="1747000" />
+      <workItem from="1624381533464" duration="9363000" />
     </task>
     <servers />
   </component>
