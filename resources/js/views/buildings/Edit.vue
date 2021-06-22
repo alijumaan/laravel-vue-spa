@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header bg-white d-flex">
                     <h5> {{ $t('titles.edit_building')}}
-                        (<span class="text-success" v-text="fields.name"></span>)
+                        (<span class="text-success" v-text="name"></span>)
                     </h5>
 
                     <router-link exact :to="{name: 'buildings.show'}" class="ml-auto btn btn-primary btn-sm">
@@ -16,7 +16,7 @@
                         <!-- name -->
                         <div class="form-group">
                             <label for="name">{{ $t('fields.building_name') }}</label>
-                            <input v-model="fields.name" type="text" id="name" class="form-control">
+                            <input v-model="currentName" type="text" id="name" class="form-control">
                             <div v-if="errors && errors.name">
                                 <div v-for="error in errors.name"
                                      class="text-danger" role="alert">
@@ -27,7 +27,7 @@
                         <!-- number -->
                         <div class="form-group">
                             <label for="number">{{ $t('fields.building_number') }}</label>
-                            <input v-model="fields.number" id="number" class="form-control">
+                            <input v-model="currentNumber" id="number" class="form-control">
                             <div v-if="errors && errors.number">
                                 <div v-for="error in errors.number"
                                      class="text-danger" role="alert">
@@ -38,7 +38,7 @@
                         <!-- user_id -->
                         <div class="form-group">
                             <label for="user_id">{{ $t('fields.inspector') }}</label>
-                            <select v-model="fields.user_id" id="user_id" class="form-control">
+                            <select v-model="currentUserId" id="user_id" class="form-control">
                                 <option value="">-- {{ $t('fields.choose') }} --</option>
                                 <option v-for="user in users" :value="user.id">{{ user.name }}</option>
                             </select>
@@ -52,7 +52,7 @@
                         <!-- period_id -->
                         <div class="form-group">
                             <label for="period_id">{{ $t('fields.period') }}</label>
-                            <select v-model="fields.period_id" id="period_id" class="form-control">
+                            <select v-model="currentPeriodId" id="period_id" class="form-control">
                                 <option value="">-- {{ $t('fields.choose') }} --</option>
                                 <option v-for="period in periods" :value="period.id">{{ period.period }}</option>
                             </select>
@@ -60,7 +60,7 @@
                         <!-- status -->
                         <div class="form-group">
                             <label for="status">{{ $t('fields.status') }}</label>
-                            <select v-model="fields.status" id="status" class="form-control">
+                            <select v-model="currentStatus" id="status" class="form-control">
                                 <option value="0">{{ $t('fields.expired') }}</option>
                                 <option value="1">{{ $t('fields.valid') }}</option>
                             </select>
@@ -68,7 +68,7 @@
                         <!-- notes -->
                         <div class="form-group">
                             <label for="notes">{{ $t('fields.note') }}</label>
-                            <input v-model="fields.notes" type="text" id="notes" class="form-control">
+                            <input v-model="currentNotes" type="text" id="notes" class="form-control">
                             <div v-if="errors && errors.notes">
                                 <div v-for="error in errors.notes"
                                      class="text-danger" role="alert">
@@ -92,63 +92,112 @@
 </template>
 
 <script>
+import {onMounted, reactive, ref, toRefs} from "vue";
+import {useI18n} from "vue-i18n/index";
+import { useRouter, useRoute } from 'vue-router'
 export default {
-    data() {
-        return {
-            users: [],
-            periods: {},
-            fields: {
-                "name": "",
-                "number": "",
-                "user_id": "",
-                "status": "",
-                "notes": "",
-                "period_id": "",
-                "checked_at": "",
-            },
-            errors: {},
-            form_submitting: false
+    setup() {
+        const i18n = useI18n()
+        const router = useRouter()
+        const route = useRoute()
+
+        let users = ref([]);
+        let periods = ref([]);
+        let errors = ref([]);
+        let form_submitting =  false
+        let currentName = ref("")
+        let currentNumber = ref("")
+        let currentUserId = ref("")
+        let currentStatus = ref("")
+        let currentNotes = ref("")
+        let currentPeriodId = ref("")
+        let currentCheckedAt = ref("")
+
+        let fields = reactive({
+            name: "",
+            number: "",
+            user_id: "",
+            status: "",
+            notes: "",
+            period_id: "",
+            checked_at: "",
+        })
+
+        onMounted(() => {
+            loadBuilding();
+            loadUsers();
+            loadPeriod()
+        })
+
+        function loadBuilding() {
+            axios.get(`/api/v1/buildings/${route.params.id}`).then(response => {
+                fields = response.data.building;
+                currentName.value = fields.name
+                currentNumber.value = fields.number
+                currentUserId.value = fields.user_id
+                currentStatus.value = fields.status
+                currentNotes.value = fields.notes
+                currentPeriodId.value = fields.period_id
+                currentCheckedAt.value = fields.checked_at
+            })
         }
-    },
-    mounted() {
-        this.loadBuilding();
-        this.loadUsers();
-        this.loadPeriod()
-    },
-    methods: {
-        loadBuilding() {
-            axios.get('/api/v1/buildings/' + this.$route.params.id).then(response => {
-                this.fields = response.data.building;
-            })
-        },
-        loadUsers() {
+
+        function loadUsers() {
             axios.get('/api/v1/users').then(response => {
-                this.users = response.data.users;
+                users.value = response.data.users;
             })
-        },
-        loadPeriod() {
+        }
+
+        function loadPeriod() {
             axios.get('/api/v1/periods').then(response => {
-                this.periods = response.data.periods;
+                periods.value = response.data.periods;
             })
-        },
-        update_building() {
-            this.form_submitting = true;
-            axios.put(`/api/v1/buildings/${this.fields.slug}`, this.fields).then(response => {
+        }
+
+        function update_building() {
+            form_submitting = true;
+            axios.put(`/api/v1/buildings/${route.params.id}`, {
+                name: currentName.value,
+                number: currentNumber.value,
+                user_id: currentUserId.value,
+                status: currentStatus.value,
+                notes: currentNotes.value,
+                period_id: currentPeriodId.value,
+                checked_at: currentCheckedAt.value,
+            }).then(response => {
                 toast.fire({
                     icon: 'success',
-                    title: this.$i18n.t('messages.updated_successfully')
+                    title: i18n.t('messages.updated_successfully')
                 })
-                this.$router.push('/buildings');
-                this.form_submitting = false;
+                router.push('/buildings');
+                form_submitting = false;
             }).catch(error => {
                 if (error.response.status === 422) {
-                    this.errors = error.response.data.errors;
+                    errors.value = error.response.data.errors;
                 }
-                this.errors = error.response.data.errors;
-                this.form_submitting = false;
+                form_submitting = false;
             })
         }
-    }
+
+        return {
+            ...toRefs(fields),
+            users,
+            periods,
+            errors,
+            form_submitting,
+            loadBuilding,
+            loadUsers,
+            loadPeriod,
+            update_building,
+            currentName,
+            currentNumber,
+            currentUserId,
+            currentStatus,
+            currentNotes,
+            currentPeriodId,
+            currentCheckedAt,
+        }
+    },
 }
 </script>
 

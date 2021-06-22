@@ -50,40 +50,38 @@
 </template>
 
 <script>
+import {ref} from "vue";
+
 export default {
-    data() {
-        return {
-            password: "",
-            password_confirmation: "",
-            errors: []
-        }
-    },
-    methods: {
-        set_password() {
-            let fields = {'password': this.password, 'password_confirmation': this.password_confirmation}
+    setup() {
+        let password = ref("");
+        let password_confirmation = ref("");
+        let errors = ref([]);
+
+        function set_password() {
+            let fields = {'password': password, 'password_confirmation': password_confirmation}
+
             axios.post("/api/v1/set-password", fields).then(response => {
-
-                console.log(response.data)
-
                 if (response.data.token.access_token) {
-
                     localStorage.setItem('authToken', response.data.token.access_token)
-
                     toast.fire({
                         icon: 'success',
                         title: 'تم تعيين كلمة المرور بنجاح'
                     })
-
                     window.location.replace('/')
                 }
-
-
             }).catch(error => {
-                console.log(error.response.data.error)
-                this.errors = error.response.data.errors;
+                errors.value = error.response.data.errors;
             })
         }
-    }
+
+        return {
+            password,
+            password_confirmation,
+            errors,
+            set_password
+        }
+    },
 }
 </script>
 

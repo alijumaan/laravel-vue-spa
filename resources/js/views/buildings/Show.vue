@@ -13,7 +13,8 @@
                         {{ building.statusText }}
                     </span>
                 </h5>
-                <router-link exact :to="{name: 'buildings', params: { id: building.slug }}" class="ml-auto btn btn-primary btn-sm">
+                <router-link exact :to="{name: 'buildings', params: { id: building.slug }}"
+                             class="ml-auto btn btn-primary btn-sm">
                     {{ $t('actions.back') }}
                 </router-link>
             </div>
@@ -32,7 +33,9 @@
                     <tr>
                         <td>{{ building.user }}</td>
                         <td><span class="badge badge-success">{{ building.updated_at }}</span></td>
-                        <td><span :class="building.checked_at > now ? 'badge badge-success' : 'badge badge-danger'">{{ building.checked_at }}</span></td>
+                        <td><span :class="building.checked_at > now ? 'badge badge-success' : 'badge badge-danger'">{{
+                                building.checked_at
+                            }}</span></td>
                         <td>{{ building.notes }}</td>
                         <td>
                             <a class="btn btn-sm" data-toggle="modal" data-target="#updateBuilding">
@@ -117,7 +120,9 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button id="close" type="button" class="btn btn-danger" data-dismiss="modal">{{ $t('actions.cancel') }}</button>
+                        <button id="close" type="button" class="btn btn-danger" data-dismiss="modal">
+                            {{ $t('actions.cancel') }}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -127,78 +132,96 @@
 </template>
 
 <script>
+import {computed, onMounted, reactive, ref, toRefs} from "vue";
+import {useRoute, useRouter} from "vue-router";
+import {useI18n} from "vue-i18n/index";
+import {useStore} from "vuex";
+
 export default {
-    data() {
-        return {
-            now: new Date().toISOString(),
-            errors: [],
-            fields: {
-                "status": "",
-                "notes": "",
-                "period_id": ""
-            },
-            form_submitting: false
-        }
-    },
-    computed: {
-        isAdmin() {
-            return this.$store.state.currentUser.isAdmin;
-        },
-        building() {
-            return this.$store.state.building.building;
-        },
-        periods() {
-            return this.$store.state.period.periods
-        }
-    },
-    mounted() {
-        this.getBuilding();
-    },
-    methods: {
-        getBuilding() {
-            this.$store.dispatch('building/getBuilding', {
-                param: this.$route.params.id
+    setup() {
+        const i18n = useI18n()
+        const router = useRouter()
+        const route = useRoute()
+        const store = useStore();
+
+        const now = new Date().toISOString();
+        let errors = ref([]);
+        let fields = reactive({
+            status: "",
+            notes: "",
+            period_id: ""
+        })
+        let form_submitting = false;
+
+        const isAdmin = computed(() => store.state.currentUser.isAdmin);
+        const building = computed(() => store.state.building.building);
+        const periods = computed(() => store.state.period.periods);
+
+        onMounted(() => {
+            getBuilding();
+        })
+
+        function getBuilding() {
+            store.dispatch('building/getBuilding', {
+                param: route.params.id
             });
-        },
-        update_building() {
-            this.form_submitting = true;
-            axios.put(`/api/v1/buildings/${this.building.slug}/quickUpdate`, {
-                status: this.building.status,
-                period_id: this.building.period_id,
-                notes: this.building.notes
+        }
+
+        function update_building() {
+            form_submitting = true;
+            axios.put(`/api/v1/buildings/${route.params.id}/quickUpdate`, {
+                status: building.value.status,
+                period_id: building.value.period_id,
+                notes: building.value.notes
             }).then(response => {
                 toast.fire({
                     icon: 'success',
-                    title: this.$i18n.t('messages.updated_successfully')
+                    title: i18n.t('messages.updated_successfully')
                 })
-                // this.$router.push(`/buildings`);
+                // router.push(`/buildings`);
                 location.replace('/buildings')
-                this.form_submitting = false;
+                form_submitting = false;
             }).catch(error => {
-                this.errors = error.response.data.errors;
-                this.form_submitting = false;
+                if (error.response.status === 422) {
+                    errors.value = error.response.data.errors;
+                }
+                form_submitting = false;
             })
-        },
-        delete_building(building) {
+        }
+
+        function delete_building(building) {
             swal.fire({
-                title: this.$i18n.t('messages.are_you_sour?'),
-                text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
+                title: i18n.t('messages.are_you_sour?'),
+                text: i18n.t('messages.You_wont_be_able_to_undo_this'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: this.$i18n.t('messages.delete_confirmation')
+                confirmButtonText: i18n.t('messages.delete_confirmation')
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete('/api/v1/buildings/' + building).then(response => {
-                        this.$router.push('/buildings');
+                        router.push('/buildings');
                     })
                     toast.fire({
                         icon: 'success',
-                        title: this.$i18n.t('messages.deleted_successfully')
+                        title: i18n.t('messages.deleted_successfully')
                     })
                 }
             })
+        }
+
+        return {
+            ...toRefs(fields),
+            now,
+            errors,
+            form_submitting,
+            isAdmin,
+            building,
+            periods,
+            getBuilding,
+            update_building,
+            delete_building
         }
     }
 }

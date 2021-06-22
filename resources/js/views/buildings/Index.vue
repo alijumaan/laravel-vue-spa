@@ -80,9 +80,10 @@
 </template>
 
 <script>
-import Pagination from "../../components/Pagination";
 import {useStore} from 'vuex'
-import {ref, reactive, computed, watch, toRefs, watchEffect} from "vue";
+import {computed, watch, ref} from "vue";
+import Pagination from "../../components/Pagination";
+import useBuildings from "../../modules/buildings";
 
 export default {
     components: {
@@ -94,39 +95,29 @@ export default {
         }
         next();
     },
-    setup() {
-        const store = useStore()
-        const search = ref("");
-        const state = reactive({
-            search: "",
-            page: store.state.building.page,
-            now: new Date().toISOString(),
-            isSupervisor: computed(() => store.state.currentUser.isSupervisor),
-            buildings: computed(() => store.state.building.buildings),
-            records: computed(() => store.state.building.records),
-            per_page: computed(() => store.state.building.per_page),
-            loading: computed(() => store.state.building.loading),
-        });
-        const handlePageUpdate = ([page]) => {
-            state.page = page;
-            store.dispatch('building/getAllBuildings', {page: state.page, search: search.value});
-        };
 
-        let stopWatch = watch(search, (val, old) => {
+    setup() {
+        const store = useStore();
+        const search = ref(store.state.building.search);
+
+        const {records,
+            loadBuildings, buildings,
+            per_page, page, loading,
+            handlePageUpdate, now} = useBuildings();
+
+        const isSupervisor = computed(() => store.state.currentUser.isSupervisor);
+
+        const stopWatch = watch(search, (val, old) => {
             if (val.length >= 2 || old.length >= 2) {
-                console.log("watch searching ", search.value)
-                // this.$store.dispatch('building/getAllBuildings', { page: state.page, search: search.value })
+                // store.dispatch('building/getAllBuildings', { page : page });
+                loadBuildings();
             }
             if (val.length === 50) {
                 stopWatch();
             }
         });
 
-        return {
-            ...toRefs(state),
-            search,
-            handlePageUpdate,
-        }
+        return {search, buildings, records, per_page, page, isSupervisor, loading, now, handlePageUpdate}
     },
 }
 </script>

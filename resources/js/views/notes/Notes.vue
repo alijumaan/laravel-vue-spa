@@ -61,7 +61,7 @@ export default {
         handlePageUpdate([page, per_page]) {
             this.page = page;
             this.per_page = per_page;
-            this.$store.dispatch('building/getAllBuildings', { page: this.page });
+            this.$store.dispatch('building/getAllBuildings');
         },
     }
 }

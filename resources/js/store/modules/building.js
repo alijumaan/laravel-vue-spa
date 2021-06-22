@@ -4,6 +4,7 @@ const state = {
     records: 0,
     per_page: 0,
     page: 1,
+    search: "",
     loading: true
 }
 
@@ -11,10 +12,10 @@ const getters = {}
 
 const mutations = {
 
-    setAllBuildings(state, page = state.page, search) {
+    setAllBuildings(state, page = state.page) {
         axios.get(`/api/v1/buildings?page=${page}`, {
             params: {
-                search: search
+                search: state.search.length >= 2 ? state.search : ""
             }
         }).then(response => {
             state.records = response.data.buildings_count
@@ -38,16 +39,16 @@ const mutations = {
         }).catch(error => {
             console.log('Error show the building')
         })
-    },
+    }
 }
 
 const actions = {
     getAllBuildings(context, data) {
-        context.commit('setAllBuildings', data.page, data.search)
+        context.commit('setAllBuildings', data.page)
     },
     getBuilding(context, data) {
         context.commit('setBuilding', data.param)
-    }
+    },
 }
 
 export default {

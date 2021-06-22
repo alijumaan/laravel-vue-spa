@@ -7,7 +7,8 @@
                     <div class="card-body">
                         <form @submit.prevent="login">
                             <div class="form-group row">
-                                <label for="username" class="col-md-4 col-form-label text-md-right">{{ $t('fields.username') }}</label>
+                                <label for="username"
+                                       class="col-md-4 col-form-label text-md-right">{{ $t('fields.username') }}</label>
                                 <div class="col-md-6">
                                     <div v-if="errors && errors.error">
                                         <div class="alert alert-danger">
@@ -16,7 +17,7 @@
                                             </ul>
                                         </div>
                                     </div>
-                                    <input v-model="loginData.username" id="username" type="text" class="form-control">
+                                    <input v-model="username" id="username" type="text" class="form-control">
                                     <div v-if="errors && errors.username">
                                         <div v-for="error in errors.username"
                                              class="text-danger" role="alert">
@@ -26,9 +27,10 @@
                                 </div>
                             </div>
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ $t('fields.password')}}</label>
+                                <label for="password"
+                                       class="col-md-4 col-form-label text-md-right">{{ $t('fields.password') }}</label>
                                 <div class="col-md-6">
-                                    <input v-model="loginData.password" id="password" :type="fieldType"
+                                    <input v-model="password" id="password" :type="fieldType"
                                            class="form-control">
                                     <div v-if="errors && errors.password">
                                         <div v-for="error in errors.password"
@@ -60,7 +62,7 @@
                                         {{ $t('buttons.login') }}
                                     </button>
                                     <a class="btn btn-link text-white" href="#">
-                                       {{ $t('fields.forget_password?') }}
+                                        {{ $t('fields.forget_password?') }}
                                     </a>
                                 </div>
                             </div>
@@ -73,6 +75,9 @@
 </template>
 
 <script>
+import {reactive, ref, toRefs} from "vue";
+import {useI18n} from "vue-i18n/index";
+
 export default {
     beforeRouteEnter(to, from, next) {
         if (localStorage.getItem("authToken")) {
@@ -80,45 +85,48 @@ export default {
         }
         next();
     },
-    data() {
-        return {
-            fieldType: 'password',
-            errors: [],
-            form_submitting: false,
-            loginData: {
-                username: "",
-                password: ""
-            }
-        }
-    },
+    setup() {
+        const i18n = useI18n()
 
-    methods: {
-        login() {
-            axios.post("/api/v1/login", this.loginData).then(response => {
+        let fieldType = ref("password");
+        let errors = ref({});
+        let form_submitting = false;
+        const loginData = reactive({
+            username: "",
+            password: ""
+        });
 
+        function login() {
+            axios.post("/api/v1/login", loginData).then(response => {
                 if (response.data.token.access_token) {
-                    this.form_submitting = true;
-
+                    form_submitting = true;
                     localStorage.setItem('authToken', response.data.token.access_token)
-
                     toast.fire({
                         icon: 'success',
-                        title: this.$i18n.t('messages.login_successfully')
+                        title: i18n.t('messages.login_successfully')
                     })
-
                     window.location.replace('/')
-
-                    this.form_submitting = false;
+                    form_submitting = false;
                 }
             }).catch(error => {
-                this.errors = error.response.data.errors;
-                this.form_submitting = false;
+                errors.value = error.response.data.errors;
+                form_submitting = false;
             })
-        },
-        switchField() {
-            this.fieldType = this.fieldType === 'password' ? 'test' : 'password';
         }
-    },
+
+        function switchField() {
+            fieldType.value = fieldType.value === 'password' ? 'text' : 'password';
+        }
+
+        return {
+            ...toRefs(loginData),
+            fieldType,
+            errors,
+            form_submitting,
+            login,
+            switchField
+        }
+    }
 }
 </script>
 

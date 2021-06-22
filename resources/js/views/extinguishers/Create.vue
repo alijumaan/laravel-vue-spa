@@ -66,9 +66,7 @@ export default {
             })
         },
         loadBuildings() {
-            this.$store.dispatch('building/getAllBuildings', {
-                page: null
-            });
+            this.$store.dispatch('building/getAllBuildings');
         },
         submit_form() {
             axios.post('/api/v1/extinguishers', {

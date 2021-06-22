@@ -27,8 +27,8 @@ class BuildingResource extends JsonResource
             'updated_at' => $this->updated_at ? $this->updated_at->format('Y-m-d') : null,
             'user' => $this->user->name,
             'period_id' => $this->period_id,
-//            'count' => $this->count(),
-//            'user_id' => $this->user_id,
+            'user_id' => $this->user_id,
+            'count' => $this->count(),
         ];
     }
 }
