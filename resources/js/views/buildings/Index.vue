@@ -68,7 +68,6 @@
         </div>
 
         <div class="row mt-3" v-show="buildings.length">
-            <!--        <pagination v-model="page" :records="records" :per-page="per_page" @paginate="loadBuildings" />-->
             <Pagination
                 :page="page"
                 :viewingAmount="per_page"
@@ -81,7 +80,7 @@
 
 <script>
 import {useStore} from 'vuex'
-import {computed, watch, ref, onMounted} from "vue";
+import {computed, watch} from "vue";
 import Pagination from "../../components/Pagination";
 import useBuildings from "../../modules/buildings";
 
@@ -95,18 +94,23 @@ export default {
         }
         next();
     },
-
     setup() {
         const store = useStore();
-
-        const {records,
-            loadBuildings, buildings,
-            per_page, page, loading, search,
-            handlePageUpdate, now} = useBuildings();
+        const now = new Date().toISOString();
+        const {
+            records,
+            loadBuildings,
+            buildings,
+            per_page,
+            page,
+            loading,
+            search,
+            handlePageUpdate,
+        } = useBuildings();
 
         const isSupervisor = computed(() => store.state.currentUser.isSupervisor);
 
-        onMounted(() => { loadBuildings() })
+        loadBuildings()
 
         const stopWatch = watch(search, (val, old) => {
             if (val.length >= 2 || old.length >= 2) {
@@ -117,7 +121,17 @@ export default {
             }
         });
 
-        return {search, buildings, records, per_page, page, isSupervisor, loading, now, handlePageUpdate}
+        return {
+            search,
+            buildings,
+            records,
+            per_page,
+            page,
+            isSupervisor,
+            loading,
+            now,
+            handlePageUpdate
+        }
     },
 }
 </script>

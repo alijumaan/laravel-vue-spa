@@ -26,16 +26,15 @@ export default {
         const show = computed(() => store.state.show_content)
         const app_title = computed(() => store.state.app_title)
 
-        onMounted(() => {
+        if (show.value) {
             store.dispatch('currentUser/isAdmin')
             store.dispatch('currentUser/isSupervisor')
             store.dispatch('currentUser/user')
             store.dispatch('page/getPagesUrl')
             store.dispatch('extinguisher/getExtinguishers')
             store.dispatch('period/getPeriods')
-            store.dispatch('contact/getContacts')
             store.dispatch('link/getLinks')
-        })
+        }
 
         return {show, app_title}
     },

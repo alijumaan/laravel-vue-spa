@@ -5,7 +5,6 @@ import {router} from "./router/router"
 import App from './App.vue'
 import './plugins/sweetaler2'
 import CKEditor from './plugins/ckeditor'
-import pagination from 'v-pagination-3'
 import {i18n} from "./plugins/i18n"
 
 const app = createApp(App);
@@ -14,7 +13,6 @@ app.use(store);
 app.use(router);
 app.use( CKEditor );
 app.use(i18n);
-app.component('pagination', pagination);
 app.mount('#app');
 
 document.title = store.state.app_title

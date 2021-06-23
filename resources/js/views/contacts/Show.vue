@@ -35,21 +35,23 @@
 </template>
 
 <script>
+import {ref} from "vue";
+import {useRoute} from "vue-router";
+
 export default {
-    data() {
-        return {
-            contact: {}
-        }
-    },
-    created() {
-        this.showMessage();
-    },
-    methods: {
-        showMessage() {
-            axios.get(`/api/v1/contacts/${this.$route.params.id}`).then(response => {
-                this.contact = response.data.contact
+    setup() {
+        const route = useRoute()
+        const contact = ref([])
+
+        function showMessage() {
+            axios.get(`/api/v1/contacts/${route.params.id}`).then(response => {
+                contact.value = response.data.contact
             })
-        },
+        }
+
+        showMessage()
+
+        return { contact }
     }
 }
 </script>

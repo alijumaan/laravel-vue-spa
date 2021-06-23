@@ -4,15 +4,14 @@
             <div class="card">
                 <div class="card-header d-flex">
                     <h5>
-                        <span class="">{{ $t('titles.creation_new_building')}}</span>
+                        <span class="">{{ $t('titles.creation_new_building') }}</span>
                     </h5>
                     <router-link exact :to="{ name: 'buildings' }" class="ml-auto btn btn-danger btn-sm">
                         {{ $t('actions.cancel') }}
                     </router-link>
                 </div>
-
                 <div class="card-body">
-                    <form @submit.prevent="create_building">
+                    <form @submit.prevent="createBuilding">
                         <div class="form-group">
                             <label for="name">{{ $t('fields.building_name') }}</label>
                             <input v-model="name" type="text" id="name" class="form-control">
@@ -23,7 +22,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="number">{{ $t('fields.building_number') }}</label>
                             <input v-model="number" type="text" id="number" class="form-control">
@@ -34,9 +32,8 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <label for="userId">{{ $t('fields.inspector')}}</label>
+                            <label for="userId">{{ $t('fields.inspector') }}</label>
                             <select v-model="user_id" id="userId" class="form-control">
                                 <option value="">-- {{ $t('fields.choose') }} --</option>
                                 <option v-for="user in users" :value="user.id">{{ user.name }}</option>
@@ -48,9 +45,8 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group">
-                            <label for="periodId">{{ $t('fields.period')}}</label>
+                            <label for="periodId">{{ $t('fields.period') }}</label>
                             <select v-model="period_id" id="periodId" class="form-control">
                                 <option value="">-- {{ $t('fields.choose') }} --</option>
                                 <option v-for="period in periods" :value="period.id">{{ period.period }}</option>
@@ -62,7 +58,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="form-group">
                             <label for="notes">{{ $t('fields.note') }}</label>
                             <input v-model="notes" type="text" id="notes" class="form-control">
@@ -86,18 +81,20 @@
 </template>
 
 <script>
-import {onMounted, reactive, ref, toRefs} from "vue";
+import {reactive, ref, toRefs} from "vue";
 import {useRouter} from "vue-router";
 import {useI18n} from "vue-i18n/index";
+import useUsers from "../../modules/users";
+import usePeriods from "../../modules/period";
 
 export default {
     setup() {
         const router = useRouter()
         const i18n = useI18n()
+        const {users, loadUsers} = useUsers()
+        const {periods, loadPeriods} = usePeriods()
 
-        let users = ref([]);
-        let periods = ref({});
-        let fields = reactive({
+        const fields = reactive({
             name: "",
             number: "",
             user_id: "",
@@ -106,27 +103,14 @@ export default {
             period_id: "",
             checked_at: "",
         });
-        let errors = ref({});
-        let form_submitting = false;
 
-        onMounted(() => {
-            loadUsers();
-            loadPeriod();
-        });
+        const errors = ref({});
+        const form_submitting = ref(false);
 
-        function loadUsers() {
-            axios.get('/api/v1/users').then(response => {
-                users.value = response.data.users
-            })
-        }
+        loadPeriods();
+        loadUsers();
 
-        function loadPeriod() {
-            axios.get('/api/v1/periods').then(response => {
-                periods.value = response.data.periods;
-            })
-        }
-
-        function create_building() {
+        const createBuilding = () => {
             axios.post("/api/v1/buildings", fields).then(response => {
                 toast.fire({
                     icon: 'success',
@@ -136,7 +120,7 @@ export default {
             }).catch(error => {
                 errors.value = error.response.data.errors;
             })
-        }
+        };
 
         return {
             ...toRefs(fields),
@@ -144,10 +128,8 @@ export default {
             periods,
             errors,
             form_submitting,
-            loadUsers,
-            loadPeriod,
-            create_building
-
+            loadPeriods,
+            createBuilding
         }
     }
 }

@@ -4,7 +4,6 @@ export default function useBuildings() {
     const state = reactive({
         page: 1,
         search: "",
-        now: new Date().toISOString(),
         buildings: {},
         records: 0,
         per_page: 0,

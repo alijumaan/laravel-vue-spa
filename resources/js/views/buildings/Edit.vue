@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header bg-white d-flex">
-                    <h5> {{ $t('titles.edit_building')}}
+                    <h5> {{ $t('titles.edit_building') }}
                         (<span class="text-success" v-text="name"></span>)
                     </h5>
 
@@ -92,26 +92,29 @@
 </template>
 
 <script>
-import {onMounted, reactive, ref, toRefs} from "vue";
+import {reactive, ref, toRefs} from "vue";
 import {useI18n} from "vue-i18n/index";
-import { useRouter, useRoute } from 'vue-router'
+import {useRouter, useRoute} from 'vue-router'
+import usePeriods from "../../modules/period";
+import useUsers from "../../modules/users";
+
 export default {
     setup() {
-        const i18n = useI18n()
-        const router = useRouter()
-        const route = useRoute()
+        const i18n = useI18n();
+        const router = useRouter();
+        const route = useRoute();
+        const {periods, loadPeriods} = usePeriods();
+        const {users, loadUsers} = useUsers()
 
-        let users = ref([]);
-        let periods = ref([]);
-        let errors = ref([]);
-        let form_submitting =  false
-        let currentName = ref("")
-        let currentNumber = ref("")
-        let currentUserId = ref("")
-        let currentStatus = ref("")
-        let currentNotes = ref("")
-        let currentPeriodId = ref("")
-        let currentCheckedAt = ref("")
+        let form_submitting = ref(false)
+        const errors = ref([]);
+        const currentName = ref("")
+        const currentNumber = ref("")
+        const currentUserId = ref("")
+        const currentStatus = ref("")
+        const currentNotes = ref("")
+        const currentPeriodId = ref("")
+        const currentCheckedAt = ref("")
 
         let fields = reactive({
             name: "",
@@ -123,11 +126,9 @@ export default {
             checked_at: "",
         })
 
-        onMounted(() => {
-            loadBuilding();
-            loadUsers();
-            loadPeriod()
-        })
+        loadBuilding();
+        loadUsers();
+        loadPeriods()
 
         function loadBuilding() {
             axios.get(`/api/v1/buildings/${route.params.id}`).then(response => {
@@ -139,18 +140,6 @@ export default {
                 currentNotes.value = fields.notes
                 currentPeriodId.value = fields.period_id
                 currentCheckedAt.value = fields.checked_at
-            })
-        }
-
-        function loadUsers() {
-            axios.get('/api/v1/users').then(response => {
-                users.value = response.data.users;
-            })
-        }
-
-        function loadPeriod() {
-            axios.get('/api/v1/periods').then(response => {
-                periods.value = response.data.periods;
             })
         }
 
@@ -185,9 +174,6 @@ export default {
             periods,
             errors,
             form_submitting,
-            loadBuilding,
-            loadUsers,
-            loadPeriod,
             update_building,
             currentName,
             currentNumber,
@@ -200,7 +186,3 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-
-</style>

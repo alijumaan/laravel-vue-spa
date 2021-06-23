@@ -5,12 +5,11 @@
                 <div class="card-header d-flex py-3">
                     <h4 class="m-0">{{ $t('titles.contact_us') }}</h4>
                 </div>
-
                 <div class="card-body">
-                    <form @submit.prevent="sendMessage">
+                    <form @submit.prevent="save">
                         <div class="form-group">
                             <label for="name">{{ $t('fields.name') }}*</label>
-                            <input v-model="fields.name" type="text" class="form-control" id="name">
+                            <input v-model="name" type="text" class="form-control" id="name">
                             <div v-if="errors && errors.name">
                                 <div v-for="error in errors.name"
                                      class="text-danger" role="alert">
@@ -20,7 +19,7 @@
                         </div>
                         <div class="form-group">
                             <label for="email">{{ $t('fields.email') }}</label>
-                            <input v-model="fields.email" type="email" class="form-control" id="email" :placeholder="$t('placeholders.email_is_optional')">
+                            <input v-model="email" type="email" class="form-control" id="email" :placeholder="$t('placeholders.email_is_optional')">
                             <div v-if="errors && errors.email">
                                 <div v-for="error in errors.email"
                                      class="text-danger" role="alert">
@@ -30,7 +29,7 @@
                         </div>
                         <div class="form-group">
                             <label for="title">{{ $t('fields.address') }}*</label>
-                            <input v-model="fields.title" type="text" class="form-control" id="title">
+                            <input v-model="title" type="text" class="form-control" id="title">
                             <div v-if="errors && errors.title">
                                 <div v-for="error in errors.title"
                                      class="text-danger" role="alert">
@@ -40,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label for="body">{{ $t('fields.content') }}*</label>
-                            <textarea v-model="fields.body" class="form-control" id="body" rows="5"></textarea>
+                            <textarea v-model="body" class="form-control" id="body" rows="5"></textarea>
                             <div v-if="errors && errors.body">
                                 <div v-for="error in errors.body"
                                      class="text-danger" role="alert">
@@ -60,30 +59,40 @@
 </template>
 
 <script>
+import {reactive, ref, toRefs} from "vue";
+import {useRouter} from "vue-router";
+import {useI18n} from "vue-i18n/index";
+
 export default {
-    data() {
-        return {
-            fields: {
-                name: "",
-                title: "",
-                email: "",
-                body: "",
-            },
-            errors: {},
-        }
-    },
-    methods: {
-        sendMessage() {
-            axios.post("/api/v1/contacts", this.fields).then( () => {
+    setup() {
+        const router = useRouter()
+        const i18n = useI18n()
+        const fields = reactive({
+            name: "",
+            title: "",
+            email: "",
+            body: "",
+        })
+        const errors = ref([]);
+
+        const save = () => {
+            axios.post("/api/v1/contacts", fields).then( () => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم الإرسال بنجاح'
+                    title: i18n.t('messages.created_successfully')
                 })
-                this.$router.push('/');
+                router.push('/');
+
             }).catch(error => {
-                this.errors = error.response.data.errors;
+                errors.value = error.response.data.errors;
             })
-        },
+        }
+
+        return {
+            ...toRefs(fields),
+            errors,
+            save
+        }
     }
 }
 

@@ -56,29 +56,43 @@
 </template>
 
 <script>
+import {reactive, ref, toRefs} from "vue";
+import {useI18n} from "vue-i18n/index";
+
 export default {
-    data() {
-        return {
+    setup() {
+        const i18n = useI18n();
+        const fields = reactive({
             current_password: "",
             new_password: "",
             new_password_confirmation: "",
-            errors: []
-        }
-    },
-    methods: {
-        updatePassword() {
+        })
+        const errors = ref([])
+
+        function updatePassword() {
             axios.post('/api/v1/user/update/password', {
-                'current_password': this.current_password,
-                'new_password': this.new_password,
-                'new_password_confirmation': this.new_password_confirmation
+                'current_password': fields.current_password,
+                'new_password': fields.new_password,
+                'new_password_confirmation': fields.new_password_confirmation
             }).then(response => {
                 toast.fire({
                     icon: 'success',
-                    title: this.$i18n.t('messages.updated_successfully')
+                    title: i18n.t('messages.updated_successfully')
                 })
             }).catch(error => {
-                this.errors = error.response.data.errors;
+                if (error.response.status === 422) {
+                    errors.value = error.response.data.errors;
+                }else {
+                    console.log("Error!")
+                }
+
             })
+        }
+
+        return {
+            ...toRefs(fields),
+            errors,
+            updatePassword
         }
     }
 }

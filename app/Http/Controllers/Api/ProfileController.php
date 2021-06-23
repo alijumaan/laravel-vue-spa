@@ -30,7 +30,7 @@ class ProfileController extends ApiController
             ]);
         }
 
-        auth()->user()->password = bcrypt($request->new_password);
+        auth()->user()->password = $request->new_password;
 
         if (auth()->user()->save()) {
 

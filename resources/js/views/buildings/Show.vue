@@ -145,20 +145,17 @@ export default {
         const store = useStore();
 
         const now = new Date().toISOString();
-        let errors = ref([]);
-        let fields = reactive({
+        const errors = ref([]);
+        const fields = reactive({
             status: "",
             notes: "",
             period_id: ""
         })
-        let form_submitting = false;
 
         const isAdmin = computed(() => store.state.currentUser.isAdmin);
         const periods = computed(() => store.state.period.periods);
 
-        onMounted(() => {
-            getBuilding();
-        })
+        getBuilding();
 
         const building = ref({});
 
@@ -169,6 +166,8 @@ export default {
                 console.log('Error show the building')
             })
         }
+
+        let form_submitting = ref(false);
 
         function update_building() {
             form_submitting = true;
@@ -222,7 +221,6 @@ export default {
             isAdmin,
             building,
             periods,
-            getBuilding,
             update_building,
             delete_building
         }
