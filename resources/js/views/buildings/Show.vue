@@ -136,7 +136,6 @@ import {computed, reactive, ref, toRefs} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {useI18n} from "vue-i18n/index";
 import {useStore} from "vuex";
-import usePeriods from "../../modules/period";
 
 export default {
     setup() {
@@ -144,7 +143,6 @@ export default {
         const router = useRouter()
         const route = useRoute()
         const store = useStore();
-        const {periods, loadPeriods} = usePeriods()
 
         const now = new Date().toISOString();
         const errors = ref([]);
@@ -156,21 +154,19 @@ export default {
 
         const isAdmin = computed(() => store.state.currentUser.isAdmin);
 
-        getBuilding();
-        loadPeriods();
+        const building = computed(() => { return store.state.building.building});
+        if (store.state.loaded_building === true) {
+            store.dispatch('building/getBuilding', { param: route.params.id })
+            store.state.loaded_building = false
+        }
 
-        const building = ref({});
-
-        function getBuilding() {
-            axios.get(`/api/v1/buildings/${route.params.id}`).then(response => {
-                building.value = response.data.building
-            }).catch(error => {
-                console.log('Error show the building')
-            })
+        const periods = computed(() => { return store.state.period.periods});
+        if (store.state.loaded_periods === true) {
+            store.dispatch('period/getPeriods')
+            store.state.loaded_periods = false
         }
 
         let form_submitting = ref(false);
-
         function update_building() {
             form_submitting = true;
             axios.put(`/api/v1/buildings/${route.params.id}/quickUpdate`, {

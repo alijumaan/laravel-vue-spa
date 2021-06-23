@@ -2,12 +2,15 @@ import {createStore} from "vuex";
 import currentUser from "./modules/currentUser";
 import page from "./modules/page";
 import building from "./modules/building";
+import period from "./modules/period";
 
 export const store = createStore({
     state: {
         app_title: 'الإطفاء والسلامة',
         show_content: !!localStorage.getItem("authToken"),
-        loaded: true
+        loaded_buildings: true,
+        loaded_building: true,
+        loaded_periods: true,
     },
     getters: {},// computed properties
 
@@ -18,6 +21,7 @@ export const store = createStore({
     modules: {
         currentUser,
         page,
-        building
+        building,
+        period
     }
 });

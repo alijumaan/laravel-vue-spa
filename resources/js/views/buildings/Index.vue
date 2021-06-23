@@ -104,9 +104,9 @@ export default {
         const page = ref(store.state.building.page)
         const search = ref("")
 
-        if (store.state.loaded === true) {
+        if (store.state.loaded_buildings === true) {
             store.dispatch('building/getAllBuildings', { page: page.value })
-            store.state.loaded = false
+            store.state.loaded_buildings = false
         }
 
         const stopWatch = watch(search, (val, old) => {
