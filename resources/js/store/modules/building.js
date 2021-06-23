@@ -11,7 +11,6 @@ const state = {
 const getters = {}
 
 const mutations = {
-
     setAllBuildings(state, page = state.page) {
         axios.get(`/api/v1/buildings?page=${page}`, {
             params: {
@@ -33,7 +32,6 @@ const mutations = {
             state.loading = false;
         })
     },
-
     setBuilding(state, param) {
         axios.get(`/api/v1/buildings/${param}`).then(response => {
             state.building = response.data.building

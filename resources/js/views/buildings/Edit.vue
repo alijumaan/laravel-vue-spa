@@ -95,8 +95,6 @@
 import {reactive, ref, toRefs} from "vue";
 import {useI18n} from "vue-i18n/index";
 import {useRouter, useRoute} from 'vue-router'
-import usePeriods from "../../modules/period";
-import useUsers from "../../modules/users";
 
 export default {
     setup() {

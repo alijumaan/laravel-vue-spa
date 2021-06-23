@@ -64,15 +64,12 @@ export default {
         const isAdmin = computed(() => {
             return store.state.currentUser.isAdmin
         })
-        const contacts = ref([])
 
-        const loadContacts = () => {
-            axios.get("/api/v1/contacts").then(response => {
-                contacts.value = response.data.contacts
-            })
+        const contacts = computed(() => { return store.state.contact.contacts })
+        if (store.state.loaded_contacts === true) {
+            store.dispatch('contact/getContacts')
+            store.state.loaded_contacts = false
         }
-
-        loadContacts();
 
         const deleteMessage = (msg) => {
             swal.fire({

@@ -3,6 +3,8 @@ import currentUser from "./modules/currentUser";
 import page from "./modules/page";
 import building from "./modules/building";
 import period from "./modules/period";
+import contact from "./modules/contact";
+import extinguisher from "./modules/extinguisher";
 
 export const store = createStore({
     state: {
@@ -11,17 +13,23 @@ export const store = createStore({
         loaded_buildings: true,
         loaded_building: true,
         loaded_periods: true,
+        loaded_extinguishers: true,
+        loaded_pages: true,
+        loaded_page: true,
+        loaded_contacts: true,
     },
-    getters: {},// computed properties
+    getters: {},
 
-    actions: {}, // methods
+    actions: {},
 
-    mutations: {}, // for changing the state
+    mutations: {},
 
     modules: {
         currentUser,
         page,
         building,
-        period
+        period,
+        extinguisher,
+        contact
     }
 });

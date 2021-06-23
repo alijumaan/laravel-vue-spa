@@ -54,7 +54,7 @@
 <script>
 import {useRouter} from "vue-router";
 import {useI18n} from "vue-i18n/index";
-import {computed, reactive, ref, toRefs} from "vue";
+import {computed} from "vue";
 import {useStore} from "vuex";
 
 export default {
@@ -63,7 +63,6 @@ export default {
         const router = useRouter()
         const store = useStore()
         const isAdmin = computed(() => { return store.state.currentUser.isAdmin })
-        const pages = ref([])
 
         function loadPages() {
             axios.get("/api/v1/pages").then(response => {
@@ -71,7 +70,11 @@ export default {
             });
         }
 
-        loadPages()
+        const pages = computed(() => { return store.state.page.pages })
+        if (store.state.loaded_pages === true) {
+            store.dispatch('page/getPages')
+            store.state.loaded_pages = false
+        }
 
         function deletePage(pageId) {
             swal.fire({

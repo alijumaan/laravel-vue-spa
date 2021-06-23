@@ -13,9 +13,9 @@
                         <form @submit.prevent="submitForm">
                             <div class="form-group">
                                 <label for="type">{{ $t('fields.type') }}</label>
-                                <select  v-model="extinguisher_id" id="type" class="form-control">
-                                    <option value=""> --- </option>
-                                    <option v-for="(extinguisher, index) in extinguishersType" :value="extinguisher.id">
+                                <select v-model="extinguisher_id" id="type" class="form-control">
+                                    <option value=""> ---</option>
+                                    <option v-for="extinguisher in extinguishersType" :value="extinguisher.id">
                                         {{ extinguisher.type }}
                                     </option>
 
@@ -30,7 +30,7 @@
                             <div class="form-group">
                                 <label for="building_id">{{ $t('fields.belong_to') }}</label>
                                 <select v-model="building_id" id="building_id" class="form-control">
-                                    <option value=""> --- </option>
+                                    <option value=""> ---</option>
                                     <option v-for="building in buildings" :value="building.id">
                                         {{ building.name }}
                                     </option>
@@ -43,7 +43,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" name="submit" class="btn btn-dark">{{ $t('buttons.execute') }}</button>
+                                <button type="submit" name="submit" class="btn btn-dark">{{ $t('buttons.execute') }}
+                                </button>
                             </div>
                         </form>
                     </div>
@@ -54,38 +55,40 @@
 </template>
 
 <script>
-import {reactive, ref, toRefs} from "vue";
-import useBuildings from "../../modules/buildings";
+import {computed, reactive, ref, toRefs} from "vue";
 import {useRouter} from "vue-router";
 import {useI18n} from "vue-i18n/index";
+import {useStore} from "vuex";
 
 export default {
     setup() {
         const router = useRouter()
+        const store = useStore()
         const i18n = useI18n();
         const fields = reactive({
-            extinguishersType: [],
             extinguisher_id: '',
             building_id: '',
         })
         const errors = ref([])
 
-        const {buildings, loadBuildings} = useBuildings()
-
-        loadBuildings();
-        extinguisherType()
-
-        function extinguisherType() {
-            axios.get('/api/v1/extinguishers/type').then(response => {
-                fields.extinguishersType = response.data.extinguishersType
-            })
+        const buildings = computed(() => {
+            return store.state.building.buildings
+        })
+        if (store.state.loaded_buildings === true) {
+            store.dispatch('building/getAllBuildings', {page: 1})
+            store.state.loaded_buildings = false
         }
+
+        const extinguishersType = computed(() => {
+            return store.state.extinguisher.extinguishersType
+        })
+        store.dispatch('extinguisher/getExtinguisherType')
 
         function submitForm() {
             axios.post('/api/v1/extinguishers', {
                 building_id: fields.building_id,
                 extinguisher_id: fields.extinguisher_id
-            }).then( () => {
+            }).then(() => {
                 toast.fire({
                     icon: 'success',
                     title: i18n.t('messages.executed_successfully')
@@ -101,6 +104,7 @@ export default {
         return {
             ...toRefs(fields),
             buildings,
+            extinguishersType,
             errors,
             submitForm
         }

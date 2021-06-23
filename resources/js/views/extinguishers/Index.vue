@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import {computed, ref} from "vue";
+import {computed} from "vue";
 import {useStore} from "vuex";
 
 export default {
@@ -57,17 +57,14 @@ export default {
         const store = useStore()
 
         const isSupervisor = computed(() => {
-            return store.state["currentUser/isSupervisor"]
+            return store.state.currentUser.isSupervisor
         })
 
-        const extinguishers = ref([])
-        function loadExtinguishers() {
-            axios.get("/api/v1/extinguishers").then(response => {
-                extinguishers.value = response.data.extinguishers
-            });
+        const extinguishers = computed(() => { return store.state.extinguisher.extinguishers })
+        if (store.state.loaded_extinguishers === true) {
+            store.dispatch('extinguisher/getExtinguishers')
+            store.state.loaded_extinguishers = false
         }
-
-        loadExtinguishers()
 
         return {
             isSupervisor,

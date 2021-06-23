@@ -15,25 +15,22 @@
 </template>
 
 <script>
-import {ref} from "vue";
+import {computed, ref} from "vue";
 import {useRoute} from "vue-router";
+import {useStore} from "vuex";
 
 export default {
     setup() {
-        const page = ref([])
+        const store = useStore()
         const route = useRoute()
 
-        function loadPage() {
-            axios.get(`/api/v1/pages/${route.params.id}`).then(response => {
-                page.value = response.data.page
-            })
+        const page = computed(() => { return store.state.page.page })
+        if (store.state.loaded_page === true) {
+            store.dispatch('page/getPage', { pageId: route.params.id})
+            store.state.loaded_page = false
         }
-
-        loadPage();
 
         return {page}
     }
 }
 </script>
-
-<style scoped></style>

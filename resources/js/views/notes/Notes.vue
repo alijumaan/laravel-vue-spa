@@ -27,7 +27,6 @@
 
 <script>
 import Pagination from "../../components/Pagination";
-import useBuildings from "../../modules/buildings";
 import {ref} from "vue";
 
 export default {
