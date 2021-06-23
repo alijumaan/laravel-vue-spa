@@ -4,7 +4,7 @@ import Building from "../views/buildings/Index.vue";
 import BuildingShow from "../views/buildings/Show.vue";
 import BuildingEdit from "../views/buildings/Edit.vue";
 import Extinguisher from "../views/extinguishers/Index.vue";
-import ExtinguisherShow from "../views/extinguishers/Show.vue";
+import ExtinguisherShow from "../views/extinguishers/Detail.vue";
 import ExtinguisherCreate from "../views/extinguishers/Create.vue";
 import ExtinguisherEdit from "../views/extinguishers/Edit.vue";
 import Pages from "../views/Pages/Index.vue";

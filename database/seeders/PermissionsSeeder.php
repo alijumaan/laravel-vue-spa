@@ -43,7 +43,7 @@ class PermissionsSeeder extends Seeder
         DB::table('permissions')->insert(['name' => 'view-contact', 'description' => 'view contact', 'message' => 'You dont allow to view contact']);
         DB::table('permissions')->insert(['name' => 'delete-contact', 'description' => 'delete contact', 'message' => 'You dont allow to delete contact']);
 
-        DB::table('permissions')->insert(['name' => 'viw-link', 'description' => 'viw link', 'message' => 'You dont allow to viw link']);
+        DB::table('permissions')->insert(['name' => 'view-link', 'description' => 'view link', 'message' => 'You dont allow to viw link']);
         DB::table('permissions')->insert(['name' => 'add-link', 'description' => 'add link', 'message' => 'You dont allow to add link']);
         DB::table('permissions')->insert(['name' => 'edit-link', 'description' => 'edit link', 'message' => 'You dont allow to edit link']);
         DB::table('permissions')->insert(['name' => 'delete-link', 'description' => 'delete link', 'message' => 'You dont allow to delete link']);

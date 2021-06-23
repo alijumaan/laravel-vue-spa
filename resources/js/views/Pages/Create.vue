@@ -91,8 +91,6 @@ export default {
             }).catch(error => {
                 if (error.response.status === 422) {
                     state.errors = error.response.data.errors;
-                }else {
-                    console.log(error)
                 }
             })
         }

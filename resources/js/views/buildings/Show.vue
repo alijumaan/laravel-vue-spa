@@ -132,10 +132,11 @@
 </template>
 
 <script>
-import {computed, onMounted, reactive, ref, toRefs} from "vue";
+import {computed, reactive, ref, toRefs} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {useI18n} from "vue-i18n/index";
 import {useStore} from "vuex";
+import usePeriods from "../../modules/period";
 
 export default {
     setup() {
@@ -143,6 +144,7 @@ export default {
         const router = useRouter()
         const route = useRoute()
         const store = useStore();
+        const {periods, loadPeriods} = usePeriods()
 
         const now = new Date().toISOString();
         const errors = ref([]);
@@ -153,9 +155,9 @@ export default {
         })
 
         const isAdmin = computed(() => store.state.currentUser.isAdmin);
-        const periods = computed(() => store.state.period.periods);
 
         getBuilding();
+        loadPeriods();
 
         const building = ref({});
 
@@ -180,7 +182,7 @@ export default {
                     icon: 'success',
                     title: i18n.t('messages.updated_successfully')
                 })
-                // router.push(`/buildings`);
+                // router.push({name: 'buildings'})
                 location.replace('/buildings')
                 form_submitting = false;
             }).catch(error => {

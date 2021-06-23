@@ -12,10 +12,11 @@
                 </div>
 
                 <div class="card-body">
-                    <form @submit.prevent="create_link">
+                    <form @submit.prevent="createLink">
                         <div class="form-group">
                             <label for="name">{{ $t('fields.name') }}</label>
-                            <input v-model="fields.name" type="text" id="name" class="form-control" :placeholder="$t('placeholders.ex_homepage')">
+                            <input v-model="name" type="text" id="name" class="form-control"
+                                   :placeholder="$t('placeholders.ex_homepage')">
                             <div v-if="errors && errors.name">
                                 <div v-for="error in errors.name"
                                      class="text-danger" role="alert">
@@ -26,7 +27,8 @@
 
                         <div class="form-group">
                             <label for="number">Url</label>
-                            <input v-model="fields.to" type="text" id="number" class="form-control" :placeholder="$t('placeholders.ex_/home')">
+                            <input v-model="to" type="text" id="number" class="form-control"
+                                   :placeholder="$t('placeholders.ex_/home')">
                             <div v-if="errors && errors.to">
                                 <div v-for="error in errors.to"
                                      class="text-danger" role="alert">
@@ -37,7 +39,8 @@
 
                         <div class="form-group">
                             <label for="icon">{{ $t('fields.icon') }}</label>
-                            <input v-model="fields.icon" type="text" id="icon" class="form-control" :placeholder="$t('placeholders.ex_home')">
+                            <input v-model="icon" type="text" id="icon" class="form-control"
+                                   :placeholder="$t('placeholders.ex_home')">
                             <div v-if="errors && errors.icon">
                                 <div v-for="error in errors.icon"
                                      class="text-danger" role="alert">
@@ -48,8 +51,8 @@
 
                         <div class="form-group">
                             <label for="userId">{{ $t('fields.status') }}</label>
-                            <select v-model="fields.access" id="userId" class="form-control">
-                                <option value="">-- {{ $t('fields.choose')}} --</option>
+                            <select v-model="access" id="userId" class="form-control">
+                                <option value="">-- {{ $t('fields.choose') }} --</option>
                                 <option value="1">{{ $t('fields.show') }}</option>
                                 <option value="0">{{ $t('fields.hide') }}</option>
                             </select>
@@ -62,7 +65,8 @@
                         </div>
 
                         <div class="form-group">
-                            <button type="submit" name="submit" class="btn btn-primary">{{ $t('buttons.create') }}</button>
+                            <button type="submit" name="submit" class="btn btn-primary">{{ $t('buttons.create') }}
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -71,29 +75,40 @@
     </div>
 </template>
 <script>
+import {reactive, ref, toRefs} from "vue";
+import {useI18n} from "vue-i18n/index";
+import {useRouter} from "vue-router";
+
 export default {
-    data() {
-        return {
-            fields: {
-                "name": "",
-                "to": "",
-                "icon": "",
-                "access": ""
-            },
-            errors: {},
-        }
-    },
-    methods: {
-        create_link() {
-            axios.post("/api/v1/links", this.fields).then( () => {
+    setup() {
+        const i18n = useI18n()
+        const router = useRouter()
+        const fields = reactive({
+            name: "",
+            to: "",
+            icon: "",
+            access: ""
+        })
+        const errors = ref([])
+
+        function createLink() {
+            axios.post("/api/v1/links", fields).then(() => {
                 toast.fire({
                     icon: 'success',
-                    title: this.$i18n.t('messages.created_successfully')
+                    title: i18n.t('messages.created_successfully')
                 })
-                this.$router.push('/links');
+                router.push({name: 'links'});
             }).catch(error => {
-                this.errors = error.response.data.errors;
+                if (error.response.status === 422) {
+                    errors.value = error.response.data.errors;
+                }
             })
+        }
+
+        return {
+            ...toRefs(fields),
+            createLink,
+            errors
         }
     }
 }

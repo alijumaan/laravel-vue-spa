@@ -12,10 +12,10 @@
                 </div>
 
                 <div class="card-body">
-                    <form @submit.prevent="create_permission">
+                    <form @submit.prevent="createPermission">
                         <div class="form-group">
                             <label for="name">{{ $t('fields.permission')}}</label>
-                            <input v-model="fields.name" type="text" id="name" class="form-control" placeholder="مثال: add-building">
+                            <input v-model="name" type="text" id="name" class="form-control" placeholder="مثال: add-building">
                             <div v-if="errors && errors.name">
                                 <div v-for="error in errors.name"
                                      class="text-danger" role="alert">
@@ -26,7 +26,7 @@
 
                         <div class="form-group">
                             <label for="description">{{ $t('fields.description') }}</label>
-                            <input v-model="fields.description" type="text" id="description" class="form-control" placeholder="مثال: اضافة مبنى">
+                            <input v-model="description" type="text" id="description" class="form-control" placeholder="مثال: اضافة مبنى">
                             <div v-if="errors && errors.description">
                                 <div v-for="error in errors.description"
                                      class="text-danger" role="alert">
@@ -46,27 +46,38 @@
 </template>
 
 <script>
+import {reactive, ref, toRefs} from "vue";
+import {useRouter} from "vue-router";
+import {useI18n} from "vue-i18n/index";
+
 export default {
-    data() {
-        return {
-            fields: {
-                "name": "",
-                "description": ""
-            },
-            errors: {},
-        }
-    },
-    methods: {
-        create_permission() {
-            axios.post("/api/v1/permissions", this.fields).then( () => {
+    setup() {
+        const i18n = useI18n()
+        const router = useRouter()
+        const fields = reactive({
+            name: "",
+            description: ""
+        })
+        const errors = ref([])
+
+        function createPermission() {
+            axios.post("/api/v1/permissions", fields).then( () => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم الإنشاء بنجاح'
+                    title: i18n.t('messages.created_successfully')
                 })
-                this.$router.push('/permissions');
+                router.push('/permissions');
             }).catch(error => {
-                this.errors = error.response.data.errors;
+                if (error.response.status === 422) {
+                    errors.value = error.response.data.errors;
+                }
             })
+        }
+
+        return {
+            ...toRefs(fields),
+            errors,
+            createPermission
         }
     }
 }

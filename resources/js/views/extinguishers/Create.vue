@@ -10,7 +10,7 @@
                         </router-link>
                     </div>
                     <div class="card-body">
-                        <form @submit.prevent="submit_form">
+                        <form @submit.prevent="submitForm">
                             <div class="form-group">
                                 <label for="type">{{ $t('fields.type') }}</label>
                                 <select  v-model="extinguisher_id" id="type" class="form-control">
@@ -20,6 +20,12 @@
                                     </option>
 
                                 </select>
+                                <div v-if="errors && errors.extinguisher_id">
+                                    <div v-for="error in errors.extinguisher_id"
+                                         class="text-danger" role="alert">
+                                        <p>{{ error }}</p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="building_id">{{ $t('fields.belong_to') }}</label>
@@ -29,6 +35,12 @@
                                         {{ building.name }}
                                     </option>
                                 </select>
+                                <div v-if="errors && errors.building_id">
+                                    <div v-for="error in errors.building_id"
+                                         class="text-danger" role="alert">
+                                        <p>{{ error }}</p>
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <button type="submit" name="submit" class="btn btn-dark">{{ $t('buttons.execute') }}</button>
@@ -42,43 +54,55 @@
 </template>
 
 <script>
+import {reactive, ref, toRefs} from "vue";
+import useBuildings from "../../modules/buildings";
+import {useRouter} from "vue-router";
+import {useI18n} from "vue-i18n/index";
+
 export default {
-    data() {
-        return {
+    setup() {
+        const router = useRouter()
+        const i18n = useI18n();
+        const fields = reactive({
             extinguishersType: [],
             extinguisher_id: '',
             building_id: '',
-        }
-    },
-    computed: {
-        buildings() {
-            return this.$store.state.building.buildings;
-        }
-    },
-    created() {
-        this.extinguisherType();
-        this.loadBuildings();
-    },
-    methods: {
-        extinguisherType() {
+        })
+        const errors = ref([])
+
+        const {buildings, loadBuildings} = useBuildings()
+
+        loadBuildings();
+        extinguisherType()
+
+        function extinguisherType() {
             axios.get('/api/v1/extinguishers/type').then(response => {
-                this.extinguishersType = response.data.extinguishersType
+                fields.extinguishersType = response.data.extinguishersType
             })
-        },
-        loadBuildings() {
-            this.$store.dispatch('building/getAllBuildings');
-        },
-        submit_form() {
+        }
+
+        function submitForm() {
             axios.post('/api/v1/extinguishers', {
-                building_id: this.building_id,
-                extinguisher_id: this.extinguisher_id
+                building_id: fields.building_id,
+                extinguisher_id: fields.extinguisher_id
             }).then( () => {
                 toast.fire({
                     icon: 'success',
-                    title: this.$i18n.t('messages.executed_successfully')
+                    title: i18n.t('messages.executed_successfully')
                 })
-                this.$router.push('/extinguishers');
+                router.push('/extinguishers');
+            }).catch(error => {
+                if (error.response.status === 422) {
+                    errors.value = error.response.data.errors;
+                }
             })
+        }
+
+        return {
+            ...toRefs(fields),
+            buildings,
+            errors,
+            submitForm
         }
     }
 }

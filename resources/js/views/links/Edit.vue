@@ -10,7 +10,7 @@
                     </router-link>
                 </div>
                 <div class="card-body">
-                    <form @submit.prevent="update_link">
+                    <form @submit.prevent="updateLink">
                         <!-- name -->
                         <div class="form-group">
                             <label for="name">{{ $t('fields.name') }}</label>
@@ -70,35 +70,46 @@
     </div></template>
 
 <script>
+import {useRoute, useRouter} from "vue-router";
+import {useI18n} from "vue-i18n/index";
+import {reactive, toRefs} from "vue";
+
 export default {
-    data() {
-        return {
+    setup() {
+        const i18n = useI18n()
+        const router = useRouter()
+        const route = useRoute()
+        const state = reactive({
             fields: {
-                "name": "",
-                "to": "",
-                "icon": "",
-                "access": ""
+                name: "",
+                to: "",
+                icon: "",
+                access: ""
             },
-            errors: {},
-        }
-    },
-    created() {
-        this.getLink();
-    },
-    methods: {
-        getLink() {
-            axios.get('/api/v1/links/' + this.$route.params.id).then(response => {
-                this.fields = response.data.link;
+            errors: []
+        })
+
+        function loadLinks() {
+            axios.get('/api/v1/links/' + route.params.id).then(response => {
+                state.fields = response.data.link;
             })
-        },
-        update_link() {
-            axios.put(`/api/v1/links/${this.fields.id}`, this.fields).then( () => {
+        }
+
+        loadLinks()
+
+        function updateLink() {
+            axios.put(`/api/v1/links/${route.params.id}`, state.fields).then( () => {
                 toast.fire({
                     icon: 'success',
-                    title: this.$i18n.t('messages.updated_successfully')
+                    title: i18n.t('messages.updated_successfully')
                 })
-                this.$router.push('/links');
-            }).catch( error => this.errors = error.response.data.errors)
+                router.push('/links');
+            }).catch( error => state.errors = error.response.data.errors)
+        }
+
+        return {
+            ...toRefs(state),
+            updateLink,
         }
     }
 }

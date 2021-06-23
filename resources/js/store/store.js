@@ -2,10 +2,6 @@ import {createStore} from "vuex";
 import currentUser from "./modules/currentUser";
 import page from "./modules/page";
 import building from "./modules/building";
-import extinguisher from "./modules/extinguisher";
-import period from "./modules/period";
-import contact from "./modules/contact";
-import link from "./modules/link";
 
 export const store = createStore({
     state: {
@@ -21,10 +17,6 @@ export const store = createStore({
     modules: {
         currentUser,
         page,
-        building,
-        extinguisher,
-        period,
-        contact,
-        link
+        building
     }
 });

@@ -43,6 +43,9 @@
 </template>
 
 <script>
+import {computed, ref} from "vue";
+import {useStore} from "vuex";
+
 export default {
     beforeRouteEnter(to, from, next) {
         if (!localStorage.getItem("authToken")) {
@@ -50,13 +53,26 @@ export default {
         }
         next();
     },
-    computed: {
-        isSupervisor() {
-            return this.$store.state.currentUser.isSupervisor;
-        },
-        extinguishers() {
-            return this.$store.state.extinguisher.extinguishers;
-        },
+    setup() {
+        const store = useStore()
+
+        const isSupervisor = computed(() => {
+            return store.state["currentUser/isSupervisor"]
+        })
+
+        const extinguishers = ref([])
+        function loadExtinguishers() {
+            axios.get("/api/v1/extinguishers").then(response => {
+                extinguishers.value = response.data.extinguishers
+            });
+        }
+
+        loadExtinguishers()
+
+        return {
+            isSupervisor,
+            extinguishers
+        }
     }
 }
 </script>

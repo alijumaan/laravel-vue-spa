@@ -38,7 +38,7 @@
                         <td>
                             <button
                                 v-if="isAdmin"
-                                @click="delete_page(page.slug)"
+                                @click="deletePage(page.slug)"
                                 class="btn btn-link">
                                 <i class="fa fa-trash text-danger"></i>
                             </button>
@@ -52,44 +52,60 @@
 </template>
 
 <script>
+import {useRouter} from "vue-router";
+import {useI18n} from "vue-i18n/index";
+import {computed, reactive, ref, toRefs} from "vue";
+import {useStore} from "vuex";
 
 export default {
-    computed: {
-        isAdmin() {
-            return this.$store.state.currentUser.isAdmin;
-        },
-        pages() {
-            return this.$store.state.page.pages;
+    setup() {
+        const i18n = useI18n()
+        const router = useRouter()
+        const store = useStore()
+        const isAdmin = computed(() => { return store.state.currentUser.isAdmin })
+        const pages = ref([])
+
+        function loadPages() {
+            axios.get("/api/v1/pages").then(response => {
+                pages.value = response.data.pages
+            });
         }
-    },
-    methods: {
-        getNewPage(event) {
-            console.log(event)
-            console.log("page updated")
-        },
-        delete_page(pageId) {
+
+        loadPages()
+
+        function deletePage(pageId) {
             swal.fire({
-                title: this.$i18n.t('messages.are_you_sour?'),
-                text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
+                title: i18n.t('messages.are_you_sour?'),
+                text: i18n.t('messages.You_wont_be_able_to_undo_this'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: this.$i18n.t('messages.delete_confirmation')
-            }).then( (result) => {
+                confirmButtonText: i18n.t('messages.delete_confirmation')
+            }).then((result) => {
                 if (result.isConfirmed) {
-                    this.$store.dispatch('page/delete_page', {pageId: pageId})
-                    toast.fire({
-                        icon: 'success',
-                        title: this.$i18n.t('messages.deleted_successfully')
+                    axios.delete('/api/v1/pages/' + pageId).then(response => {
+                        toast.fire({
+                            icon: 'success',
+                            title: i18n.t('messages.deleted_successfully')
+                        })
+                        loadPages()
+                        router.push({name: 'pages'})
+                    }).catch(error => {
+                        console.log(error)
                     })
-                    location.reload();
                 }
             }).catch(error => {
                 console.log(error)
             })
-        },
-    },
+        }
+
+        return {
+            isAdmin,
+            pages,
+            deletePage
+        }
+    }
 }
 </script>
 

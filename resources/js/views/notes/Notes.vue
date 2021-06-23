@@ -27,6 +27,8 @@
 
 <script>
 import Pagination from "../../components/Pagination";
+import useBuildings from "../../modules/buildings";
+import {ref} from "vue";
 
 export default {
     beforeRouteEnter(to, from, next) {
@@ -35,34 +37,38 @@ export default {
         }
         next();
     },
-    data() {
-      return {
-          page: this.$store.state.building.page,
-      }
-    },
     components: {
         Pagination
     },
-    computed: {
-        buildings() {
-            return this.$store.state.building.buildings;
-        },
-        loading() {
-            return this.$store.state.building.loading;
-        },
-        per_page() {
-            return this.$store.state.building.per_page;
-        },
-        records() {
-            return this.$store.state.building.records;
-        },
-    },
-    methods: {
-        handlePageUpdate([page, per_page]) {
-            this.page = page;
-            this.per_page = per_page;
-            this.$store.dispatch('building/getAllBuildings');
-        },
+    setup() {
+        const {
+            page,
+            buildings,
+            loadBuildings,
+            loading,
+            per_page,
+            records,
+            handlePageUpdate
+        } = useBuildings()
+
+        const pages = ref([])
+        const loadPage = () => {
+            axios.get("/api/v1/pages").then(response => {
+                pages.value = response.data.pages
+            });
+        }
+
+        loadBuildings()
+        loadPage()
+
+        return {
+            page,
+            buildings,
+            loading,
+            per_page,
+            records,
+            handlePageUpdate
+        }
     }
 }
 </script>

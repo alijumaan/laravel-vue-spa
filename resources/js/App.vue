@@ -1,11 +1,11 @@
 <template>
     <div>
-        <Header />
+        <Header/>
         <div class="container mb-5">
-            <Links />
+            <Links/>
             <router-view></router-view>
         </div>
-        <Footer />
+        <Footer/>
     </div>
 </template>
 
@@ -13,11 +13,12 @@
 import Header from "./components/Header.vue";
 import Links from "./components/Links.vue";
 import Footer from "./components/Footer.vue";
-import {computed, onMounted} from "vue";
+import {computed} from "vue";
 import {useStore} from "vuex";
 
 export default {
-    components: {Footer,
+    components: {
+        Footer,
         Links,
         Header
     },
@@ -30,10 +31,6 @@ export default {
             store.dispatch('currentUser/isAdmin')
             store.dispatch('currentUser/isSupervisor')
             store.dispatch('currentUser/user')
-            store.dispatch('page/getPagesUrl')
-            store.dispatch('extinguisher/getExtinguishers')
-            store.dispatch('period/getPeriods')
-            store.dispatch('link/getLinks')
         }
 
         return {show, app_title}

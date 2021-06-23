@@ -30,7 +30,7 @@
                                 {{ building.name }}
                                 <button
                                     v-if="isAdmin"
-                                    @click="restore_extinguisher(extinguisher.id, building.id)"
+                                    @click="remove_extinguisher(extinguisher.id, building.id)"
                                     class="btn btn-link">
                                     <i class="fas fa-undo"></i>
                                 </button>
@@ -49,51 +49,60 @@
 </template>
 
 <script>
+import {computed, ref} from "vue";
+import {useStore} from "vuex";
+import {useI18n} from "vue-i18n/index";
+import {useRoute} from "vue-router";
+
 export default {
-    data() {
-        return {
-            extinguisher: '',
-            buildings: [],
-        }
-    },
-    computed: {
-        isAdmin() {
-            return this.$store.state.currentUser.isAdmin;
-        }
-    },
-    created() {
-        this.$store.dispatch('currentUser/isAdmin');
-        this.getBuilding();
-    },
-    methods: {
-        getBuilding() {
-            axios.get(`/api/v1/extinguishers/${this.$route.params.id}`).then(response => {
-                this.extinguisher = response.data.extinguisher
-                this.buildings = response.data.buildings
+    setup() {
+        const i18n = useI18n();
+        const route = useRoute()
+        const store = useStore()
+        const isAdmin = computed(() => {
+            return store.state.currentUser.isAdmin
+        })
+
+        const extinguisher = ref("")
+        const buildings = ref([])
+
+        function getBuildingHasExtinguisher() {
+            axios.get(`/api/v1/extinguishers/${route.params.id}`).then(response => {
+                extinguisher.value = response.data.extinguisher
+                buildings.value = response.data.buildings
             });
-        },
-        restore_extinguisher(extinguisher, building) {
+        }
+
+        function remove_extinguisher(extinguisher, building) {
             swal.fire({
-                title: this.$i18n.t('messages.are_you_sour?'),
-                text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
+                title: i18n.t('messages.are_you_sour?'),
+                text: i18n.t('messages.You_wont_be_able_to_undo_this'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: this.$i18n.t('messages.delete_confirmation')
+                confirmButtonText: i18n.t('messages.delete_confirmation')
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete(`/api/v1/extinguishers/${extinguisher}/${building}`).then(response => {
-                        console.log(response)
-                        this.getBuilding();
+                        getBuildingHasExtinguisher();
                     })
                     toast.fire({
                         icon: 'success',
-                        title: this.$i18n.t('messages.deleted_successfully')
+                        title: i18n.t('messages.deleted_successfully')
                     })
                 }
             })
-        },
+        }
+
+        getBuildingHasExtinguisher();
+
+        return {
+            isAdmin,
+            buildings,
+            extinguisher,
+            remove_extinguisher
+        }
     }
 }
 </script>

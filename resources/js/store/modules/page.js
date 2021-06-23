@@ -21,8 +21,7 @@ const mutations = {
         });
     },
     delete_page(state, pageId) {
-        axios.delete('/api/v1/pages/' + pageId).then(() => {
-        })
+        axios.delete('/api/v1/pages/' + pageId).then(() => {})
     }
 }
 

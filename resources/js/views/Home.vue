@@ -69,21 +69,15 @@
 </template>
 
 <script>
+import {computed} from "vue";
+import {useStore} from "vuex";
 
 export default {
-    data() {
-        return {
-            show: this.$store.state.show_content,
-        }
-    },
-    computed: {
-        isAdmin() {
-            return this.$store.state.currentUser.isAdmin;
-        }
-    },
+    setup() {
+        const store = useStore()
+        const isAdmin = computed(() => { return store.state.currentUser.isAdmin })
+
+        return { isAdmin }
+    }
 }
 </script>
-
-<style scoped>
-
-</style>

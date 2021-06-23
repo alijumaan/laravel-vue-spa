@@ -4,7 +4,7 @@
             <div class="card">
                 <div class="card-header bg-white d-flex">
                     <h5> {{ $t('titles.edit_building') }}
-                        (<span class="text-success" v-text="name"></span>)
+                        (<span class="text-success" v-text="fields.name"></span>)
                     </h5>
 
                     <router-link exact :to="{name: 'buildings.show'}" class="ml-auto btn btn-primary btn-sm">
@@ -16,7 +16,7 @@
                         <!-- name -->
                         <div class="form-group">
                             <label for="name">{{ $t('fields.building_name') }}</label>
-                            <input v-model="currentName" type="text" id="name" class="form-control">
+                            <input v-model="fields.name" type="text" id="name" class="form-control">
                             <div v-if="errors && errors.name">
                                 <div v-for="error in errors.name"
                                      class="text-danger" role="alert">
@@ -27,7 +27,7 @@
                         <!-- number -->
                         <div class="form-group">
                             <label for="number">{{ $t('fields.building_number') }}</label>
-                            <input v-model="currentNumber" id="number" class="form-control">
+                            <input v-model="fields.number" id="number" class="form-control">
                             <div v-if="errors && errors.number">
                                 <div v-for="error in errors.number"
                                      class="text-danger" role="alert">
@@ -38,7 +38,7 @@
                         <!-- user_id -->
                         <div class="form-group">
                             <label for="user_id">{{ $t('fields.inspector') }}</label>
-                            <select v-model="currentUserId" id="user_id" class="form-control">
+                            <select v-model="fields.user_id" id="user_id" class="form-control">
                                 <option value="">-- {{ $t('fields.choose') }} --</option>
                                 <option v-for="user in users" :value="user.id">{{ user.name }}</option>
                             </select>
@@ -52,7 +52,7 @@
                         <!-- period_id -->
                         <div class="form-group">
                             <label for="period_id">{{ $t('fields.period') }}</label>
-                            <select v-model="currentPeriodId" id="period_id" class="form-control">
+                            <select v-model="fields.period_id" id="period_id" class="form-control">
                                 <option value="">-- {{ $t('fields.choose') }} --</option>
                                 <option v-for="period in periods" :value="period.id">{{ period.period }}</option>
                             </select>
@@ -60,7 +60,7 @@
                         <!-- status -->
                         <div class="form-group">
                             <label for="status">{{ $t('fields.status') }}</label>
-                            <select v-model="currentStatus" id="status" class="form-control">
+                            <select v-model="fields.status" id="status" class="form-control">
                                 <option value="0">{{ $t('fields.expired') }}</option>
                                 <option value="1">{{ $t('fields.valid') }}</option>
                             </select>
@@ -68,7 +68,7 @@
                         <!-- notes -->
                         <div class="form-group">
                             <label for="notes">{{ $t('fields.note') }}</label>
-                            <input v-model="currentNotes" type="text" id="notes" class="form-control">
+                            <input v-model="fields.notes" type="text" id="notes" class="form-control">
                             <div v-if="errors && errors.notes">
                                 <div v-for="error in errors.notes"
                                      class="text-danger" role="alert">
@@ -116,14 +116,17 @@ export default {
         const currentPeriodId = ref("")
         const currentCheckedAt = ref("")
 
-        let fields = reactive({
-            name: "",
-            number: "",
-            user_id: "",
-            status: "",
-            notes: "",
-            period_id: "",
-            checked_at: "",
+
+        let state = reactive({
+            fields: {
+                name: "",
+                number: "",
+                user_id: "",
+                status: "",
+                notes: "",
+                period_id: "",
+                checked_at: "",
+            }
         })
 
         loadBuilding();
@@ -132,28 +135,13 @@ export default {
 
         function loadBuilding() {
             axios.get(`/api/v1/buildings/${route.params.id}`).then(response => {
-                fields = response.data.building;
-                currentName.value = fields.name
-                currentNumber.value = fields.number
-                currentUserId.value = fields.user_id
-                currentStatus.value = fields.status
-                currentNotes.value = fields.notes
-                currentPeriodId.value = fields.period_id
-                currentCheckedAt.value = fields.checked_at
+                state.fields = response.data.building;
             })
         }
 
         function update_building() {
             form_submitting = true;
-            axios.put(`/api/v1/buildings/${route.params.id}`, {
-                name: currentName.value,
-                number: currentNumber.value,
-                user_id: currentUserId.value,
-                status: currentStatus.value,
-                notes: currentNotes.value,
-                period_id: currentPeriodId.value,
-                checked_at: currentCheckedAt.value,
-            }).then(response => {
+            axios.put(`/api/v1/buildings/${route.params.id}`, state.fields).then(response => {
                 toast.fire({
                     icon: 'success',
                     title: i18n.t('messages.updated_successfully')
@@ -169,7 +157,7 @@ export default {
         }
 
         return {
-            ...toRefs(fields),
+            ...toRefs(state),
             users,
             periods,
             errors,

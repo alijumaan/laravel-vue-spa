@@ -26,16 +26,18 @@
                         <tr v-for="link in links">
                             <td>{{ link.name }}</td>
                             <td>{{ link.to }}</td>
-                            <td>{{ link.icon}}</td>
+                            <td>{{ link.icon }}</td>
                             <td>{{ link.access }}</td>
                             <td>
                                 <div class="btn-group btn-group-toggle">
-                                    <router-link :to="{ name: 'links.edit', params: { id: link.id } }" :title="$t('actions.edit')"
+                                    <router-link :to="{ name: 'links.edit', params: { id: link.id } }"
+                                                 :title="$t('actions.edit')"
                                                  class="btn-primary btn btn-sm">
                                         <i class="fa fa-edit"></i>
                                     </router-link>
-                                    <a href="javascript:void(0);" @click="delete_link(link.id)"
-                                       :title="$t('actions.delete')" class="btn-danger btn btn-sm"><i class="fa fa-trash"></i>
+                                    <a href="javascript:void(0);" @click="deleteLink(link.id)"
+                                       :title="$t('actions.delete')" class="btn-danger btn btn-sm"><i
+                                        class="fa fa-trash"></i>
                                     </a>
                                 </div>
                             </td>
@@ -54,38 +56,59 @@
 </template>
 
 <script>
+import {useRouter} from "vue-router";
+import {useI18n} from "vue-i18n/index";
+import {computed, ref} from "vue";
+import {useStore} from "vuex";
+
 export default {
-    computed: {
-        isAdmin() {
-            return this.$store.state.currentUser.isAdmin;
-        },
-        links() {
-            return this.$store.state.link.links;
+    setup() {
+        const i18n = useI18n()
+        const router = useRouter()
+        const store = useStore()
+
+        const isAdmin = computed(() => {
+            return store.state.currentUser.isAdmin
+        })
+        const links = ref([])
+
+        function loadLinks() {
+            axios.get("/api/v1/links").then(response => {
+                links.value = response.data.links
+            });
         }
-    },
-    methods: {
-        delete_link(link_id) {
+
+        loadLinks()
+
+        function deleteLink(link_id) {
             swal.fire({
-                title: this.$i18n.t('messages.are_you_sour?'),
-                text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
+                title: i18n.t('messages.are_you_sour?'),
+                text: i18n.t('messages.You_wont_be_able_to_undo_this'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: this.$i18n.t('messages.delete_confirmation')
+                confirmButtonText: i18n.t('messages.delete_confirmation')
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete('/api/v1/links/' + link_id).then(() => {
-                        this.$router.push('/links');
-                        this.loadLinks();
+                        router.push('/links');
+                        loadLinks();
                     })
                     toast.fire({
                         icon: 'success',
-                        title: this.$i18n.t('messages.deleted_successfully')
+                        title: i18n.t('messages.deleted_successfully')
                     })
                 }
             })
-        },
+        }
+
+        return {
+            isAdmin,
+            links,
+            deleteLink
+        }
+
     }
 }
 </script>

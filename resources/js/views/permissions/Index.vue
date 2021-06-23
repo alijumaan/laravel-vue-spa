@@ -62,7 +62,6 @@ export default {
                 this.roles = response.data.roles
             });
         },
-
         saveRolePermission() {
             axios.post('/api/v1/permission-role', {
                 role_id: this.role_id,
@@ -74,7 +73,6 @@ export default {
                 })
             });
         },
-
         checkPermissionByRoleId(roleId) {
             axios.post('/api/v1/permission-role/' + roleId).then(response => {
                 $('input[type=checkbox]').each(function () {
@@ -82,12 +80,10 @@ export default {
                     this.checked = response.data.permissions.includes(ThisVal);
                 });
             });
-
         },
     }
 }
 </script>
 
 <style scoped>
-
 </style>

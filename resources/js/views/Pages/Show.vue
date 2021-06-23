@@ -15,21 +15,23 @@
 </template>
 
 <script>
+import {ref} from "vue";
+import {useRoute} from "vue-router";
+
 export default {
-    data() {
-        return {
-            page: {}
-        }
-    },
-    created() {
-        this.loadPage()
-    },
-    methods: {
-        loadPage() {
-            axios.get(`/api/v1/pages/${this.$route.params.id}`).then(response => {
-                this.page = response.data.page
+    setup() {
+        const page = ref([])
+        const route = useRoute()
+
+        function loadPage() {
+            axios.get(`/api/v1/pages/${route.params.id}`).then(response => {
+                page.value = response.data.page
             })
         }
+
+        loadPage();
+
+        return {page}
     }
 }
 </script>

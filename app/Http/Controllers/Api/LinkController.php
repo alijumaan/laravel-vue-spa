@@ -21,7 +21,7 @@ class LinkController extends ApiController
 
     public function show(Link $link)
     {
-        $this->authorize('show-link');
+        $this->authorize('view-link');
 
         return $this->respond([
             'link' => $link
