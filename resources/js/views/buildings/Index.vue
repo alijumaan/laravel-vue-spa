@@ -80,9 +80,8 @@
 
 <script>
 import {useStore} from 'vuex'
-import {computed, watch} from "vue";
+import {computed, ref, watch} from "vue";
 import Pagination from "../../components/Pagination";
-import useBuildings from "../../modules/buildings";
 
 export default {
     components: {
@@ -97,29 +96,33 @@ export default {
     setup() {
         const store = useStore();
         const now = new Date().toISOString();
-        const {
-            records,
-            loadBuildings,
-            buildings,
-            per_page,
-            page,
-            loading,
-            search,
-            handlePageUpdate,
-        } = useBuildings();
-
         const isSupervisor = computed(() => store.state.currentUser.isSupervisor);
+        const buildings = computed(() => store.state.building.buildings);
+        const loading = computed(() => store.state.building.loading);
+        const records = computed(() => store.state.building.records);
+        const per_page = computed(() => store.state.building.per_page);
+        const page = ref(store.state.building.page)
+        const search = ref("")
 
-        loadBuildings()
+        if (store.state.loaded === true) {
+            store.dispatch('building/getAllBuildings', { page: page.value })
+            store.state.loaded = false
+        }
 
         const stopWatch = watch(search, (val, old) => {
             if (val.length >= 2 || old.length >= 2) {
-                loadBuildings();
+                store.dispatch('building/getAllBuildings', { page: page.value })
             }
             if (val.length === 50) {
                 stopWatch();
             }
         });
+
+        function handlePageUpdate([p, per_p]) {
+            page.value = p
+            per_page.value = per_p
+            store.dispatch('building/getAllBuildings', { page: page.value })
+        }
 
         return {
             search,
@@ -141,3 +144,6 @@ a {
     text-decoration: none;
 }
 </style>
+
+
+

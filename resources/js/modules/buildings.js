@@ -1,6 +1,8 @@
 import {reactive, toRefs} from "vue";
+import {useStore} from "vuex";
 
 export default function useBuildings() {
+    const store = useStore()
     const state = reactive({
         page: 1,
         search: "",

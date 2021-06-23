@@ -7,6 +7,7 @@ export const store = createStore({
     state: {
         app_title: 'الإطفاء والسلامة',
         show_content: !!localStorage.getItem("authToken"),
+        loaded: true
     },
     getters: {},// computed properties
 
