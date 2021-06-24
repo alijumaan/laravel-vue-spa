@@ -5,18 +5,18 @@ import building from "./modules/building";
 import period from "./modules/period";
 import contact from "./modules/contact";
 import extinguisher from "./modules/extinguisher";
+import user from "./modules/user";
 
 export const store = createStore({
     state: {
         app_title: 'الإطفاء والسلامة',
         show_content: !!localStorage.getItem("authToken"),
         loaded_buildings: true,
-        loaded_building: true,
         loaded_periods: true,
         loaded_extinguishers: true,
         loaded_pages: true,
-        loaded_page: true,
         loaded_contacts: true,
+        loaded_users: true,
     },
     getters: {},
 
@@ -30,6 +30,7 @@ export const store = createStore({
         building,
         period,
         extinguisher,
-        contact
+        contact,
+        user
     }
 });

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {computed, ref} from "vue";
+import {computed} from "vue";
 import {useRoute} from "vue-router";
 import {useStore} from "vuex";
 
@@ -25,10 +25,7 @@ export default {
         const route = useRoute()
 
         const page = computed(() => { return store.state.page.page })
-        if (store.state.loaded_page === true) {
-            store.dispatch('page/getPage', { pageId: route.params.id})
-            store.state.loaded_page = false
-        }
+        store.dispatch('page/getPage', { pageId: route.params.id})
 
         return {page}
     }

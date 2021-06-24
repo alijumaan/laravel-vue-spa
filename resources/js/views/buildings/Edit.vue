@@ -92,17 +92,17 @@
 </template>
 
 <script>
-import {reactive, ref, toRefs} from "vue";
+import {computed, reactive, ref, toRefs} from "vue";
 import {useI18n} from "vue-i18n/index";
 import {useRouter, useRoute} from 'vue-router'
+import {useStore} from "vuex";
 
 export default {
     setup() {
         const i18n = useI18n();
         const router = useRouter();
         const route = useRoute();
-        const {periods, loadPeriods} = usePeriods();
-        const {users, loadUsers} = useUsers()
+        const store = useStore()
 
         let form_submitting = ref(false)
         const errors = ref([]);
@@ -127,9 +127,18 @@ export default {
             }
         })
 
+        const users = computed(() => { return store.state.user.users})
+        if (store.state.loaded_users === true) {
+            store.dispatch('user/getUsers')
+            store.state.loaded_users = false
+        }
+
         loadBuilding();
-        loadUsers();
-        loadPeriods()
+        const periods = computed(() => { return store.state.period.periods})
+        if (store.state.loaded_periods === true) {
+            store.dispatch('period/getPeriods')
+            store.state.loaded_periods = false
+        }
 
         function loadBuilding() {
             axios.get(`/api/v1/buildings/${route.params.id}`).then(response => {

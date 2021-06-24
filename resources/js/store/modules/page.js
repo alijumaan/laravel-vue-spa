@@ -6,7 +6,7 @@ const state = {
 const getters = {}
 
 const mutations = {
-    setPages(state) {
+    setAllPages(state) {
         axios.get("/api/v1/pages").then(response => {
             state.pages = response.data.pages
         });
@@ -25,8 +25,8 @@ const mutations = {
 }
 
 const actions = {
-    getPages(context) {
-        context.commit('setPages')
+    getAllPages(context) {
+        context.commit('setAllPages')
     },
     getPage(context, data) {
         context.commit('setPage', data.pageId)

@@ -81,16 +81,16 @@
 </template>
 
 <script>
-import {reactive, ref, toRefs} from "vue";
+import {computed, reactive, ref, toRefs} from "vue";
 import {useRouter} from "vue-router";
 import {useI18n} from "vue-i18n/index";
+import {useStore} from "vuex";
 
 export default {
     setup() {
         const router = useRouter()
+        const store = useStore()
         const i18n = useI18n()
-        const {users, loadUsers} = useUsers()
-        const {periods, loadPeriods} = usePeriods()
 
         const fields = reactive({
             name: "",
@@ -105,8 +105,11 @@ export default {
         const errors = ref({});
         const form_submitting = ref(false);
 
-        loadPeriods();
-        loadUsers();
+        const periods = computed(() => { return store.state.period.periods})
+        store.dispatch('period/getPeriods')
+
+        const users = computed(() => { return store.state.user.users})
+        store.dispatch('user/getUsers')
 
         const createBuilding = () => {
             axios.post("/api/v1/buildings", fields).then(response => {
@@ -126,7 +129,6 @@ export default {
             periods,
             errors,
             form_submitting,
-            loadPeriods,
             createBuilding
         }
     }

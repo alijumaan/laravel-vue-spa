@@ -154,19 +154,21 @@ export default {
 
         const isAdmin = computed(() => store.state.currentUser.isAdmin);
 
-        const building = computed(() => { return store.state.building.building});
-        if (store.state.loaded_building === true) {
-            store.dispatch('building/getBuilding', { param: route.params.id })
-            store.state.loaded_building = false
-        }
+        const building = computed(() => {
+            return store.state.building.building
+        });
+        store.dispatch('building/getBuilding', {param: route.params.id})
 
-        const periods = computed(() => { return store.state.period.periods});
+        const periods = computed(() => {
+            return store.state.period.periods
+        });
         if (store.state.loaded_periods === true) {
             store.dispatch('period/getPeriods')
             store.state.loaded_periods = false
         }
 
         let form_submitting = ref(false);
+
         function update_building() {
             form_submitting = true;
             axios.put(`/api/v1/buildings/${route.params.id}/quickUpdate`, {

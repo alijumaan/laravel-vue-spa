@@ -20,7 +20,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="page in pages" @getPages="getNewPage">
+                    <tr v-for="page in pages">
                         <td>{{ page.title }}</td>
                         <td>
                             <router-link :to="{ name: 'pages.show', params: { id: page.slug } }">
@@ -64,15 +64,9 @@ export default {
         const store = useStore()
         const isAdmin = computed(() => { return store.state.currentUser.isAdmin })
 
-        function loadPages() {
-            axios.get("/api/v1/pages").then(response => {
-                pages.value = response.data.pages
-            });
-        }
-
         const pages = computed(() => { return store.state.page.pages })
         if (store.state.loaded_pages === true) {
-            store.dispatch('page/getPages')
+            store.dispatch('page/getAllPages')
             store.state.loaded_pages = false
         }
 
@@ -92,7 +86,7 @@ export default {
                             icon: 'success',
                             title: i18n.t('messages.deleted_successfully')
                         })
-                        loadPages()
+                        store.dispatch('page/getAllPages')
                         router.push({name: 'pages'})
                     }).catch(error => {
                         console.log(error)
