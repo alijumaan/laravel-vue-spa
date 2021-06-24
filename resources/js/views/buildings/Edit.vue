@@ -153,7 +153,8 @@ export default {
                     icon: 'success',
                     title: i18n.t('messages.updated_successfully')
                 })
-                router.push('/buildings');
+                store.state.loaded_buildings = true
+                router.push({name: 'buildings'});
                 form_submitting = false;
             }).catch(error => {
                 if (error.response.status === 422) {

@@ -37,15 +37,18 @@
 <script>
 import {ref} from "vue";
 import {useRoute} from "vue-router";
+import {useStore} from "vuex";
 
 export default {
     setup() {
         const route = useRoute()
+        const store = useStore()
         const contact = ref([])
 
         function showMessage() {
             axios.get(`/api/v1/contacts/${route.params.id}`).then(response => {
                 contact.value = response.data.contact
+                store.dispatch('contact/getContacts')
             })
         }
 

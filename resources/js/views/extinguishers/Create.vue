@@ -98,7 +98,8 @@ export default {
                     icon: 'success',
                     title: i18n.t('messages.executed_successfully')
                 })
-                router.push('/extinguishers');
+                store.dispatch('extinguisher/getExtinguishers')
+                router.push({name: 'extinguishers'});
             }).catch(error => {
                 if (error.response.status === 422) {
                     errors.value = error.response.data.errors;

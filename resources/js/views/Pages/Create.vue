@@ -60,12 +60,13 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import {reactive, toRefs} from "vue";
 import {useI18n} from "vue-i18n/index";
 import {useRouter} from "vue-router";
+import {useStore} from "vuex";
 
 export default {
-    setup(props, context) {
+    setup() {
         const i18n = useI18n()
         const router = useRouter()
-
+        const store = useStore()
         const state = reactive({
             fields: {
                 title: '',
@@ -86,7 +87,7 @@ export default {
                     icon: 'success',
                     title: i18n.t('messages.created_successfully')
                 })
-                context.emit("getPages");
+                store.dispatch('page/getAllPages')
                 router.push({name: 'pages'});
             }).catch(error => {
                 if (error.response.status === 422) {

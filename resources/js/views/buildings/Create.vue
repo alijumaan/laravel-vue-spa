@@ -117,6 +117,7 @@ export default {
                     icon: 'success',
                     title: i18n.t('messages.created_successfully')
                 })
+                store.state.loaded_buildings = true
                 router.push({name: 'buildings'});
             }).catch(error => {
                 errors.value = error.response.data.errors;

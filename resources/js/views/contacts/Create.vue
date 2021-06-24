@@ -62,11 +62,13 @@
 import {reactive, ref, toRefs} from "vue";
 import {useRouter} from "vue-router";
 import {useI18n} from "vue-i18n/index";
+import {useStore} from "vuex";
 
 export default {
     setup() {
         const router = useRouter()
         const i18n = useI18n()
+        const store = useStore()
         const fields = reactive({
             name: "",
             title: "",
@@ -81,8 +83,8 @@ export default {
                     icon: 'success',
                     title: i18n.t('messages.created_successfully')
                 })
+                store.dispatch('contact/getContacts')
                 router.push('/');
-
             }).catch(error => {
                 errors.value = error.response.data.errors;
             })

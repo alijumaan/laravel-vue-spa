@@ -70,15 +70,13 @@ export default {
         const isAdmin = computed(() => {
             return store.state.currentUser.isAdmin
         })
-        const links = ref([])
 
-        function loadLinks() {
-            axios.get("/api/v1/links").then(response => {
-                links.value = response.data.links
-            });
+        const links = computed(() => { return store.state.link.links })
+
+        if (store.state.loaded_links === true) {
+            store.dispatch('link/getLinks')
+            store.state.loaded_links = false
         }
-
-        loadLinks()
 
         function deleteLink(link_id) {
             swal.fire({
@@ -93,7 +91,7 @@ export default {
                 if (result.isConfirmed) {
                     axios.delete('/api/v1/links/' + link_id).then(() => {
                         router.push('/links');
-                        loadLinks();
+                        store.dispatch('link/getLinks')
                     })
                     toast.fire({
                         icon: 'success',

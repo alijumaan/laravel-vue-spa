@@ -203,7 +203,8 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete('/api/v1/buildings/' + building).then(response => {
-                        router.push('/buildings');
+                        store.state.loaded_buildings = true
+                        router.push({name: 'buildings'});
                     })
                     toast.fire({
                         icon: 'success',

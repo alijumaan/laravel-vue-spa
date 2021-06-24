@@ -6,6 +6,7 @@ import period from "./modules/period";
 import contact from "./modules/contact";
 import extinguisher from "./modules/extinguisher";
 import user from "./modules/user";
+import link from "./modules/link";
 
 export const store = createStore({
     state: {
@@ -17,6 +18,7 @@ export const store = createStore({
         loaded_pages: true,
         loaded_contacts: true,
         loaded_users: true,
+        loaded_links: true,
     },
     getters: {},
 
@@ -31,6 +33,7 @@ export const store = createStore({
         period,
         extinguisher,
         contact,
-        user
+        user,
+        link
     }
 });

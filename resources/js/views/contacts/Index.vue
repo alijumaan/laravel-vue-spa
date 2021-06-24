@@ -52,13 +52,15 @@
 </template>
 
 <script>
-import {computed, ref} from "vue";
+import {computed} from "vue";
 import {useStore} from "vuex";
+import {useRouter} from "vue-router";
 import {useI18n} from "vue-i18n/index";
 
 export default {
     setup() {
         const store = useStore()
+        const router = useRouter()
         const i18n = useI18n()
 
         const isAdmin = computed(() => {
@@ -83,8 +85,8 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete('/api/v1/contacts/' + msg).then(() => {
-                        // router.push('/contacts');
-                        location.replace('/contacts')
+                        store.dispatch('contact/getContacts')
+                        router.push({name: 'contacts'});
                     })
                     toast.fire({
                         icon: 'success',
