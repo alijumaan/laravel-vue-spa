@@ -75,14 +75,19 @@ export default {
             return store.state.building.buildings
         })
         if (store.state.loaded_buildings === true) {
-            store.dispatch('building/getAllBuildings', {page: 1})
+            store.dispatch('building/getAllBuildings', { page: 1 })
             store.state.loaded_buildings = false
         }
 
-        const extinguishersType = computed(() => {
-            return store.state.extinguisher.extinguishersType
-        })
-        store.dispatch('extinguisher/getExtinguisherType')
+
+        const extinguishersType = ref([])
+        function getExtinguisherType() {
+            axios.get('/api/v1/extinguishers/type').then(response => {
+                extinguishersType.value = response.data.extinguishersType
+            })
+        }
+
+        getExtinguisherType()
 
         function submitForm() {
             axios.post('/api/v1/extinguishers', {

@@ -60,7 +60,10 @@ export default {
             return store.state.currentUser.isSupervisor
         })
 
-        const extinguishers = computed(() => { return store.state.extinguisher.extinguishers })
+        const extinguishers = computed(() => {
+            return store.state.extinguisher.extinguishers
+        })
+
         if (store.state.loaded_extinguishers === true) {
             store.dispatch('extinguisher/getExtinguishers')
             store.state.loaded_extinguishers = false
