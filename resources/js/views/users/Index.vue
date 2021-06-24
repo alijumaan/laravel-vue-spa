@@ -9,7 +9,9 @@
             <div class="card shadow">
                 <div class="p-3 d-flex">
                     <h4 class="text-success">{{ $t('titles.active_users') }}</h4>
-                    <h4 class="ml-auto">{{ $t('generals.total_count')}} <span class="badge badge-success">{{ usersCount }}</span></h4>
+                    <h4 class="ml-auto">{{ $t('generals.total_count') }} <span class="badge badge-success">{{
+                            usersCount
+                        }}</span></h4>
                 </div>
                 <div class="table table-responsive">
                     <table class="table table-striped table-sm">
@@ -52,7 +54,8 @@
             <div class="card shadow">
                 <div class="p-3 d-flex">
                     <h4 class="text-danger">{{ $t('titles.inactive_users') }}</h4>
-                    <h4 class="ml-auto">{{ $t('generals.total_count') }} <span class="badge badge-success">{{ unActiveUsersCount }}</span>
+                    <h4 class="ml-auto">{{ $t('generals.total_count') }} <span
+                        class="badge badge-success">{{ unActiveUsersCount }}</span>
                     </h4>
                 </div>
                 <div class="table-responsive">
@@ -95,80 +98,92 @@
 </template>
 
 <script>
+import {computed} from "vue";
+import {useStore} from "vuex";
+import {useI18n} from "vue-i18n/index";
+
 export default {
-    data() {
-        return {
-            users: [],
-            usersCount: 0,
-            unActiveUsersCount: 0,
-            unActiveUsers: []
-        }
-    },
-    created() {
-        this.loadUsers();
-    },
-    methods: {
-        loadUsers() {
-            axios.get("/api/v1/users").then(response => {
-                this.users = response.data.users
-                this.unActiveUsers = response.data.unActiveUsers
-                this.usersCount = response.data.usersCount
-                this.unActiveUsersCount = response.data.unActiveUsersCount
-            })
-        },
-        delete_user(userId) {
+    setup() {
+        const store = useStore()
+        const i18n = useI18n();
+        const users = computed(() => {
+            return store.state.user.users
+        })
+        const unActiveUsers = computed(() => {
+            return store.state.user.unActiveUsers
+        })
+        const usersCount = computed(() => {
+            return store.state.user.usersCount
+        })
+        const unActiveUsersCount = computed(() => {
+            return store.state.user.unActiveUsersCount
+        })
+        store.dispatch('user/getUsers')
+
+        function delete_user(userId) {
             swal.fire({
-                title: this.$i18n.t('messages.are_you_sour?'),
-                text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
+                title: i18n.t('messages.are_you_sour?'),
+                text: i18n.t('messages.You_wont_be_able_to_undo_this'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: this.$i18n.t('messages.delete_confirmation')
+                confirmButtonText: i18n.t('messages.delete_confirmation')
             }).then((result) => {
                 if (result.isConfirmed) {
                     axios.delete("/api/v1/users/" + userId).then(response => {
-                        this.loadUsers()
+                        store.dispatch('user/getUsers')
                     })
                     toast.fire({
                         icon: 'success',
-                        title: this.$i18n.t('messages.deleted_successfully')
+                        title: i18n.t('messages.deleted_successfully')
                     })
                 }
             })
-        },
-        delete_user_force(userId) {
+        }
+
+        function delete_user_force(userId) {
             swal.fire({
-                title: this.$i18n.t('messages.are_you_sour?'),
-                text: this.$i18n.t('messages.You_wont_be_able_to_undo_this'),
+                title: i18n.t('messages.are_you_sour?'),
+                text: i18n.t('messages.You_wont_be_able_to_undo_this'),
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#d33',
                 cancelButtonColor: '#3085d6',
-                confirmButtonText: this.$i18n.t('messages.delete_confirmation')
+                confirmButtonText: i18n.t('messages.delete_confirmation')
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // axios.delete(`/api/users/${userId}/forceDelete`).then(response => {
                     axios.delete('/api/v1/users/' + userId + '/forceDelete').then(response => {
-                        this.loadUsers()
+                        store.dispatch('user/getUsers')
                     })
                     toast.fire({
                         icon: 'success',
-                        title: this.$i18n.t('messages.deleted_successfully')
+                        title: i18n.t('messages.deleted_successfully')
                     })
                 }
             })
-        },
-        restore(userId) {
+        }
+
+        function restore(userId) {
             axios.post(`/api/v1/users/${userId}/restore`).then(response => {
-                this.loadUsers()
+                store.dispatch('user/getUsers')
                 toast.fire({
                     icon: 'success',
-                    title: this.$i18n.t('messages.restored_successfully')
+                    title: i18n.t('messages.restored_successfully')
                 })
             })
         }
-    }
+
+        return {
+            users,
+            unActiveUsers,
+            usersCount,
+            unActiveUsersCount,
+            delete_user,
+            delete_user_force,
+            restore
+        }
+    },
 }
 </script>
 

@@ -2,7 +2,8 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="d-flex mb-3">
-                <router-link exact :to="{name: 'users', params: { id: user.id }}" class="ml-auto btn btn-primary btn-sm">
+                <router-link exact :to="{name: 'users'}"
+                             class="ml-auto btn btn-primary btn-sm">
                     {{ $t('actions.back') }}
                 </router-link>
             </div>
@@ -13,9 +14,11 @@
                 <div class="card-body">
                     <form @submit.prevent="updateUser">
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ $t('fields.name') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">
+                                {{ $t('fields.name') }}
+                            </label>
                             <div class="col-md-8">
-                                <input v-model="user.name" id="name" type="text" class="form-control" >
+                                <input v-model="name" id="name" type="text" class="form-control">
 
                                 <div v-if="errors">
                                     <span v-for="error in errors.name" class="text-danger" role="alert">
@@ -26,9 +29,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ $t('fields.email') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">
+                                {{ $t('fields.email') }}
+                            </label>
                             <div class="col-md-8">
-                                <input v-model="user.email" id="email" type="email" class="form-control">
+                                <input v-model="email" id="email" type="email" class="form-control">
 
                                 <div v-if="errors">
                                     <span v-for="error in errors.email" class="text-danger" role="alert">
@@ -39,9 +44,11 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="roleId" class="col-md-4 col-form-label text-md-right">{{ $t('fields.role') }}</label>
+                            <label for="roleId" class="col-md-4 col-form-label text-md-right">
+                                {{ $t('fields.role') }}
+                            </label>
                             <div class="col-md-8">
-                                <select v-model="user.role_id" id="roleId" class="form-control">
+                                <select v-model="role_id" id="roleId" class="form-control">
                                     <option v-for="role in roles" :value="role.id">{{ role.role }}</option>
                                 </select>
 
@@ -69,46 +76,57 @@
 </template>
 
 <script>
+import {computed, reactive, ref, toRefs} from "vue";
+import {useStore} from "vuex";
+import {useRoute, useRouter} from "vue-router";
+import {useI18n} from "vue-i18n/index";
+
 export default {
-    data() {
-        return {
-            user: {},
-            roles: [],
-            errors: {}
+    setup() {
+        const store = useStore()
+        const router = useRouter()
+        const route = useRoute()
+        const i18n = useI18n();
+        const fields = reactive({
+            name: '',
+            email: '',
+            role_id: '',
+        })
+        const errors = ref([])
+        const roles = computed(() => { return store.state.user.roles })
+        store.dispatch('user/getRoles')
+
+        function loadUser() {
+            axios.get(`/api/v1/users/${route.params.id}`).then(response => {
+                fields.name = response.data.user.name;
+                fields.email = response.data.user.email;
+                fields.role_id = response.data.user.role_id;
+            })
         }
-    },
-    created() {
-        this.loadUser();
-        this.loadRoles();
-    },
-    methods: {
-        loadUser() {
-            axios.get(`/api/v1/users/${this.$route.params.id}`).then(response => {
-                this.user = response.data.user
-            })
-        },
 
-        loadRoles() {
-            axios.get("/api/v1/roles").then(response => {
-                this.roles = response.data.roles
-            })
-        },
+        loadUser()
 
-        updateUser() {
-            axios.put('/api/v1/users/' + this.user.id, {
-                name: this.user.name,
-                email: this.user.email,
-                role_id: this.user.role_id
-            }).then( () => {
+        function updateUser() {
+            axios.put('/api/v1/users/' + route.params.id, fields).then(() => {
                 toast.fire({
                     icon: 'success',
-                    title: this.$i18n.t('messages.updated_successfully')
+                    title: i18n.t('messages.updated_successfully')
                 })
-                this.$router.push('/users');
-            }).catch( (error) => {
-                this.errors = error.response.data.errors;
+                router.push({name: 'users'});
+            }).catch((error) => {
+                if (error.response.status === 422) {
+                    errors.value = error.response.data.errors;
+                }
             })
         }
+
+        return {
+            ...toRefs(fields),
+            errors,
+            roles,
+            updateUser
+        }
+
     }
 }
 </script>

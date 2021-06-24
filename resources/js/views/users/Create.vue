@@ -1,5 +1,4 @@
 <template>
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -14,7 +13,7 @@
                     <div class="card-body">
                         <form @submit.prevent="create">
                             <div class="form-group row">
-                                <label for="name" class="col-md-4 col-form-label text-md-right">{{ $t('fields.name') }}</label>
+                                <label for="name" class="col-md-4 col-form-label text-md-right">{{$t('fields.name') }}</label>
                                 <div class="col-md-6">
                                     <input v-model="name" id="name" type="text" class="form-control">
                                     <div v-if="errors && errors.name">
@@ -27,7 +26,8 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="username" class="col-md-4 col-form-label text-md-right">{{ $t('fields.username') }}</label>
+                                <label for="username"
+                                       class="col-md-4 col-form-label text-md-right">{{ $t('fields.username') }}</label>
                                 <div class="col-md-6">
                                     <input v-model="username" id="username" type="text" class="form-control">
                                     <div v-if="errors && errors.username">
@@ -40,7 +40,9 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">{{ $t('fields.email') }}</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right">
+                                    {{ $t('fields.email') }}
+                                </label>
                                 <div class="col-md-6">
                                     <input v-model="email" id="email" type="email" class="form-control">
                                     <div v-if="errors && errors.email">
@@ -53,7 +55,10 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ $t('fields.password') }}</label>
+                                <label for="password"
+                                       class="col-md-4 col-form-label text-md-right">
+                                    {{ $t('fields.password') }}
+                                </label>
 
                                 <div class="col-md-6">
                                     <input v-model="password" id="password" type="password" class="form-control">
@@ -67,9 +72,12 @@
                             </div>
 
                             <div class="form-group row">
-                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ $t('fields.password_confirmation') }}</label>
+                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">
+                                    {{$t('fields.password_confirmation') }}
+                                </label>
                                 <div class="col-md-6">
-                                    <input v-model="password_confirmation" id="password-confirm" type="password" class="form-control" name="password_confirmation">
+                                    <input v-model="password_confirmation" id="password-confirm" type="password"
+                                           class="form-control" name="password_confirmation">
                                     <div v-if="errors && errors.password_confirmation">
                                         <div v-for="error in errors.password_confirmation"
                                              class="text-danger" role="alert">
@@ -93,13 +101,18 @@
             </div>
         </div>
     </div>
-
 </template>
 
 <script>
+import {reactive, toRefs} from "vue";
+import {useRouter} from "vue-router";
+import {useI18n} from "vue-i18n/index";
+
 export default {
-    data() {
-        return {
+    setup() {
+        const router = useRouter()
+        const i18n = useI18n();
+        const fields = reactive({
             name: "",
             username: "",
             email: "",
@@ -107,28 +120,32 @@ export default {
             password_confirmation: "",
             errors: [],
             form_submitting: false
-        }
-    },
-    methods: {
-        create() {
-            this.form_submitting = true;
+        })
+
+        function create() {
+            fields.form_submitting = true;
             axios.post("/api/v1/users", {
-                name: this.name,
-                username: this.username,
-                email: this.email,
-                password: this.password,
-                password_confirmation: this.password_confirmation
+                name: fields.name,
+                username: fields.username,
+                email: fields.email,
+                password: fields.password,
+                password_confirmation: fields.password_confirmation
             }).then(response => {
                 toast.fire({
                     icon: 'success',
-                    title: 'تم انشاء المستخدم بنجاح'
+                    title: i18n.t('messages.created_successfully')
                 })
-                this.$router.push({name: 'users'})
-                this.form_submitting = false;
+                router.push({name: 'users'})
+                fields.form_submitting = false;
             }).catch(error => {
-                this.errors = error.response.data.errors;
-                this.form_submitting = false;
+                fields.errors = error.response.data.errors;
+                fields.form_submitting = false;
             })
+        }
+
+        return {
+            ...toRefs(fields),
+            create
         }
     }
 }
