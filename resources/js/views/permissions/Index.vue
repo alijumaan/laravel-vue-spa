@@ -7,7 +7,7 @@
 
                     <select v-model="role_id" @change="checkPermissionByRoleId(role_id)" class="form-control w-50">
                         <option disabled value="">-- {{ $t('fields.choose') }} --</option>
-                        <option v-for="role in roles" :value="role.id">{{ role.role }}</option>
+                        <option v-for="role in roles" :key="role.id" :value="role.id">{{ role.role }}</option>
                     </select>
 
                     <router-link v-if="isAdmin" :to="{ name: 'permissions.create'}"
@@ -19,7 +19,7 @@
                 </div>
                 <div class="card-body row">
 
-                    <div class="col-lg-4" v-for="permission in permissions">
+                    <div class="col-lg-4" v-for="permission in permissions" :key="permission.id">
                         <input class="m-2" id="checkbox" type="checkbox" :value="permission.id" v-model="permissionId"
                                :checked="checked">
                         <label for="checkbox">{{ permission.description }}</label>

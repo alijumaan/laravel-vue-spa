@@ -23,7 +23,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="link in links">
+                        <tr v-for="link in links" :key="link.id">
                             <td>{{ link.name }}</td>
                             <td>{{ link.to }}</td>
                             <td>{{ link.icon }}</td>

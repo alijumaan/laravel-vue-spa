@@ -9,9 +9,9 @@
             <div class="card shadow">
                 <div class="p-3 d-flex">
                     <h4 class="text-success">{{ $t('titles.active_users') }}</h4>
-                    <h4 class="ml-auto">{{ $t('generals.total_count') }} <span class="badge badge-success">{{
-                            usersCount
-                        }}</span></h4>
+                    <h4 class="ml-auto">{{ $t('generals.total_count') }} <span class="badge badge-success">
+                        {{ usersCount }}
+                    </span></h4>
                 </div>
                 <div class="table table-responsive">
                     <table class="table table-striped table-sm">
@@ -26,7 +26,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="user in users">
+                        <tr v-for="user in users" :key="user.id">
                             <td>{{ user.id }}</td>
                             <td>{{ user.name }}</td>
                             <td>{{ user.email }}</td>
@@ -71,7 +71,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="user in unActiveUsers">
+                        <tr v-for="user in unActiveUsers" :key="user.id">
                             <td>{{ user.id }}</td>
                             <td>{{ user.name }}</td>
                             <td>{{ user.email }}</td>

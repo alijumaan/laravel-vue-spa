@@ -21,7 +21,7 @@
                         </tr>
                         </thead>
                         <tbody v-if="extinguishers.length > 0">
-                        <tr v-for="extinguisher in extinguishers">
+                        <tr v-for="extinguisher in extinguishers" :key="extinguisher.id">
                             <td>{{ extinguisher.extinguisherType }}</td>
                             <td>{{ extinguisher.extinguisherCount }}</td>
                             <td>

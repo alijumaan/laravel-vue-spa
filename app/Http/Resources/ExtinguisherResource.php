@@ -16,8 +16,8 @@ class ExtinguisherResource extends JsonResource
     {
         return [
             'id' => $this->id,
-//            'extinguisherType' => $this->extinguisherType(), // Display on Arabic Language
-            'extinguisherType' => $this->type,
+//            'extinguisherType' => $this->type,
+            'extinguisherType' => $this->extinguisherType(), // Display on Arabic Language
             'extinguisherCount' => $this->extinguisherBuildings()->where('extinguisher_id', $this->id)->count(),
         ];
     }

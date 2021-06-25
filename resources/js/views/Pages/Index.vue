@@ -20,7 +20,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr v-for="page in pages">
+                    <tr v-for="page in pages" :key="page.id">
                         <td>{{ page.title }}</td>
                         <td>
                             <router-link :to="{ name: 'pages.show', params: { id: page.slug } }">

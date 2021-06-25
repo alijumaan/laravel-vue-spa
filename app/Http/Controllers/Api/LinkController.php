@@ -15,7 +15,7 @@ class LinkController extends ApiController
         $links = Link::latest()->get();
 
         return $this->respond([
-            'links' => $links
+            'links' => LinkResource::collection($links),
         ]);
     }
 
@@ -24,7 +24,7 @@ class LinkController extends ApiController
         $this->authorize('view-link');
 
         return $this->respond([
-            'link' => $link
+            'link' => new LinkResource($link)
         ]);
     }
 

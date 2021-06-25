@@ -32,7 +32,7 @@
                                 </tr>
                                 </thead>
                                 <tbody v-if="buildings.length > 0">
-                                <tr v-for="(building, index) in buildings" :key="index">
+                                <tr v-for="(building, index) in buildings" :key="building.id">
                                     <td>
                                     <span class="text-dark">
                                         <router-link :to="{ name: 'buildings.show', params: { id: building.slug } }">

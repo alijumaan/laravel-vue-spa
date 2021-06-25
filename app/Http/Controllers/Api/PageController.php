@@ -3,23 +3,24 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\StorePageRequest;
+use App\Http\Resources\PageResource;
 use App\Models\Page;
 
 class PageController extends ApiController
 {
     public function index()
     {
-        $pages = Page::all();
+        $pages = Page::select('id', 'slug', 'title')->get();
 
         return $this->respond([
-            'pages' => $pages
+            'pages' => PageResource::collection($pages)
         ]);
     }
 
     public function show(Page $page)
     {
         return $this->respond([
-            'page' => $page
+            'page' => new PageResource($page)
         ]);
     }
 

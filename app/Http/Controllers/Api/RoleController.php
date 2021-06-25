@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Resources\RoleResource;
 use App\Models\Role;
 
 class RoleController extends ApiController
@@ -11,7 +12,7 @@ class RoleController extends ApiController
         $roles = Role::select('id', 'role')->get();
 
         return $this->respond([
-            'roles' => $roles
+            'roles' => RoleResource::collection($roles)
         ]);
     }
 }

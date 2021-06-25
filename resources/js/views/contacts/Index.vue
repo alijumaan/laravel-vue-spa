@@ -17,7 +17,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr v-for="contact in contacts">
+                        <tr v-for="contact in contacts" :key="contact.id">
                             <td>{{ contact.name }}</td>
                             <td>{{ contact.title }}</td>
                             <td>

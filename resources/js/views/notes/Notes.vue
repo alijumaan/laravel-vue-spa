@@ -9,7 +9,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(building, index) in buildings">
+            <tr v-for="(building, index) in buildings" :key="building.id">
                 <th scope="row">{{ building.id }}</th>
                 <td>{{ building.name }}</td>
                 <td class="text-danger">{{ building.notes }}</td>
