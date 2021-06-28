@@ -58,13 +58,13 @@ class LinkController extends ApiController
     public function getUrl()
     {
         if (auth()->user()->isAdmin()) {
-            $links = Link::oldest()->get();
+            $url = Link::oldest()->get();
         } else {
-            $links = Link::oldest()->whereAccess(TRUE)->get();
+            $url = Link::oldest()->whereAccess(TRUE)->get();
         }
 
         return $this->respond([
-            'links' => LinkResource::collection($links)
+            'url' => LinkResource::collection($url)
         ]);
     }
 }

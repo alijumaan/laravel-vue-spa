@@ -7,6 +7,7 @@ import contact from "./modules/contact";
 import extinguisher from "./modules/extinguisher";
 import user from "./modules/user";
 import link from "./modules/link";
+import permission from "./modules/permission";
 
 export const store = createStore({
     state: {
@@ -19,6 +20,7 @@ export const store = createStore({
         loaded_contacts: true,
         loaded_users: true,
         loaded_links: true,
+        loaded_permissions: true,
     },
     getters: {},
 
@@ -34,6 +36,7 @@ export const store = createStore({
         extinguisher,
         contact,
         user,
-        link
+        link,
+        permission
     }
 });

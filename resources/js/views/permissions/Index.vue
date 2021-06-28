@@ -13,7 +13,7 @@
                     <router-link v-if="isAdmin" :to="{ name: 'permissions.create'}"
                                  class="ml-auto btn btn-primary btn-sm">
                         <i class="fa fa-plus fa-fw"></i>
-                        {{ $t('buttons.new_permission')}}
+                        {{ $t('buttons.new_permission') }}
                     </router-link>
 
                 </div>
@@ -36,43 +36,57 @@
 </template>
 
 <script>
+import {computed, reactive, toRefs} from "vue";
+import {useStore} from "vuex";
+import {useI18n} from "vue-i18n/index";
+
 export default {
-    data() {
-        return {
-            permissions: [],
-            roles: [],
+    setup() {
+        const store = useStore()
+        const i18n = useI18n()
+        const state = reactive({
             permissionId: [],
             role_id: "",
             checked: false,
+        });
+
+        const isAdmin = computed(() => {
+            return store.state.currentUser.isAdmin
+        })
+
+        const permissions = computed(() => {
+            return store.state.permission.permissions
+        })
+        const roles = computed(() => {
+            return store.state.permission.roles
+        })
+        if (store.state.loaded_permissions === true) {
+            store.dispatch('permission/getPermissions')
+            store.state.loaded_permissions = false
         }
-    },
-    computed: {
-        isAdmin() {
-            return this.$store.state.currentUser.isAdmin;
-        }
-    },
-    created() {
-        this.$store.dispatch('currentUser/isAdmin');
-        this.loadPermissions();
-    },
-    methods: {
-        loadPermissions() {
-            axios.get('/api/v1/permissions').then(response => {
-                this.permissions = response.data.permissions
-                this.roles = response.data.roles
-            });
-        },
-        saveRolePermission() {
+
+        function saveRolePermission() {
             axios.post('/api/v1/permission-role', {
-                role_id: this.role_id,
-                permission: this.permissionId
+                role_id: state.role_id,
+                permission: state.permissionId
             }).then(() => {
                 toast.fire({
                     icon: 'success',
-                    title: this.$i18n.t('messages.created_successfully')
+                    title: i18n.t('messages.created_successfully')
                 })
             });
-        },
+        }
+
+        return {
+            ...toRefs(state),
+            isAdmin,
+            permissions,
+            roles,
+            saveRolePermission
+        }
+    },
+
+    methods: {
         checkPermissionByRoleId(roleId) {
             axios.post('/api/v1/permission-role/' + roleId).then(response => {
                 $('input[type=checkbox]').each(function () {
@@ -80,7 +94,7 @@ export default {
                     this.checked = response.data.permissions.includes(ThisVal);
                 });
             });
-        },
+        }
     }
 }
 </script>

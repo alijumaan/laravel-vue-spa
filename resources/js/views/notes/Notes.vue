@@ -9,7 +9,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="(building, index) in buildings" :key="building.id">
+            <tr v-for="building in buildings" :key="building.id">
                 <th scope="row">{{ building.id }}</th>
                 <td>{{ building.name }}</td>
                 <td class="text-danger">{{ building.notes }}</td>
@@ -27,7 +27,8 @@
 
 <script>
 import Pagination from "../../components/Pagination";
-import {ref} from "vue";
+import {computed, ref} from "vue";
+import {useStore} from "vuex";
 
 export default {
     beforeRouteEnter(to, from, next) {
@@ -40,32 +41,26 @@ export default {
         Pagination
     },
     setup() {
-        const {
-            page,
-            buildings,
-            loadBuildings,
-            loading,
-            per_page,
-            records,
-            handlePageUpdate
-        } = useBuildings()
+        const store = useStore()
+        const buildings = computed(() => store.state.building.buildings);
+        const loading = computed(() => store.state.building.loading);
+        const records = computed(() => store.state.building.records);
+        const per_page = computed(() => store.state.building.per_page);
+        const page = ref(store.state.building.page)
+        store.dispatch('building/getAllBuildings', {page: page})
 
-        const pages = ref([])
-        const loadPage = () => {
-            axios.get("/api/v1/pages").then(response => {
-                pages.value = response.data.pages
-            });
+        function handlePageUpdate([p, per_p]) {
+            page.value = p
+            per_page.value = per_p
+            store.dispatch('building/getAllBuildings', { page: page.value })
         }
 
-        loadBuildings()
-        loadPage()
-
         return {
-            page,
             buildings,
-            loading,
-            per_page,
             records,
+            per_page,
+            page,
+            loading,
             handlePageUpdate
         }
     }
