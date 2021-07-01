@@ -52,7 +52,7 @@
                                     </td>
                                     <td>
                                     <span
-                                        :class="building.status === 'Valid' ? 'badge badge-success' : 'badge badge-danger'">
+                                        :class="building.status === 'مشيك' ? 'badge badge-success' : 'badge badge-danger'">
                                         {{ building.status }}
                                     </span>
                                     </td>
@@ -118,9 +118,8 @@ export default {
             }
         });
 
-        function handlePageUpdate([p, per_p]) {
+        function handlePageUpdate([p]) {
             page.value = p
-            per_page.value = per_p
             store.dispatch('building/getAllBuildings', { page: page.value })
         }
 

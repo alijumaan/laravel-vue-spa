@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helper\SlugHelper;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Nicolaslopezj\Searchable\SearchableTrait;
@@ -80,7 +81,7 @@ class Building extends Model
     public function status()
     {
 //        return $this->status == 1 ? 'مشيك' : 'منتهي';
-        return $this->status == 1 ? __('message.valid') : __('message.invalid');
+        return $this->status == 1 && $this->checked_at > Carbon::now() ? __('message.valid') : __('message.invalid');
     }
 
     public function periodArabic()

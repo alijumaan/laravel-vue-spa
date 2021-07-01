@@ -17,11 +17,7 @@ import {computed} from "vue";
 import {useStore} from "vuex";
 
 export default {
-    components: {
-        Footer,
-        Links,
-        Header
-    },
+    components: {Footer, Links, Header},
     setup() {
         const store = useStore();
         const show = computed(() => store.state.show_content)

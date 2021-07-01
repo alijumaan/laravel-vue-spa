@@ -38,7 +38,9 @@
         "change_password": "تغير كلمة المرور",
         "control_board": "لوحة التحكم",
         "first": "الأول",
-        "last": "الأخير"
+        "last": "الأخير",
+        "previous": "السابق",
+        "next":"التالي"
     },
 
     "fields": {

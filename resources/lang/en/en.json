@@ -38,7 +38,9 @@
         "change_password": "Change password",
         "control_board": "Control board",
         "first": "First",
-        "last": "Last"
+        "last": "Last",
+        "previous": "Previous",
+        "next":"Next"
     },
 
     "fields": {

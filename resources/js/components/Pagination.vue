@@ -1,26 +1,26 @@
 <template>
     <nav v-show="pages > 1">
         <ul class="pagination justify-content-start">
-            <li class="page-item" @click="changePage(1)">
-                <a class="page-link" href="#">{{ $t('buttons.first') }}</a>
-            </li>
+<!--            <li class="page-item" @click="changePage(1)">-->
+<!--                <a class="page-link" href="#">{{ $t('buttons.first') }}</a>-->
+<!--            </li>-->
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Previous"
                    @click="changePage(page - 1)">
-                    <span aria-hidden="true">&laquo;</span>
+                    <span aria-hidden="true">{{ $t('buttons.previous') }}</span>
                     <span class="sr-only">Previous</span>
                 </a>
             </li>
             <li class="page-item">
                 <a class="page-link" href="#" aria-label="Next"
                    @click="changePage(page + 1)">
-                    <span aria-hidden="true">&raquo;</span>
+                    <span aria-hidden="true">{{ $t('buttons.next') }}</span>
                     <span class="sr-only">Next</span>
                 </a>
             </li>
-            <li class="page-item" @click="changePage(pages)">
-                <a class="page-link" href="#">{{ $t('buttons.last') }}</a>
-            </li>
+<!--            <li class="page-item" @click="changePage(pages)">-->
+<!--                <a class="page-link" href="#">{{ $t('buttons.last') }}</a>-->
+<!--            </li>-->
         </ul>
         <p class="mr-4">Page: {{ page }} of {{ pages }}</p>
     </nav>
