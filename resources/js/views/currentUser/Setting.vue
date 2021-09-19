@@ -69,6 +69,12 @@
 
 <script>
 export default {
+    beforeRouteEnter(to, from, next) {
+        if (!localStorage.getItem("authToken")) {
+            return next({name: 'login'})
+        }
+        next();
+    },
     data() {
         return {
             errors: [],

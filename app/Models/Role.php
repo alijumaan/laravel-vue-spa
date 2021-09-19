@@ -11,9 +11,9 @@ class Role extends Model
 
     protected $fillable = ['role'];
 
-    public const IS_ADMIN = 1;
-    public const IS_SUPERVISOR = 2;
-    public const IS_USER = 3;
+    public const ADMIN = 1;
+    public const SUPERVISOR = 2;
+    public const USER = 3;
 
     public function permissions()
     {

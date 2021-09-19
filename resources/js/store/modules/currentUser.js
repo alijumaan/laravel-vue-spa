@@ -15,9 +15,6 @@ const actions = {
     },
     isSupervisor(context) {
         context.commit('isSupervisor')
-    },
-    logout(context) {
-        context.commit('logout')
     }
 }
 
@@ -33,20 +30,6 @@ const mutations = {
     isSupervisor(state) {
         axios.get('/api/v1/supervisor').then(response => state.isSupervisor = response.data)
     },
-    logout() {
-        axios.post('/api/v1/logout').then( () => {
-            localStorage.removeItem("authToken");
-            swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'logout successfully',
-                showConfirmButton: false,
-                timer: 1500
-            })
-            // this.$router.push({name: 'home'});
-            window.location.replace('/')
-        })
-    }
 }
 
 export default {

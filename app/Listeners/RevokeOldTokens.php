@@ -27,11 +27,11 @@ class RevokeOldTokens
      */
     public function handle(AccessTokenCreated $event)
     {
-        auth()->logout();
-
-        Token::where([
-            ['user_id', $event->userId],
-            ['id', '<>', $event->tokenId]
-        ])->delete();
+//        auth()->logout();
+//
+//        Token::where([
+//            ['user_id', $event->userId],
+//            ['id', '<>', $event->tokenId]
+//        ])->delete();
     }
 }

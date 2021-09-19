@@ -2,15 +2,19 @@
     <div>
         <div class="row justify-content-center">
             <div class="col-md-12">
+                <div class="d-flex mb-3">
+                    <router-link class="ml-auto btn btn-primary btn-sm" :to="{name: 'home'}">
+                        {{ $t('actions.back') }}
+                    </router-link>
+                </div>
                 <div class="card shadow">
                     <div class="p-2 d-flex">
-                        <input type="text" class="form-control w-50" v-model="search"
-                               :placeholder="$t('fields.search')">
-
-                        <router-link v-if="isSupervisor" :to="{ name: 'buildings.create'}"
-                                     class="ml-auto btn btn-primary btn-sm">
-                            <i class="fa fa-plus fa-fw"></i>
-                            {{ $t('buttons.create_new_building') }}
+                        <input type="text" class="form-control w-50" v-model="search" :placeholder="$t('fields.search')">
+                        <router-link v-if="isSupervisor" :to="{ name: 'buildings.create'}" class="ml-auto">
+                            <span class="btn btn-primary btn-sm">
+                                <i class="fa fa-plus fa-fw"></i>
+                                {{ $t('buttons.create_new_building') }}
+                            </span>
                         </router-link>
                     </div>
                     <div :class="{'loading': loading}">
@@ -28,7 +32,6 @@
                                     <th>{{ $t('fields.building') }}</th>
                                     <th>{{ $t('fields.expiry_date') }}</th>
                                     <th>{{ $t('fields.status') }}</th>
-
                                 </tr>
                                 </thead>
                                 <tbody v-if="buildings.length > 0">
@@ -86,12 +89,6 @@ import Pagination from "../../components/Pagination";
 export default {
     components: {
         Pagination
-    },
-    beforeRouteEnter(to, from, next) {
-        if (!localStorage.getItem("authToken")) {
-            return next({name: 'login'})
-        }
-        next();
     },
     setup() {
         const store = useStore();

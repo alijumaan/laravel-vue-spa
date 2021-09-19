@@ -47,7 +47,8 @@ class BuildingController extends ApiController
         return $this->respond([
             'buildings' => BuildingResource::collection($buildings),
             'buildings_count' => $buildings_count,
-            'pagination' => $paginate
+            'pagination' => $paginate,
+            'auth' => auth()->user()
         ]);
     }
 

@@ -39,6 +39,12 @@ import {computed} from "vue";
 import {useStore} from "vuex";
 
 export default {
+    beforeRouteEnter(to, from, next) {
+        if (!localStorage.getItem("authToken")) {
+            return next({name: 'login'})
+        }
+        next();
+    },
     setup() {
         const store = useStore()
         const user = computed(() => {

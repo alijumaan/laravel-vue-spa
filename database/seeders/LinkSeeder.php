@@ -15,59 +15,45 @@ class LinkSeeder extends Seeder
     public function run()
     {
         Link::create([
-            'name' => 'Home',
+            'name' => 'home',
             'to' => '/',
             'icon' => 'home',
-            'access' => TRUE
+            'access' => 1
         ]);
 
         Link::create([
-            'name' => 'Buildings',
-            'to' => '/buildings',
-            'icon' => 'building',
-            'access' => TRUE
-        ]);
-
-        Link::create([
-            'name' => 'Extinguishers',
-            'to' => '/extinguishers',
-            'icon' => 'fire-extinguisher',
-            'access' => TRUE
-        ]);
-
-        Link::create([
-            'name' => 'Pages',
+            'name' => 'pages',
             'to' => '/pages',
             'icon' => 'file',
-            'access' => FALSE
+            'access' => 0
         ]);
 
         Link::create([
-            'name' => 'Profile',
+            'name' => 'profile',
             'to' => '/user/profile',
             'icon' => 'user',
-            'access' => TRUE
+            'access' => 1
         ]);
 
         Link::create([
-            'name' => 'Settings',
+            'name' => 'settings',
             'to' => '/user/setting',
             'icon' => 'cog',
-            'access' => TRUE
+            'access' => 1
         ]);
 
         Link::create([
-            'name' => 'Contacts',
+            'name' => 'messages',
             'to' => '/contacts',
             'icon' => 'comment',
-            'access' => FALSE
+            'access' => 0
         ]);
 
         Link::create([
-            'name' => 'Contact us',
+            'name' => 'contacts',
             'to' => '/contacts/create',
             'icon' => 'comment',
-            'access' => TRUE
+            'access' => 1
         ]);
     }
 }

@@ -2,9 +2,8 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card shadow bg-transparent text-white">
-                    <div class="card-header border-0">{{ $t('buttons.login') }}</div>
-                    <div class="card-body">
+                <div class="card-custom shadow text-white">
+                    <div class="card-body my-4">
                         <form @submit.prevent="login">
                             <div class="form-group row">
                                 <label for="username"
@@ -56,13 +55,13 @@
                             </div>
                             <div class="form-group row mb-0">
                                 <div class="col-md-8 offset-md-4">
-                                    <button type="submit" class="btn btn-success"
+                                    <button type="submit" class="btn btn-primary btn-sm"
                                             :value="form_submitting ? $t('fields.please_wait') : $t('buttons.login')"
                                             :disabled="form_submitting">
                                         {{ $t('buttons.login') }}
                                     </button>
                                     <a class="btn btn-link text-white" href="#">
-                                        {{ $t('fields.forget_password?') }}
+                                        <small>{{ $t('fields.forget_password?') }}</small>
                                     </a>
                                 </div>
                             </div>
@@ -131,5 +130,12 @@ export default {
 </script>
 
 <style scoped>
-
+.border-blue{
+    border-color: #4684bb;
+}
+.card-custom{
+    border-radius: .25rem;
+    background-color: #343a3e;
+    border: 1px solid #4684bb;
+}
 </style>

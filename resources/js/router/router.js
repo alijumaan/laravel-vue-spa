@@ -35,7 +35,7 @@ import PermissionEdit from "../views/permissions/Edit.vue";
 
 export const router = createRouter({
     history: createWebHistory(),
-    linkActiveClass: 'text-dark bg-white',
+    linkActiveClass: 'text-primary',
     routes: [
         {
             path: "/",

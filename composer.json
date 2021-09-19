@@ -1,8 +1,8 @@
 {
-    "name": "alijumaan/fire-vue",
+    "name": "alijumaan/vue-spa",
     "type": "project",
-    "description": "manage buildings safety, based on Laravel framework.",
-    "homepage": "https://howworking.com",
+    "description": "manage buildings safety, based on VueJs and Laravel framework.",
+    "my-website": "https://alialqahtani.sa",
     "keywords": [
         "framework",
         "laravel",

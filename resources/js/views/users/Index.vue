@@ -1,17 +1,23 @@
 <template>
     <div class="row justify-content-center">
-        <div class="col-md-12 mb-3">
+        <div class="col-md-12">
             <div class="d-flex mb-3">
-                <router-link class="ml-auto btn btn-primary btn-sm" :to="{name: 'users.create'}">
-                    {{ $t('buttons.create_new_user') }}
+                <router-link class="ml-auto btn btn-primary btn-sm" :to="{name: 'home'}">
+                    {{ $t('actions.back') }}
                 </router-link>
             </div>
             <div class="card shadow">
-                <div class="p-3 d-flex">
-                    <h4 class="text-success">{{ $t('titles.active_users') }}</h4>
-                    <h4 class="ml-auto">{{ $t('generals.total_count') }} <span class="badge badge-success">
-                        {{ usersCount }}
-                    </span></h4>
+                <div class="p-2 d-flex">
+                    <span class="lead text-dark m-1">
+                        {{ $t('titles.active_users') }}
+                        <span class="badge badge-success">{{ usersCount }}</span>
+                    </span>
+
+                    <span class="ml-auto">
+                        <router-link class="btn btn-primary btn-sm" :to="{name: 'users.create'}">
+                        {{ $t('buttons.create_new_user') }}
+                    </router-link>
+                    </span>
                 </div>
                 <div class="table table-responsive">
                     <table class="table table-striped table-sm">

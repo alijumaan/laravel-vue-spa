@@ -1,7 +1,12 @@
 <template>
+    <div class="d-flex mb-3">
+        <router-link class="ml-auto btn btn-primary btn-sm" :to="{name: 'home'}">
+            {{ $t('actions.back') }}
+        </router-link>
+    </div>
     <div :class="{'loading': loading}">
         <table class="table table-striped table-light">
-            <thead class="table-dark">
+            <thead class="table-secondary">
             <tr>
                 <th scope="col" width="5%">#</th>
                 <th scope="col">{{ $t('fields.building') }}</th>
@@ -31,12 +36,6 @@ import {computed, ref} from "vue";
 import {useStore} from "vuex";
 
 export default {
-    beforeRouteEnter(to, from, next) {
-        if (!localStorage.getItem("authToken")) {
-            return next({name: 'login'})
-        }
-        next();
-    },
     components: {
         Pagination
     },

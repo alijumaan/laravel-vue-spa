@@ -1,6 +1,11 @@
 <template>
     <div class="row">
         <div class="col-md-12">
+            <div class="d-flex mb-3">
+                <router-link exact :to="{ name: 'home' }" class="ml-auto btn btn-primary btn-sm">
+                    {{ $t('actions.back') }}
+                </router-link>
+            </div>
             <div v-show="isAdmin" class="card shadow-sm mb-4">
                 <div class="card-header d-flex py-3">
                     <h4 class="m-0">{{ $t('titles.website_links') }}</h4>
@@ -58,7 +63,7 @@
 <script>
 import {useRouter} from "vue-router";
 import {useI18n} from "vue-i18n/index";
-import {computed, ref} from "vue";
+import {computed} from "vue";
 import {useStore} from "vuex";
 
 export default {

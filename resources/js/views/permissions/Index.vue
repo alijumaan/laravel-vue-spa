@@ -9,11 +9,11 @@
                         <option disabled value="">-- {{ $t('fields.choose') }} --</option>
                         <option v-for="role in roles" :key="role.id" :value="role.id">{{ role.role }}</option>
                     </select>
-
-                    <router-link v-if="isAdmin" :to="{ name: 'permissions.create'}"
-                                 class="ml-auto btn btn-primary btn-sm">
-                        <i class="fa fa-plus fa-fw"></i>
-                        {{ $t('buttons.new_permission') }}
+                    <router-link v-if="isAdmin" :to="{ name: 'permissions.create'}" class="ml-auto">
+                        <span class=" btn btn-primary btn-sm">
+                            <i class="fa fa-plus fa-fw"></i>
+                            {{ $t('buttons.new_permission') }}
+                        </span>
                     </router-link>
 
                 </div>

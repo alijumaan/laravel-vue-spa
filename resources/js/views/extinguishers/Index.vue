@@ -1,15 +1,17 @@
 <template>
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div v-if="isSupervisor" class="d-flex mb-3">
-                <router-link :to="{ name: 'extinguishers.create'}"
-                             class="ml-auto btn btn-primary btn-sm">
-                    <h6>{{ $t('buttons.pull_extinguisher') }}</h6>
+            <div class="d-flex mb-3">
+                <router-link class="ml-auto btn btn-primary btn-sm" :to="{name: 'home'}">
+                    {{ $t('actions.back') }}
                 </router-link>
             </div>
             <div class="card shadow">
                 <div class="p-3 d-flex">
-                    <h4>{{ $t('titles.extinguishers_under_maintenance') }}</h4>
+                    <span class="lead">{{ $t('titles.extinguishers_under_maintenance') }}</span>
+                    <router-link v-if="isSupervisor" :to="{ name: 'extinguishers.create'}" class="ml-auto btn btn-primary btn-sm">
+                        {{ $t('buttons.pull_extinguisher') }}
+                    </router-link>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped table-sm">
@@ -47,12 +49,6 @@ import {computed} from "vue";
 import {useStore} from "vuex";
 
 export default {
-    beforeRouteEnter(to, from, next) {
-        if (!localStorage.getItem("authToken")) {
-            return next({name: 'login'})
-        }
-        next();
-    },
     setup() {
         const store = useStore()
 

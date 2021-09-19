@@ -18,19 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['prefix' => '/v1'], function() {
 
     Route::group(['middleware' => 'auth:api'], function () {
-        Route::get('links/get-url', [LinkController::class, 'getUrl']);
-        Route::apiResource('links', LinkController::class);
-
-        Route::get('buildings_list', [BuildingController::class, 'list']);
-        Route::put('buildings/{building}/quickUpdate', [BuildingController::class, 'quickUpdate']);
-        Route::apiResource('buildings', BuildingController::class );
-
-        Route::delete('extinguishers/{extinguisherId}/{buildingId}', [ExtinguisherController::class, 'delete']);
-        Route::get('extinguishers/type', [ExtinguisherController::class, 'getExtinguishersType']);
-        Route::apiResource('extinguishers', ExtinguisherController::class );
-
-        Route::apiResource('pages', PageController::class );
-
         Route::post('logout', [AuthController::class, 'logout']);
 
         /* Current User */
@@ -52,9 +39,6 @@ Route::group(['prefix' => '/v1'], function() {
         Route::post('permission-role', [PermissionRoleController::class, 'store']);
         Route::post('permission-role/{roleId}', [PermissionRoleController::class, 'getPermissionByRole']);
 
-
-        Route::get('periods', [PeriodController::class, 'getPeriods']);
-
         Route::get('/admin', function () {
             if (!auth()->user()->isAdmin()) {
                 return false;
@@ -71,8 +55,22 @@ Route::group(['prefix' => '/v1'], function() {
 
     });
 
+    Route::get('links/get-url', [LinkController::class, 'getUrl']);
+    Route::apiResource('links', LinkController::class);
+
+    Route::get('periods', [PeriodController::class, 'getPeriods']);
+
+    Route::get('buildings_list', [BuildingController::class, 'list']);
+    Route::put('buildings/{building}/quickUpdate', [BuildingController::class, 'quickUpdate']);
+    Route::apiResource('buildings', BuildingController::class );
+
+    Route::delete('extinguishers/{extinguisherId}/{buildingId}', [ExtinguisherController::class, 'delete']);
+    Route::get('extinguishers/type', [ExtinguisherController::class, 'getExtinguishersType']);
+    Route::apiResource('extinguishers', ExtinguisherController::class );
+
     Route::get('invitation/{user}', [InvitationController::class, 'invitation'])->name('invitation');
     Route::post('login', [AuthController::class, 'login'])->name('login');
 
+    Route::apiResource('pages', PageController::class );
     Route::apiResource('contacts',ContactController::class)->except(['update']);
 });

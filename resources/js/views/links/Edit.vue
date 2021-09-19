@@ -46,7 +46,7 @@
                         </div>
                         <!-- Access -->
                         <div class="form-group">
-                            <label for="userId">{{ $t('fields.status') }}</label>
+                            <label>{{ $t('fields.status') }}</label>
                             <select v-model="fields.access" id="userId" class="form-control">
                                 <option value="1">{{ $t('fields.show') }}</option>
                                 <option value="0">{{ $t('fields.hide') }}</option>

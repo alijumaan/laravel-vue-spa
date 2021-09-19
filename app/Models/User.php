@@ -78,26 +78,25 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin()
     {
-        return $this->role_id == Role::IS_ADMIN;
+        return $this->role_id == Role::ADMIN;
     }
 
     public function isSupervisor()
     {
-        return  in_array($this->role_id, [Role::IS_ADMIN, Role::IS_SUPERVISOR]);
+        return  in_array($this->role_id, [Role::ADMIN, Role::SUPERVISOR]);
     }
 
     public function roleId()
     {
         switch ($this->role_id) {
-            case Role::IS_ADMIN:
+            case Role::ADMIN:
                 return 'مدير';
-                break;
-            case Role::IS_SUPERVISOR:
+            case Role::SUPERVISOR:
                 return 'مشرف';
-                break;
-            case Role::IS_USER:
+            case Role::USER:
                 return 'مستخدم';
-                break;
+            default:
+                return $this->role_id;
         }
     }
 

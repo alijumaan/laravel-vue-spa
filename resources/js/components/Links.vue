@@ -7,7 +7,7 @@
                 <span v-for="item in navbar_items">
                     <router-link class="mt-2 mr-1 btn btn-secondary" exact :to="item.to">
                         <i :class="`fa fa-${item.icon}`"></i>
-                        {{ item.name }}
+                        {{ $t(`generals.${item.name}`)}}
                     </router-link>
                 </span>
                 <router-link v-show="!show" class="mt-2 mr-1 btn btn-secondary" exact to="/login">
@@ -38,20 +38,24 @@ export default {
             return this.$store.state.currentUser.isAdmin;
         },
     },
-    mounted() {
-        if (this.show) {
-            this.loadLinks();
-        }
-
+    created() {
+        this.loadLinks();
     },
     methods: {
         loadLinks() {
             axios.get('/api/v1/links/get-url').then(response => {
                 this.navbar_items = response.data.url
+
             })
         }
     }
 }
 </script>
 
-<style scoped></style>
+<style scoped>
+.btn-secondary {
+    color: #fff;
+    background-color: #1e2b35;
+    border-color: #4684bb;
+}
+</style>

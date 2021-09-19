@@ -1,14 +1,16 @@
 <template>
     <div class="row justify-content-center">
-        <div class="col-md-12">
+        <div class="col-md-9">
+            <div class="d-flex mb-3">
+                <router-link exact :to="{ name: 'buildings' }" class="ml-auto btn btn-danger btn-sm">
+                    {{ $t('actions.cancel') }}
+                </router-link>
+            </div>
             <div class="card">
-                <div class="card-header d-flex">
+                <div class="card-header">
                     <h5>
                         <span class="">{{ $t('titles.creation_new_building') }}</span>
                     </h5>
-                    <router-link exact :to="{ name: 'buildings' }" class="ml-auto btn btn-danger btn-sm">
-                        {{ $t('actions.cancel') }}
-                    </router-link>
                 </div>
                 <div class="card-body">
                     <form @submit.prevent="createBuilding">
