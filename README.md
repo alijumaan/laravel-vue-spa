@@ -26,7 +26,4 @@ after install the source code open Terminal to use these command line:
 <a href='http://vue-spa.cartwhite.tk' target="_blank">http://vue-spa.cartwhite.tk</a>
 
 ## Contact me
-<a href='https://alijumaan.com' target="_blank">https://alijumaan.com</a>
-
-* enjoy...
-
+<a href='https://alialqahtani.com' target="_blank">about me</a>
