@@ -26,27 +26,27 @@
 </template>
 
 <script>
-export default {
-    data() {
-        return {
-            navbar_items: [],
-            show: this.$store.state.show_content,
-        }
-    },
-    computed: {
-        isAdmin() {
-            return this.$store.state.currentUser.isAdmin;
-        },
-    },
-    created() {
-        this.loadLinks();
-    },
-    methods: {
-        loadLinks() {
-            axios.get('/api/v1/links/get-url').then(response => {
-                this.navbar_items = response.data.url
+import {useStore} from "vuex";
+import {computed} from "vue";
 
-            })
+export default {
+    setup() {
+        const store = useStore()
+        const show = store.state.show_content;
+        const isAdmin = computed(() => { return store.state.currentUser.isAdmin })
+
+        const navbar_items = computed(() => { return store.state.link.navbar_items })
+        if (show) {
+            if (store.state.loaded_urls === true) {
+                store.dispatch('link/getUrl')
+                store.state.loaded_urls = false
+            }
+        }
+
+        return {
+            show,
+            navbar_items,
+            isAdmin
         }
     }
 }

@@ -171,7 +171,7 @@ export default {
 
         function update_building() {
             form_submitting = true;
-            axios.put(`/api/v1/buildings/${route.params.id}/quickUpdate`, {
+            axios.put(`/api/v1/buildings/${route.params.id}/quick-update`, {
                 status: building.value.status,
                 period_id: building.value.period_id,
                 notes: building.value.notes

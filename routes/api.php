@@ -60,8 +60,8 @@ Route::group(['prefix' => '/v1'], function() {
 
     Route::get('periods', [PeriodController::class, 'getPeriods']);
 
-    Route::get('buildings_list', [BuildingController::class, 'list']);
-    Route::put('buildings/{building}/quickUpdate', [BuildingController::class, 'quickUpdate']);
+    Route::get('buildings/has-notes', [BuildingController::class, 'buildingsHasNotes']);
+    Route::put('buildings/{building}/quick-update', [BuildingController::class, 'quickUpdate']);
     Route::apiResource('buildings', BuildingController::class );
 
     Route::delete('extinguishers/{extinguisherId}/{buildingId}', [ExtinguisherController::class, 'delete']);

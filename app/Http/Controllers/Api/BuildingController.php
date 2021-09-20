@@ -11,43 +11,27 @@ use Carbon\Carbon;
 
 class BuildingController extends ApiController
 {
+    public int $paginate = 10;
+
     public function index()
     {
-        $paginate = 10;
+        $buildings = Building::with('user')
+            ->when(request('search', '') != '', function ($query) {
+                $query->where(function ($q) {
+                    $q->where('name', 'LIKE', '%' . request('search') . '%')
+                        ->orWhere('number', 'LIKE', '%' . request('search') . '%');
+                });
+            })
+            ->orderBy('checked_at')
+            ->latest()
+            ->paginate($this->paginate);
 
-        if (auth()->user()->isAdmin()) {
-            $buildings = Building::with('user')
-                ->when(request('search', '') != '', function ($query) {
-                    $query->where(function ($q) {
-                        $q->where('name', 'LIKE', '%' . request('search') . '%')
-                            ->orWhere('number', 'LIKE', '%' . request('search') . '%');
-                    });
-                })
-                ->orderBy('checked_at')
-                ->latest()
-                ->paginate($paginate);
-
-            $buildings_count = Building::count();
-        } else {
-            $buildings = Building::with('user')
-                ->where('user_id', auth()->id())
-                ->when(request('search', '') != '', function ($query) {
-                    $query->where(function ($q) {
-                        $q->where('name', 'LIKE', '%' . request('search') . '%')
-                            ->orWhere('number', 'LIKE', '%' . request('search') . '%');
-                    });
-                })
-                ->orderBy('checked_at')
-                ->latest()
-                ->paginate($paginate);
-
-            $buildings_count = count(Building::where('user_id', auth()->id())->get());
-        }
+        $buildings_count = Building::count();
 
         return $this->respond([
             'buildings' => BuildingResource::collection($buildings),
             'buildings_count' => $buildings_count,
-            'pagination' => $paginate,
+            'pagination' => $this->paginate,
             'auth' => auth()->user()
         ]);
     }
@@ -128,16 +112,14 @@ class BuildingController extends ApiController
         return $this->respondUpdated();
     }
 
-    public function list()
+    public function buildingsHasNotes()
     {
-        if (auth()->user()->isAdmin()) {
-            $buildings = Building::select(['id', 'name', 'notes'])->get();
-        } else {
-            $buildings = Building::select(['id', 'name', 'notes'])->where('user_id', auth()->id())->get();
-        }
+        $buildingsHasNotes = Building::whereNotNull('notes')
+            ->paginate($this->paginate);
 
         return $this->respond([
-            'buildings' => $buildings
+            'buildingsHasNotes' => BuildingResource::collection($buildingsHasNotes),
+            'buildings_has_notes_count' => Building::count()
         ]);
     }
 }

@@ -102,13 +102,13 @@ export default {
         const search = ref("")
 
         if (store.state.loaded_buildings === true) {
-            store.dispatch('building/getAllBuildings', { page: page.value })
+            store.dispatch('building/getBuildings', { page: page.value })
             store.state.loaded_buildings = false
         }
 
         const stopWatch = watch(search, (val, old) => {
             if (val.length >= 2 || old.length >= 2) {
-                store.dispatch('building/getAllBuildings', { page: page.value })
+                store.dispatch('building/getBuildings', { page: page.value })
             }
             if (val.length === 50) {
                 stopWatch();
@@ -117,7 +117,7 @@ export default {
 
         function handlePageUpdate([p]) {
             page.value = p
-            store.dispatch('building/getAllBuildings', { page: page.value })
+            store.dispatch('building/getBuildings', { page: page.value })
         }
 
         return {

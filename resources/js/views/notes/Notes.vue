@@ -14,7 +14,7 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="building in buildings" :key="building.id">
+            <tr v-for="building in buildingsHasNotes" :key="building.id">
                 <th scope="row">{{ building.id }}</th>
                 <td>{{ building.name }}</td>
                 <td class="text-danger">{{ building.notes }}</td>
@@ -41,21 +41,25 @@ export default {
     },
     setup() {
         const store = useStore()
-        const buildings = computed(() => store.state.building.buildings);
         const loading = computed(() => store.state.building.loading);
         const records = computed(() => store.state.building.records);
         const per_page = computed(() => store.state.building.per_page);
         const page = ref(store.state.building.page)
-        store.dispatch('building/getAllBuildings', {page: page})
+
+        const buildingsHasNotes = computed(() => store.state.building.buildingsHasNotes);
+        if (store.state.loaded_buildingsHasNotes === true) {
+            store.dispatch('building/getBuildingsHasNotes', {page: page})
+            store.state.loaded_buildingsHasNotes = false
+        }
 
         function handlePageUpdate([p, per_p]) {
             page.value = p
             per_page.value = per_p
-            store.dispatch('building/getAllBuildings', { page: page.value })
+            store.dispatch('building/getBuildingsHasNotes', { page: page.value })
         }
 
         return {
-            buildings,
+            buildingsHasNotes,
             records,
             per_page,
             page,

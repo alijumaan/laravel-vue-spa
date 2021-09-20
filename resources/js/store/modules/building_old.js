@@ -43,7 +43,7 @@
 // }
 //
 // const actions = {
-//     getAllBuildings(context, data) {
+//     getBuildings(context, data) {
 //         context.commit('setAllBuildings', data.page)
 //     },
 //     getBuilding(context, data) {

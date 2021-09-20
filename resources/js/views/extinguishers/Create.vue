@@ -77,7 +77,7 @@ export default {
             return store.state.building.buildings
         })
         if (store.state.loaded_buildings === true) {
-            store.dispatch('building/getAllBuildings', { page: 1 })
+            store.dispatch('building/getBuildings', { page: 1 })
             store.state.loaded_buildings = false
         }
 
