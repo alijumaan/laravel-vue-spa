@@ -44,8 +44,8 @@ export default {
         }
 
         return {
-            show,
             navbar_items,
+            show,
             isAdmin
         }
     }

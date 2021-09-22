@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43b0e3bc-b334-44df-8d87-e55277b9bb05" name="Default Changelist" comment="" />
+    <list default="true" id="43b0e3bc-b334-44df-8d87-e55277b9bb05" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/components/Links.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/components/Links.vue" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -507,6 +512,7 @@
       <workItem from="1632071435246" duration="297000" />
       <workItem from="1632074625918" duration="2249000" />
       <workItem from="1632152332777" duration="2257000" />
+      <workItem from="1632154726583" duration="2032000" />
     </task>
     <servers />
   </component>
