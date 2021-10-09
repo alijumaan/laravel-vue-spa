@@ -17,7 +17,8 @@ after install the source code open Terminal to use these command line:
 - mkdir storage/app/public/assets/avatars
 - sudo cp public/img/users/avatar.png storage/app/public/assets/avatars/  
 - add your default image (should be the name is 'avatar.png' or custom the default name from ProductMedia migration table)
-
+- important( make sure the APP_URL in .env file same actually URL )
+- 
 ## Permission folder ( Linux | Mac)
 - sudo chmod -R 777 settings.json
 - sudo chmod -R 777 storage/app/public/images/

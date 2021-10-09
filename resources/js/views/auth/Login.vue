@@ -97,6 +97,7 @@ export default {
 
         function login() {
             axios.post("/api/v1/login", loginData).then(response => {
+                console.log(response.data)
                 if (response.data.token.access_token) {
                     form_submitting = true;
                     localStorage.setItem('authToken', response.data.token.access_token)
