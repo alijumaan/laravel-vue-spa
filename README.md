@@ -23,8 +23,6 @@ after install the source code open Terminal to use these command line:
 - sudo chmod -R 777 settings.json
 - sudo chmod -R 777 storage/app/public/images/
 
-## Try
-<a href='http://vue-spa.cartwhite.tk' target="_blank">http://vue-spa.cartwhite.tk</a>
 
 ## Contact me
 <a href='https://alialqahtani.com' target="_blank">about me</a>
